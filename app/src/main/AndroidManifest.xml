@@ -35,10 +35,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name="in.silive.bo.Activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
-            android:windowSoftInputMode="stateHidden">
+            >
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

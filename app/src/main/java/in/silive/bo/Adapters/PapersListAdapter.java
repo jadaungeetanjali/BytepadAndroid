@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -62,7 +63,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
 
         holder.imageView.setImageResource(paperImgId);
         if (paper.downloaded) {
-            holder.tvDownload.setText("View");
+
             holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -86,7 +87,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
         TextView tvPaperTitle, tvPaperCategory, tvPaperSize;
         ImageView  tvDownload;
         ImageView imageView;
-        RelativeLayout relativeLayout;
+        LinearLayout relativeLayout;
 
         PaperViewHolder(View view) {
             super(view);
@@ -95,7 +96,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
             tvPaperSize = (TextView) view.findViewById(R.id.paper_size);
             tvDownload = (ImageView) view.findViewById(R.id.tvDownload);
             imageView = (ImageView) view.findViewById(R.id.ivIcon);
-            relativeLayout = (RelativeLayout) view.findViewById(R.id.rl);
+            relativeLayout = (LinearLayout) view.findViewById(R.id.rl);
         }
     }
 
