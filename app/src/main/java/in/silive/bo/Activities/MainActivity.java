@@ -1,5 +1,8 @@
 package in.silive.bo.Activities;
 
+import android.arch.lifecycle.LifecycleActivity;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -38,8 +41,9 @@ import in.silive.bo.PaperDatabaseModel_Table;
 import in.silive.bo.PrefManager;
 import in.silive.bo.R;
 import in.silive.bo.SnackBarListener;
+import in.silive.bo.viewmodel.BytepadAndroidViewModel;
 
-public class MainActivity extends AppCompatActivity implements SnackBarListener, FlowContentObserver.OnModelStateChangedListener {
+public class MainActivity extends LifecycleActivity implements SnackBarListener, FlowContentObserver.OnModelStateChangedListener {
     public static List<PaperDatabaseModel> paperList = new ArrayList<>();
     public AutoCompleteTextView search_paper;
     public RecyclerView recyclerView;
@@ -53,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements SnackBarListener,
     RelativeLayout recyclerEmptyView;
     FlowContentObserver observer;
     PrefManager prefManager;
+    private BytepadAndroidViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +173,18 @@ public class MainActivity extends AppCompatActivity implements SnackBarListener,
                 .where(PaperDatabaseModel_Table.Title.like("%" + query + "%"), secondCondition)
                 .queryList();
         papersListAdapter = new PapersListAdapter(this, paperList);
+
+        viewModel = ViewModelProviders.of(this).get(BytepadAndroidViewModel.class);
+
+        viewModel.getAllBorrowedItems().observe(MainActivity.this, new Observer<List<PaperDatabaseModel>>() {
+            @Override
+            public void onChanged(@Nullable List<PaperDatabaseModel> PaperDatabaseModel) {
+                papersListAdapter.addItems(PaperDatabaseModel);
+
+            }
+
+
+        });
         recyclerView.setAdapter(papersListAdapter);
         if (paperList.size() != 0) {
             recyclerEmptyView.setVisibility(View.GONE);

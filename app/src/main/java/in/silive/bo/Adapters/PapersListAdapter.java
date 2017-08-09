@@ -32,6 +32,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
         return papersList;
     }
 
+
     @Override
     public int getItemCount() {
         return papersList.size();
@@ -44,7 +45,10 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
 
         return new PaperViewHolder(itemView);
     }
-
+    public void addItems(List<PaperDatabaseModel> PaperModelList) {
+        this.papersList = PaperModelList;
+        notifyDataSetChanged();
+    }
     @Override
     public void onBindViewHolder(PaperViewHolder holder, int position) {
         final PaperDatabaseModel paper = this.getPapersList().get(position);
