@@ -70,7 +70,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
                 }
             });
         } else {
-            holder.tvDownload.setText("Download");
+
             holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -83,7 +83,8 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
     }
 
     class PaperViewHolder extends RecyclerView.ViewHolder {
-        TextView tvPaperTitle, tvPaperCategory, tvPaperSize, tvDownload;
+        TextView tvPaperTitle, tvPaperCategory, tvPaperSize;
+        ImageView  tvDownload;
         ImageView imageView;
         RelativeLayout relativeLayout;
 
@@ -92,7 +93,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
             tvPaperTitle = (TextView) view.findViewById(R.id.paper_title);
             tvPaperCategory = (TextView) view.findViewById(R.id.paper_category);
             tvPaperSize = (TextView) view.findViewById(R.id.paper_size);
-            tvDownload = (TextView) view.findViewById(R.id.tvDownload);
+            tvDownload = (ImageView) view.findViewById(R.id.tvDownload);
             imageView = (ImageView) view.findViewById(R.id.ivIcon);
             relativeLayout = (RelativeLayout) view.findViewById(R.id.rl);
         }
