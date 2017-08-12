@@ -7,6 +7,6 @@ import retrofit.http.GET;
  * Created by akriti on 2/8/16.
  */
 public interface BytePad {
-    @GET("/getlist")
+    @GET("/api/get_list_/getlist")
     PaperModel.PapersList papersList();
 }

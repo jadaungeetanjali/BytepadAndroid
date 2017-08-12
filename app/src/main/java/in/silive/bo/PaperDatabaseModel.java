@@ -22,7 +22,7 @@ public class PaperDatabaseModel extends BaseModel {
     @Column
     public String Size;
     @Column
-    public String URL;
+    public String file_url;
     @Column
     public String RelativeURL;
     @Column

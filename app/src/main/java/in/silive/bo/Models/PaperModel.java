@@ -3,17 +3,21 @@ package in.silive.bo.Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 /**
  * Created by akriti on 2/8/16.
  */
  public class PaperModel implements Parcelable{
+
+    @SerializedName("name")
     public String Title;
     public String ExamCategory;
     public String PaperCategory;
     public String Size;
-    public String URL;
+    public String file_url;
     public String RelativeURL;
 
     public PaperModel(String title, String size) {
@@ -66,11 +70,11 @@ import java.util.ArrayList;
     }
 
     public String getURL() {
-        return URL;
+        return file_url;
     }
 
     public void setURL(String URL) {
-        this.URL = URL;
+        this.file_url = URL;
     }
 
     public PaperModel(Parcel in){
@@ -78,7 +82,7 @@ import java.util.ArrayList;
       ExamCategory = in.readString();
       PaperCategory = in.readString();
       Size = in.readString();
-      URL = in.readString();
+      file_url= in.readString();
      RelativeURL = in.readString();
     }
 
@@ -93,7 +97,7 @@ import java.util.ArrayList;
         parcel.writeString(ExamCategory);
         parcel.writeString(PaperCategory);
         parcel.writeString(Size);
-        parcel.writeString(URL);
+        parcel.writeString(file_url);
         parcel.writeString(RelativeURL);
     }
     public static final Creator CREATOR = new Creator() {

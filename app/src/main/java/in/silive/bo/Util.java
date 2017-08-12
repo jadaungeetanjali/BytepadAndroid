@@ -87,7 +87,8 @@ public class Util {
                     }).show();
         }else {
             final DownloadManager downloadManager;
-            String file_url = paper.URL;
+            String file_url = "http://testapi.silive.in/PaperFileUpload/"+paper.file_url;
+            Log.d("file_url",paper.file_url);
             file_url = file_url.replace(" ", "%20");
             final long downloadReference;
             BroadcastReceiver recieveDownloadComplete, notificationClicked;

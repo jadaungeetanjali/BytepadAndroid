@@ -227,10 +227,11 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
                     paperDatabaseModel.Title = paper.Title;
                     paperDatabaseModel.ExamCategory = paper.ExamCategory;
                     paperDatabaseModel.PaperCategory = paper.PaperCategory;
-                    paperDatabaseModel.URL = paper.URL;
+                    paperDatabaseModel.file_url= paper.file_url;
                     paperDatabaseModel.RelativeURL = paper.RelativeURL;
                     paperDatabaseModel.Size = paper.Size;
                     paperDatabaseModel.downloaded = false;
+                    Log.d("debugg",paperDatabaseModel.file_url+paperDatabaseModel.RelativeURL);
                     paperDatabaseModel.save();
                     publishProgress(i + 1);
                 }
