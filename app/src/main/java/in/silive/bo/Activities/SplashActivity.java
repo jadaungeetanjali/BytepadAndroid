@@ -271,27 +271,26 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
     }
 
     public void checkDownloadList() {
-        List<DownloadQueue> list = new Select().from(DownloadQueue.class).queryList();
+        List<DownloadQueue> list =appDatabase.itemAndPersonModel().getQueuelist();
+
         for (DownloadQueue item : list) {
             if (Util.isDownloadComplete(this, item.reference)) {
-                PaperDatabaseModel paper = new Select().from(PaperDatabaseModel.class)
-                        .where(PaperDatabaseModel_Table.id.eq(item.paperId)).querySingle();
+                PaperDatabaseModel paper =appDatabase.itemAndPersonModel().getdownloadedpaperlist(item.paperId);
                 if (paper != null) {
-                    paper.downloaded = true;
-                    paper.dwnldPath = item.dwnldPath;
-                    paper.update();
+
+                    appDatabase.itemAndPersonModel().update(true,item.dwnldPath,item.paperId);
                 }
-                new Delete().from(DownloadQueue.class).where(DownloadQueue_Table.reference.eq(item.reference)).query();
+                appDatabase.itemAndPersonModel().delete(item.reference);
+
             }
         }
 
-        List<PaperDatabaseModel> downloadedPapers = new Select().from(PaperDatabaseModel.class).where(PaperDatabaseModel_Table
-                .downloaded.eq(true)).queryList();
+        List<PaperDatabaseModel> downloadedPapers = appDatabase.itemAndPersonModel().downloaded(true);
         for (PaperDatabaseModel paper : downloadedPapers) {
             File file = new File(paper.dwnldPath);
             if (!file.exists()) {
                 paper.downloaded = false;
-                paper.update();
+                appDatabase.itemAndPersonModel().updatepaper(false,paper.id);
             }
         }
 
