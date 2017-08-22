@@ -1,65 +1,153 @@
 package in.silive.bo;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.structure.BaseModel;
+
+
 
 /**
  * Created by akriti on 5/8/16.
  */
 @Entity
-public class PaperDatabaseModel extends BaseModel {
+public class PaperDatabaseModel  {
 
-    @PrimaryKey(autoincrement = true)
+    @PrimaryKey(autoGenerate = true)
+
     public int id;
 
-    public String Title;
 
-    public String ExamCategory;
+    public Integer subjectCodeId;
 
-    public String PaperCategory;
+    public Integer examTypeId;
 
-    public String Size;
+    public String fileUrl;
 
-    public String URL;
+    public Integer semester;
 
+    public Integer sessionId;
 
-    public String RelativeURL;
+    public Integer paperType;
 
-    public boolean downloaded;
+    public Integer adminId;
 
     public String dwnldPath;
+    public boolean downloaded;
 
 
-    public PaperDatabaseModel(int id,String title,String ExamCategory,String PaperCategory,String Size,String URL,
-                              String RelativeURL,boolean downloaded,String dwnldPath) {
+    public PaperDatabaseModel(Integer id, Integer subjectCodeId, Integer examTypeId, String fileUrl, Integer semester, Integer sessionId, Integer paperType, Integer adminId,
+                              String dwnldPath,boolean downloaded) {
+        super();
         this.id = id;
+        this.subjectCodeId = subjectCodeId;
+        this.examTypeId = examTypeId;
+        this.fileUrl = fileUrl;
+        this.semester = semester;
+        this.sessionId = sessionId;
+        this.paperType = paperType;
+        this.adminId = adminId;
         this.downloaded=downloaded;
-        this.ExamCategory=ExamCategory;
-        this.Title=title;
-        this.PaperCategory=PaperCategory;
-        this.Size=Size;
-        this.URL=URL;
-        this.RelativeURL=RelativeURL;
         this.dwnldPath=dwnldPath;
+    }
+
+    public PaperDatabaseModel() {
+
+    }
+
+    public PaperDatabaseModel(Integer id, Integer subjectCodeId, Integer examTypeId, String fileUrl,
+                              Integer semester,Integer sessionId, Integer paperType, Integer adminId,boolean downloaded) {
+        super();
+        this.id = id;
+        this.subjectCodeId = subjectCodeId;
+        this.examTypeId = examTypeId;
+        this.fileUrl = fileUrl;
+        this.semester = semester;
+        this.sessionId = sessionId;
+        this.paperType = paperType;
+        this.adminId = adminId;
+        this.downloaded=downloaded;
+
+    }
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public boolean isDownloaded() {
         return downloaded;
     }
 
-    public int getId() {
-        return id;
+    public void setDownloaded(boolean downloaded) {
+        this.downloaded = downloaded;
     }
 
-    public String getSize() {
-        return Size;
+    public Integer getSubjectCodeId() {
+        return subjectCodeId;
     }
 
-    public String getTitle() {
-        return Title;
+    public void setSubjectCodeId(Integer subjectCodeId) {
+        this.subjectCodeId = subjectCodeId;
+    }
+
+    public String getDwnldPath() {
+        return dwnldPath;
+    }
+
+    public void setDwnldPath(String dwnldPath) {
+        this.dwnldPath = dwnldPath;
+    }
+
+    public Integer getExamTypeId() {
+        return examTypeId;
+    }
+
+    public void setExamTypeId(Integer examTypeId) {
+        this.examTypeId = examTypeId;
+    }
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
+    }
+
+    public Integer getSemester() {
+        return semester;
+    }
+
+    public void setSemester(Integer semester) {
+        this.semester = semester;
+    }
+
+    public Integer getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(Integer sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public Integer getPaperType() {
+        return paperType;
+    }
+
+    public void setPaperType(Integer paperType) {
+        this.paperType = paperType;
+    }
+
+    public Integer getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
     }
 }

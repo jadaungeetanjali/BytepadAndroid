@@ -1,7 +1,5 @@
 package in.silive.bo.Activities;
 
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
@@ -36,20 +34,16 @@ import in.silive.bo.DownloadQueue;
 import in.silive.bo.DownloadQueue_Table;
 import in.silive.bo.Fragments.DialogFileDir;
 import in.silive.bo.MarshMallowPermission;
-
 import in.silive.bo.Models.PaperModel;
 import in.silive.bo.Network.CheckConnectivity;
 import in.silive.bo.Network.RoboRetroSpiceRequest;
 import in.silive.bo.Network.RoboRetrofitService;
-import in.silive.bo.PaperDatabase;
 import in.silive.bo.PaperDatabaseModel;
 import in.silive.bo.PaperDatabaseModel_Table;
 import in.silive.bo.PrefManager;
 import in.silive.bo.R;
 import in.silive.bo.Services.RegisterGCM;
 import in.silive.bo.Util;
-import in.silive.bo.database.AppDatabase;
-import in.silive.bo.viewmodel.BytepadAndroidViewModel;
 
 public class SplashActivity extends AppCompatActivity implements RequestListener<PaperModel.PapersList> {
     public static PaperModel pm;
@@ -63,8 +57,6 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
     Bundle bundle;
     ArrayList<PaperModel> list;
     AnimateHorizontalProgressBar progressBar;
-    private BytepadAndroidViewModel addAndroidViewModel;
-    private AppDatabase appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +64,6 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
         setContentView(R.layout.activity_splash);
         bundle = new Bundle();
         prefManager = new PrefManager(this);
-        appDatabase = AppDatabase.getDatabase(this);
         BytepadApplication application = (BytepadApplication) getApplication();
         mTracker = application.getDefaultTracker();
         mTracker.setScreenName("SplashActivity");
@@ -82,7 +73,6 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
             startService(i);
         }
         splash = (RelativeLayout) findViewById(R.id.splash);
-        addAndroidViewModel= ViewModelProviders.of(this).get(BytepadAndroidViewModel.class);
         progressBar = (AnimateHorizontalProgressBar) findViewById(R.id.animate_progress_bar);
         tvProgressInfo = (TextView) findViewById(R.id.tvProgressInfo);
         Log.d("Bytepad", "SplashActivity created");
@@ -142,7 +132,6 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
         } else {
             tvProgressInfo.setText("Moving satellites into position");
             spiceManager.execute(roboRetroSpiceRequest, "in.silive.bo", DurationInMillis.ONE_MINUTE, this);
-
         }
     }
 
@@ -220,8 +209,6 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
     public void updatePapers(final PaperModel.PapersList result) {
         Log.d("Bytepad", "Updating papers in DB");
         tvProgressInfo.setText("Filling up your bookshelf");
-
-
         new AsyncTask<Void, Integer, Void>() {
             PrefManager pref = prefManager;
 
@@ -233,24 +220,18 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
 
             @Override
             protected Void doInBackground(Void... voids) {
-
+                new Delete().from(PaperDatabaseModel.class).query();
                 for (int i = 0; i < result.size(); i++) {
                     PaperModel paper = result.get(i);
                     PaperDatabaseModel paperDatabaseModel = new PaperDatabaseModel();
-                    paperDatabaseModel.id=paper.id;
-
-                    paperDatabaseModel.subjectCodeId = paper.subjectCodeId;
-                    paperDatabaseModel.examTypeId = paper.examTypeId;
-                    paperDatabaseModel.fileUrl = paper.fileUrl;
-                    paperDatabaseModel.semester = paper.semester;
-                    paperDatabaseModel.sessionId = paper.sessionId;
-                    paperDatabaseModel.paperType = paper.paperType;
-
+                    paperDatabaseModel.Title = paper.Title;
+                    paperDatabaseModel.ExamCategory = paper.ExamCategory;
+                    paperDatabaseModel.PaperCategory = paper.PaperCategory;
+                    paperDatabaseModel.URL = paper.URL;
+                    paperDatabaseModel.RelativeURL = paper.RelativeURL;
+                    paperDatabaseModel.Size = paper.Size;
                     paperDatabaseModel.downloaded = false;
-                    appDatabase.itemAndPersonModel().addPaper(new PaperDatabaseModel(paper.id, paper.subjectCodeId, paper.examTypeId, paper.fileUrl
-                            , paper.semester, paper.sessionId, paper.paperType, paper.adminId, false));
-
-
+                    paperDatabaseModel.save();
                     publishProgress(i + 1);
                 }
                 pref.setPapersLoaded(true);

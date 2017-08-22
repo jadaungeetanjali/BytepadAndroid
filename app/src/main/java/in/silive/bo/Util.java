@@ -87,7 +87,7 @@ public class Util {
                     }).show();
         }else {
             final DownloadManager downloadManager;
-            String file_url = paper.URL;
+            String file_url = paper.fileUrl;
             file_url = file_url.replace(" ", "%20");
             final long downloadReference;
             BroadcastReceiver recieveDownloadComplete, notificationClicked;

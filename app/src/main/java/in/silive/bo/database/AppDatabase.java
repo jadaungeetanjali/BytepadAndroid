@@ -31,4 +31,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract PaperDatabaseDao itemAndPersonModel();
 
+
+
 }

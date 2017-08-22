@@ -37,7 +37,7 @@ import in.silive.bo.Adapters.PapersListAdapter;
 import in.silive.bo.Application.BytepadApplication;
 import in.silive.bo.Network.CheckConnectivity;
 import in.silive.bo.PaperDatabaseModel;
-import in.silive.bo.PaperDatabaseModel_Table;
+
 import in.silive.bo.PrefManager;
 import in.silive.bo.R;
 import in.silive.bo.SnackBarListener;
@@ -72,7 +72,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener,
         this.observer.registerForContentChanges(this, PaperDatabaseModel.class);
         this.observer.addModelChangeListener(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         Log.d("Bytepad", "MainActivity created");
         search_paper = (AutoCompleteTextView) findViewById(R.id.search_paper);
@@ -143,7 +143,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener,
             @Override
             public void afterTextChanged(Editable editable) {
                 query = editable.toString();
-                setUpList(query);
+                //setUpList(query);
             }
         });
 
@@ -163,7 +163,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener,
         super.onStop();
     }
 
-    public void setUpList(String query) {
+  public void setUpList(String query) {
         SQLCondition secondCondition;
         if (paperType.equalsIgnoreCase("download"))
             secondCondition = PaperDatabaseModel_Table.downloaded.is(true);
@@ -223,4 +223,4 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener,
             }
         }
     }
-}
+}+
