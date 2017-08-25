@@ -21,7 +21,7 @@ import in.silive.bo.database.AppDatabase;
 
 public class BytepadAndroidViewModel extends AndroidViewModel{
     private final LiveData<List<PaperDatabaseModel>> itemAndPersonList;
-    private final LiveData<List<SubjectDatabaseModel>> SubjectList;
+    //private final LiveData<List<SubjectDatabaseModel>> SubjectList;
     private AppDatabase appDatabase;
     PrefManager prefManager;
 
@@ -31,17 +31,17 @@ public class BytepadAndroidViewModel extends AndroidViewModel{
 
         appDatabase = AppDatabase.getDatabase(this.getApplication());
 
-        itemAndPersonList = appDatabase.itemAndPersonModel().getAllPapers();
-        SubjectList=appDatabase.itemAndPersonModel().getSubjects();
+        itemAndPersonList = appDatabase.itemAndPersonModel().getPapers();
+        //SubjectList=appDatabase.itemAndPersonModel().getSubjects();
     }
 
 
     public LiveData<List<PaperDatabaseModel>> getAllBorrowedItems() {
         return itemAndPersonList ;
     }
-    public LiveData<List<SubjectDatabaseModel>> getSubjectList()
+   // public LiveData<List<SubjectDatabaseModel>> getSubjectList()
     {
-        return SubjectList;
+        //return SubjectList;
     }
 
     }

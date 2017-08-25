@@ -23,6 +23,7 @@ import com.mobapphome.mahandroidupdater.tools.MAHUpdaterController;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.PendingRequestListener;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
@@ -33,20 +34,23 @@ import java.util.List;
 
 import in.silive.bo.Application.BytepadApplication;
 import in.silive.bo.DownloadQueue;
-import in.silive.bo.DownloadQueue_Table;
+
 import in.silive.bo.Fragments.DialogFileDir;
 import in.silive.bo.MarshMallowPermission;
 
 import in.silive.bo.Models.PaperModel;
+import in.silive.bo.Models.SubjectModel;
 import in.silive.bo.Network.CheckConnectivity;
 import in.silive.bo.Network.RoboRetroSpiceRequest;
+import in.silive.bo.Network.RoboRetroSpiceRequestSubject;
 import in.silive.bo.Network.RoboRetrofitService;
 import in.silive.bo.PaperDatabase;
 import in.silive.bo.PaperDatabaseModel;
-import in.silive.bo.PaperDatabaseModel_Table;
+
 import in.silive.bo.PrefManager;
 import in.silive.bo.R;
 import in.silive.bo.Services.RegisterGCM;
+import in.silive.bo.SubjectDatabaseModel;
 import in.silive.bo.Util;
 import in.silive.bo.database.AppDatabase;
 import in.silive.bo.viewmodel.BytepadAndroidViewModel;
@@ -56,6 +60,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
     RelativeLayout splash;
     SpiceManager spiceManager;
     RoboRetroSpiceRequest roboRetroSpiceRequest;
+    RoboRetroSpiceRequestSubject roboRetroSpiceRequestSubject;
     PrefManager prefManager;
     Bundle paperModelBundle;
     TextView tvProgressInfo;
@@ -82,7 +87,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
             startService(i);
         }
         splash = (RelativeLayout) findViewById(R.id.splash);
-        addAndroidViewModel= ViewModelProviders.of(this).get(BytepadAndroidViewModel.class);
+        addAndroidViewModel = ViewModelProviders.of(this).get(BytepadAndroidViewModel.class);
         progressBar = (AnimateHorizontalProgressBar) findViewById(R.id.animate_progress_bar);
         tvProgressInfo = (TextView) findViewById(R.id.tvProgressInfo);
         Log.d("Bytepad", "SplashActivity created");
@@ -90,6 +95,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
         Log.d("Bytepad", "Spice manager initialized");
         roboRetroSpiceRequest = new RoboRetroSpiceRequest();
         Log.d("Bytepad", "Spice request initialized");
+        roboRetroSpiceRequestSubject = new RoboRetroSpiceRequestSubject();
         checkPermissions();
 
     }
@@ -111,6 +117,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
 
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 checkPapersList();
+                checkSubjectList();
             } else {
                 Toast.makeText(this, "Permission denied!!!. App is exiting now", Toast.LENGTH_SHORT).show();
                 finish();
@@ -121,6 +128,15 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
     public void checkPapersList() {
         if (!prefManager.isPapersLoaded()) {
             downloadPaperList();
+        } else {
+            tvProgressInfo.setText("Organizing your bookshelf");
+            checkDownloadDir();
+        }
+    }
+
+    public void checkSubjectList() {
+        if (!prefManager.isSubjectLoaded()) {
+            downloadSubjectList();
         } else {
             tvProgressInfo.setText("Organizing your bookshelf");
             checkDownloadDir();
@@ -142,7 +158,47 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
         } else {
             tvProgressInfo.setText("Moving satellites into position");
             spiceManager.execute(roboRetroSpiceRequest, "in.silive.bo", DurationInMillis.ONE_MINUTE, this);
+        }
+    }
 
+    public void downloadSubjectList() {
+        tvProgressInfo.setText("Searching for signals");
+        if (!CheckConnectivity.isNetConnected(this)) {
+            Snackbar
+                    .make(splash, "No internet connection!", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            downloadSubjectList();
+                        }
+                    }).show();
+
+        } else {
+            tvProgressInfo.setText("Moving satellites into position");
+            spiceManager.execute(roboRetroSpiceRequestSubject, "in.silive.bo", DurationInMillis.ONE_MINUTE, new PendingRequestListener<SubjectModel.SubjectList>() {
+                @Override
+                public void onRequestNotFound() {
+
+                }
+
+                @Override
+                public void onRequestFailure(SpiceException spiceException) {
+                    Snackbar
+                            .make(splash, "No internet connection!", Snackbar.LENGTH_INDEFINITE)
+                            .setAction("RETRY", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    downloadSubjectList();
+                                }
+                            }).show();
+
+                }
+
+                @Override
+                public void onRequestSuccess(SubjectModel.SubjectList subjectModels) {
+
+                }
+            });
         }
     }
 
@@ -214,7 +270,44 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
                 .setAction("Paper list download")
                 .set("Result", "Success")
                 .build());
+        downloadSubjectList();
 
+    }
+
+
+    public void updateSubject(final SubjectModel.SubjectList result)
+    {
+        Log.d("Bytepad", "Updating subject in DB");
+        tvProgressInfo.setText("Filling up your bookshelf");
+        new AsyncTask<Void, Integer, Void>() {
+            PrefManager pref = prefManager;
+
+            @Override
+            protected void onProgressUpdate(Integer... values) {
+                super.onProgressUpdate(values);
+                progressBar.setProgress(values[0]);
+            }
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+
+                for (int i = 0; i < result.size(); i++) {
+                    SubjectModel subject = result.get(i);
+                    //SubjectDatabaseModel subjectDatabaseModel =new SubjectDatabaseModel();
+                    appDatabase.itemAndPersonModel().addSubject(new SubjectDatabaseModel(subject.id,subject.subjectCode,subject.subjectName));
+
+
+                    publishProgress(i + 1);
+                }
+                pref.setSubjectLoaded(true);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                checkDownloadDir();
+            }
+        }.execute();
     }
 
     public void updatePapers(final PaperModel.PapersList result) {

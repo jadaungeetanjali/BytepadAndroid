@@ -6,6 +6,7 @@ package in.silive.bo;
 public class Config {
     static final String KEY_SHAREDPREF_NAME = "bytepad";
     static final String PAPERS_LOADED = "papersLoaded";
+    static final String Subject_Loaded="subjectsLoaded";
     static final int DB_VERSION = 3;
     static final String DB_NAME = "bytepad";
     public static final String BASE_URL = "http://bytepad.silive.in/rest/api/paper";

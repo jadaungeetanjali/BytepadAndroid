@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 /**
  * Created by root on 12/8/17.
  */
@@ -68,7 +70,9 @@ public class SubjectModel implements Parcelable{
             return new SubjectModel[size];
         }
     };
-
+    @SuppressWarnings("serial")
+    public static class SubjectList extends ArrayList<SubjectModel> {
+    }
     public Integer getId() {
         return id;
     }

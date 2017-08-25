@@ -52,19 +52,19 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
     @Override
     public void onBindViewHolder(PaperViewHolder holder, int position) {
         final PaperDatabaseModel paper = this.getPapersList().get(position);
-        holder.tvPaperTitle.setText(paper.Title);
-        holder.tvPaperCategory.setText(paper.PaperCategory);
-        holder.tvPaperTitle.setText(paper.Title);
-        holder.tvPaperSize.setText(paper.Size);
+        holder.tvPaperTitle.setText(paper.dwnldPath);
+        holder.tvPaperCategory.setText(paper.dwnldPath);
+        holder.tvPaperTitle.setText(paper.dwnldPath);
+        holder.tvPaperSize.setText(paper.dwnldPath);
         int paperImgId;
-        if (paper.Title.contains("doc") || paper.Title.contains("DOC") || paper.Title.contains("Doc"))
+       /* if (paper.Title.contains("doc") || paper.Title.contains("DOC") || paper.Title.contains("Doc"))
             paperImgId = R.drawable.doc;
         else if (paper.Title.contains("rtf") || paper.Title.contains("RTF") || paper.Title.contains("Rtf"))
             paperImgId = R.drawable.rtf;
         else
             paperImgId = R.drawable.pdf;
-
-        holder.imageView.setImageResource(paperImgId);
+    */
+        holder.imageView.setImageResource(R.drawable.doc);
         if (paper.downloaded) {
             holder.tvDownload.setText("View");
             holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -96,9 +96,9 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
             tvPaperTitle = (TextView) view.findViewById(R.id.paper_title);
             tvPaperCategory = (TextView) view.findViewById(R.id.paper_category);
             tvPaperSize = (TextView) view.findViewById(R.id.paper_size);
-            tvDownload = (TextView) view.findViewById(R.id.tvDownload);
+           // tvDownload = (TextView) view.findViewById(R.id.tvDownload);
             imageView = (ImageView) view.findViewById(R.id.ivIcon);
-            relativeLayout = (RelativeLayout) view.findViewById(R.id.rl);
+           // relativeLayout = (RelativeLayout) view.findViewById(R.id.rl);
         }
     }
 

@@ -21,8 +21,8 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 @Dao
 public interface PaperDatabaseDao {
 
-      @Query("select * from PaperDatabaseModel where id in :id")
-      LiveData<List<PaperDatabaseModel>> getPapers(int[] id);
+      @Query("select * from PaperDatabaseModel")
+      LiveData<List<PaperDatabaseModel>> getPapers();
 
     @Query("select * from PaperDatabaseModel where id in :id")
     LiveData<List<SubjectDatabaseModel>> getSubjects(String sub);
@@ -43,8 +43,14 @@ public interface PaperDatabaseDao {
     void updatepaper(boolean val,int itemid);
        @Query("delete from PaperDatabaseModel where reference = :itemreference")
        void delete(long reference);
+     @Query("select * from PaperDatabaseModel where downloaded = :val")
+     List<PaperDatabaseModel>  setval(boolean val);
+    @Query("select * from PaperDatabaseModel where paperType = :val")
+    List<PaperDatabaseModel>  setPaperType(int val);
         @Insert(onConflict = REPLACE)
         void addPaper(PaperDatabaseModel borrowModel);
+        @Insert(onConflict = REPLACE)
+        void addSubject(SubjectDatabaseModel subjectDatabaseModel);
 
         @Delete
         void deletePaper(PaperDatabaseModel borrowModel);

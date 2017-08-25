@@ -35,15 +35,17 @@ import java.util.List;
 
 import in.silive.bo.Adapters.PapersListAdapter;
 import in.silive.bo.Application.BytepadApplication;
+import in.silive.bo.Mapping;
 import in.silive.bo.Network.CheckConnectivity;
 import in.silive.bo.PaperDatabaseModel;
 
 import in.silive.bo.PrefManager;
 import in.silive.bo.R;
 import in.silive.bo.SnackBarListener;
+import in.silive.bo.database.AppDatabase;
 import in.silive.bo.viewmodel.BytepadAndroidViewModel;
 
-public class MainActivity extends LifecycleActivity implements SnackBarListener, FlowContentObserver.OnModelStateChangedListener {
+public class MainActivity extends LifecycleActivity implements SnackBarListener {
     public static List<PaperDatabaseModel> paperList = new ArrayList<>();
     public AutoCompleteTextView search_paper;
     public RecyclerView recyclerView;
@@ -51,12 +53,16 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener,
     public CoordinatorLayout coordinatorLayout;
     PapersListAdapter papersListAdapter;
     String query = "%";
-    String paperType = "%";
+
+    int paperType ;
     Toolbar toolbar;
     ImageView ivClearSearch;
     RelativeLayout recyclerEmptyView;
     FlowContentObserver observer;
     PrefManager prefManager;
+    Mapping mapping;
+    private AppDatabase appDatabase;
+
     private BytepadAndroidViewModel viewModel;
 
     @Override
@@ -67,12 +73,13 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener,
         Tracker mTracker = application.getDefaultTracker();
         mTracker.setScreenName("MainActivity");
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        mapping=new Mapping(this);
         prefManager = new PrefManager(this);
         this.observer = new FlowContentObserver();
-        this.observer.registerForContentChanges(this, PaperDatabaseModel.class);
-        this.observer.addModelChangeListener(this);
+      //  this.observer.registerForContentChanges(this, PaperDatabaseModel.class);
+        //this.observer.addModelChangeListener(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-
+        appDatabase = AppDatabase.getDatabase(this);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         Log.d("Bytepad", "MainActivity created");
         search_paper = (AutoCompleteTextView) findViewById(R.id.search_paper);
@@ -86,33 +93,38 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener,
         ivClearSearch = (ImageView) findViewById(R.id.ivClearSearch);
         recyclerEmptyView = (RelativeLayout) findViewById(R.id.recyclerEmptyView);
         tabLayout.addTab(tabLayout.newTab().setText("ALL"), 0);
-        tabLayout.addTab(tabLayout.newTab().setText("ST"), 1);
-        tabLayout.addTab(tabLayout.newTab().setText("PUT"), 2);
-        tabLayout.addTab(tabLayout.newTab().setText("UT"), 3);
-        tabLayout.addTab(tabLayout.newTab().setText("SAVED"), 4);
+        tabLayout.addTab(tabLayout.newTab().setText("ST1"), 1);
+        tabLayout.addTab(tabLayout.newTab().setText("ST2"),2);
+        tabLayout.addTab(tabLayout.newTab().setText("PUT"), 3);
+        tabLayout.addTab(tabLayout.newTab().setText("UT"), 4);
+        tabLayout.addTab(tabLayout.newTab().setText("SAVED"), 5);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int i = tab.getPosition();
                 switch (i) {
                     case 0:
-                        paperType = "%";
+                        paperType = 0;
                         break;
                     case 1:
-                        paperType = "ST%";
+                        paperType = 3;
                         break;
+
                     case 2:
-                        paperType = "PUT%";
+                        paperType = 2;
                         break;
                     case 3:
-                        paperType = "UT%";
+                        paperType = 1;
                         break;
                     case 4:
-                        paperType = "download";
+                        paperType = 5;
+                        break;
+                    case 5:
+                        paperType=4;
                         break;
 
                 }
-                setUpList(query);
+                setUpList(paperType);
             }
 
             @Override
@@ -126,7 +138,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener,
             }
         });
         if (!CheckConnectivity.isNetConnected(this)) {
-            TabLayout.Tab tab = tabLayout.getTabAt(4);
+            TabLayout.Tab tab = tabLayout.getTabAt(5);
             tab.select();
         }
         search_paper.addTextChangedListener(new TextWatcher() {
@@ -143,6 +155,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener,
             @Override
             public void afterTextChanged(Editable editable) {
                 query = editable.toString();
+
                 //setUpList(query);
             }
         });
@@ -153,7 +166,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener,
                 search_paper.setText("");
             }
         });
-        setUpList(query);
+        //setUpList(query);
 
     }
 
@@ -163,15 +176,13 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener,
         super.onStop();
     }
 
-  public void setUpList(String query) {
+  public void setUpList(int query) {
         SQLCondition secondCondition;
-        if (paperType.equalsIgnoreCase("download"))
-            secondCondition = PaperDatabaseModel_Table.downloaded.is(true);
+        if (paperType==5)
+            paperList=appDatabase.itemAndPersonModel().setval(true);
         else
-            secondCondition = PaperDatabaseModel_Table.ExamCategory.like(paperType);
-        paperList = new Select().from(PaperDatabaseModel.class)
-                .where(PaperDatabaseModel_Table.Title.like("%" + query + "%"), secondCondition)
-                .queryList();
+
+        paperList = appDatabase.itemAndPersonModel().setPaperType(paperType);
         papersListAdapter = new PapersListAdapter(this, paperList);
 
         viewModel = ViewModelProviders.of(this).get(BytepadAndroidViewModel.class);
@@ -199,7 +210,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener,
         return this.coordinatorLayout;
     }
 
-    @Override
+    /*@Override
     public void onModelStateChanged(@Nullable Class<? extends Model> table, BaseModel.Action action, @NonNull SQLCondition[] primaryKeyValues) {
         if (action.equals(BaseModel.Action.UPDATE)) {
             for (SQLCondition cond : primaryKeyValues) {
@@ -222,5 +233,5 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener,
                 break;
             }
         }
-    }
-}+
+    }*/
+}
