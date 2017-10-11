@@ -184,28 +184,36 @@
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:text="ALL"
+                    android:textColor="#000000"
                     android:id="@+id/all"
                     android:layout_weight="1"/>
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="ST1"
+                    android:textColor="#000000"
                     android:id="@+id/St1"
                     android:layout_weight="1"/>
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:text="ST2"
+                    android:textColor="#000000"
                     android:id="@+id/st2"
                     android:layout_weight="1"/>
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="PUT"
+                    android:textColor="#000000"
                     android:id="@+id/put"
                     android:layout_weight="1"/>
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="UT"
+                    android:textColor="#000000"
                     android:id="@+id/ut"
                     android:layout_weight="1"/>
 

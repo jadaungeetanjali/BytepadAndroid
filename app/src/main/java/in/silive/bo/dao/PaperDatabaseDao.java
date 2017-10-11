@@ -43,10 +43,10 @@ public interface PaperDatabaseDao {
     void updatepaper(boolean val,int itemid);
        @Query("delete from PaperDatabaseModel where reference = :itemreference")
        void delete(long reference);
-     @Query("select * from PaperDatabaseModel where downloaded = :val")
+     @Query("select * from PaperDatabaseModel,SubjectDatabaseModel  where downloaded = :val")
      List<PaperDatabaseModel>  setval(boolean val);
-    @Query("select * from PaperDatabaseModel where paperType = :val")
-    List<PaperDatabaseModel>  setPaperType(int val);
+    @Query("select * from PaperDatabaseModel where paperType in (:val)")
+    List<PaperDatabaseModel>  setPaperType(int val[]);
         @Insert(onConflict = REPLACE)
         void addPaper(PaperDatabaseModel borrowModel);
         @Insert(onConflict = REPLACE)

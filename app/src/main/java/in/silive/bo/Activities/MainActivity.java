@@ -3,6 +3,7 @@ package in.silive.bo.Activities;
 import android.arch.lifecycle.LifecycleActivity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,8 +20,10 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -53,8 +56,8 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
     public CoordinatorLayout coordinatorLayout;
     PapersListAdapter papersListAdapter;
     String query = "%";
-
-    int paperType ;
+    ToggleButton all,st1,st2,put,ut;
+    int paperType[];
     Toolbar toolbar;
     ImageView ivClearSearch;
     RelativeLayout recyclerEmptyView;
@@ -63,6 +66,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
     Mapping mapping;
     private AppDatabase appDatabase;
 
+    ArrayList<Integer> paper;
     private BytepadAndroidViewModel viewModel;
 
     @Override
@@ -79,12 +83,17 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
       //  this.observer.registerForContentChanges(this, PaperDatabaseModel.class);
         //this.observer.addModelChangeListener(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        all=(ToggleButton)findViewById(R.id.all);
+        st1=(ToggleButton)findViewById(R.id.St1);
+        st2=(ToggleButton)findViewById(R.id.st2);
+        put=(ToggleButton)findViewById(R.id.put);
+        ut=(ToggleButton)findViewById(R.id.ut);
         appDatabase = AppDatabase.getDatabase(this);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         Log.d("Bytepad", "MainActivity created");
         search_paper = (AutoCompleteTextView) findViewById(R.id.search_paper);
         Log.d("Bytepad", "Search bar added");
-        tabLayout = (TabLayout) findViewById(R.id.tabview);
+        //tabLayout = (TabLayout) findViewById(R.id.tabview);
         Log.d("Bytepad", "Tab Layout added");
         recyclerView = (RecyclerView) findViewById(R.id.rview);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -92,13 +101,59 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
         query = "";
         ivClearSearch = (ImageView) findViewById(R.id.ivClearSearch);
         recyclerEmptyView = (RelativeLayout) findViewById(R.id.recyclerEmptyView);
-        tabLayout.addTab(tabLayout.newTab().setText("ALL"), 0);
-        tabLayout.addTab(tabLayout.newTab().setText("ST1"), 1);
-        tabLayout.addTab(tabLayout.newTab().setText("ST2"),2);
-        tabLayout.addTab(tabLayout.newTab().setText("PUT"), 3);
-        tabLayout.addTab(tabLayout.newTab().setText("UT"), 4);
-        tabLayout.addTab(tabLayout.newTab().setText("SAVED"), 5);
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        all.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                all.setTextColor(Color.WHITE);
+                paper.add(1);
+                paper.add(2);
+                paper.add(3);
+                paper.add(4);
+            }
+        });
+        st1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                st1.setTextColor(Color.WHITE);
+                paper.add(3);
+            }
+        });
+        st2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                st2.setTextColor(Color.WHITE);
+                paper.add(4);
+            }
+        });
+        put.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                put.setTextColor(Color.WHITE);
+                paper.add(2);
+            }
+        });
+        ut.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ut.setTextColor(Color.WHITE);
+                paper.add(1);
+            }
+        });
+
+
+
+
+
+
+
+
+        //tabLayout.addTab(tabLayout.newTab().setText("ALL"), 0);
+        //tabLayout.addTab(tabLayout.newTab().setText("ST1"), 1);
+        //tabLayout.addTab(tabLayout.newTab().setText("ST2"),2);
+        //tabLayout.addTab(tabLayout.newTab().setText("PUT"), 3);
+        //tabLayout.addTab(tabLayout.newTab().setText("UT"), 4);
+        //tabLayout.addTab(tabLayout.newTab().setText("SAVED"), 5);
+        /*tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int i = tab.getPosition();
@@ -165,7 +220,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
             public void onClick(View view) {
                 search_paper.setText("");
             }
-        });
+        });*/
         //setUpList(query);
 
     }
@@ -178,10 +233,13 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
 
   public void setUpList(int query) {
         SQLCondition secondCondition;
-        if (paperType==5)
-            paperList=appDatabase.itemAndPersonModel().setval(true);
-        else
-
+        //if (paperType==5)
+          //  paperList=appDatabase.itemAndPersonModel().setval(true);
+        //else
+        for(int i=0;i<paper.size();i++)
+        {
+            paperType[i]=paper.get(i);
+        }
         paperList = appDatabase.itemAndPersonModel().setPaperType(paperType);
         papersListAdapter = new PapersListAdapter(this, paperList);
 
