@@ -12,6 +12,7 @@ import java.util.List;
 import in.silive.bo.DownloadQueue;
 import in.silive.bo.PaperDatabaseModel;
 import in.silive.bo.SubjectDatabaseModel;
+import in.silive.bo.util.PaperDetails;
 
 import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 
@@ -22,7 +23,7 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 public interface PaperDatabaseDao {
 
       @Query("select * from PaperDatabaseModel")
-      LiveData<List<PaperDatabaseModel>> getPapers();
+      LiveData<List<PaperDetails>> getPapers();
 
     @Query("select * from PaperDatabaseModel where id in :id")
     LiveData<List<SubjectDatabaseModel>> getSubjects(String sub);
@@ -45,8 +46,10 @@ public interface PaperDatabaseDao {
        void delete(long reference);
      @Query("select * from PaperDatabaseModel,SubjectDatabaseModel  where downloaded = :val")
      List<PaperDatabaseModel>  setval(boolean val);
-    @Query("select * from PaperDatabaseModel where paperType in (:val)")
-    List<PaperDatabaseModel>  setPaperType(int val[]);
+    @Query("select * from PaperDatabaseModel,SubjectDatabaseModel where PaperDatabaseModel.subjectCodeId=SubjectDatabaseModel.id and  paper_type in (:val)")
+    List<PaperDetails> setPaperType(int val[]);
+    @Query("select * from PaperDatabaseModel,SubjectDatabaseModel where PaperDatabaseModel.subjectCodeId=SubjectDatabaseModel.id")
+    List<PaperDetails>  setPaperTypeAll();
         @Insert(onConflict = REPLACE)
         void addPaper(PaperDatabaseModel borrowModel);
         @Insert(onConflict = REPLACE)

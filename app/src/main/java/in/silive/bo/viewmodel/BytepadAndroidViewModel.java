@@ -14,13 +14,14 @@ import in.silive.bo.PaperDatabaseModel;
 import in.silive.bo.PrefManager;
 import in.silive.bo.SubjectDatabaseModel;
 import in.silive.bo.database.AppDatabase;
+import in.silive.bo.util.PaperDetails;
 
 /**
  * Created by root on 9/8/17.
  */
 
 public class BytepadAndroidViewModel extends AndroidViewModel{
-    private final LiveData<List<PaperDatabaseModel>> itemAndPersonList;
+    private final LiveData<List<PaperDetails>> itemAndPersonList;
     //private final LiveData<List<SubjectDatabaseModel>> SubjectList;
     private AppDatabase appDatabase;
     PrefManager prefManager;
@@ -36,7 +37,7 @@ public class BytepadAndroidViewModel extends AndroidViewModel{
     }
 
 
-    public LiveData<List<PaperDatabaseModel>> getAllBorrowedItems() {
+    public LiveData<List<PaperDetails>> getAllBorrowedItems() {
         return itemAndPersonList ;
     }
    // public LiveData<List<SubjectDatabaseModel>> getSubjectList()

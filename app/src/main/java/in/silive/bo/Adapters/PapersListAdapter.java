@@ -14,6 +14,7 @@ import java.util.List;
 import in.silive.bo.PaperDatabaseModel;
 import in.silive.bo.R;
 import in.silive.bo.Util;
+import in.silive.bo.util.PaperDetails;
 
 /**
  * Created by akriti on 6/8/16.
@@ -22,7 +23,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
     private Activity context;
     private List<PaperDatabaseModel> papersList;
 
-    public PapersListAdapter(Activity context, List<PaperDatabaseModel> papersList) {
+    public PapersListAdapter(Activity context, List<PaperDetails> papersList) {
         this.papersList = papersList;
         this.context = context;
 
@@ -45,7 +46,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
 
         return new PaperViewHolder(itemView);
     }
-    public void addItems(List<PaperDatabaseModel> PaperModelList) {
+    public void addItems(List<PaperDetails> PaperModelList) {
         this.papersList = PaperModelList;
         notifyDataSetChanged();
     }

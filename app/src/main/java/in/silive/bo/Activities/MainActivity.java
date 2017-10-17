@@ -39,6 +39,7 @@ import java.util.List;
 import in.silive.bo.Adapters.PapersListAdapter;
 import in.silive.bo.Application.BytepadApplication;
 import in.silive.bo.Mapping;
+import in.silive.bo.Models.PaperModel;
 import in.silive.bo.Network.CheckConnectivity;
 import in.silive.bo.PaperDatabaseModel;
 
@@ -46,10 +47,11 @@ import in.silive.bo.PrefManager;
 import in.silive.bo.R;
 import in.silive.bo.SnackBarListener;
 import in.silive.bo.database.AppDatabase;
+import in.silive.bo.util.PaperDetails;
 import in.silive.bo.viewmodel.BytepadAndroidViewModel;
 
 public class MainActivity extends LifecycleActivity implements SnackBarListener {
-    public static List<PaperDatabaseModel> paperList = new ArrayList<>();
+    public static List<PaperDetails> paperList = new ArrayList<>();
     public AutoCompleteTextView search_paper;
     public RecyclerView recyclerView;
     public TabLayout tabLayout;
@@ -104,39 +106,81 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
         all.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                all.setTextColor(Color.WHITE);
-                paper.add(1);
-                paper.add(2);
-                paper.add(3);
-                paper.add(4);
+                if(isChecked) {
+                    all.setTextColor(Color.WHITE);
+                    paper.add(1);
+                    paper.add(2);
+                    paper.add(3);
+                    paper.add(4);
+                    setUpList();
+                }
+                else {
+                    paper.remove(1);
+                    paper.remove(2);
+                    paper.remove(3);
+                    paper.remove(4);
+                    setUpList();
+                }
             }
         });
         st1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                st1.setTextColor(Color.WHITE);
-                paper.add(3);
+                if(isChecked) {
+                    st1.setTextColor(Color.WHITE);
+                    paper.add(3);
+                    setUpList();
+                }
+                else
+                {
+                    paper.remove(3);
+                    setUpList();
+                }
             }
         });
         st2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                st2.setTextColor(Color.WHITE);
-                paper.add(4);
+                if(isChecked) {
+                    st2.setTextColor(Color.WHITE);
+                    paper.add(4);
+                    setUpList();
+                }
+                else
+                {
+                    paper.remove(4);
+                    setUpList();
+                }
             }
         });
         put.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                put.setTextColor(Color.WHITE);
-                paper.add(2);
+                if(isChecked) {
+                    put.setTextColor(Color.WHITE);
+                    paper.add(2);
+                    setUpList();
+                }
+                else {
+                    paper.remove(2);
+                    setUpList();
+                }
             }
         });
         ut.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ut.setTextColor(Color.WHITE);
-                paper.add(1);
+                if(isChecked) {
+                    ut.setTextColor(Color.WHITE);
+                    paper.add(1);
+                    setUpList();
+                }
+                else
+                {
+                    paper.remove(1);
+                    setUpList();
+                }
+
             }
         });
 
@@ -231,7 +275,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
         super.onStop();
     }
 
-  public void setUpList(int query) {
+  public void setUpList() {
         SQLCondition secondCondition;
         //if (paperType==5)
           //  paperList=appDatabase.itemAndPersonModel().setval(true);
@@ -245,9 +289,9 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
 
         viewModel = ViewModelProviders.of(this).get(BytepadAndroidViewModel.class);
 
-        viewModel.getAllBorrowedItems().observe(MainActivity.this, new Observer<List<PaperDatabaseModel>>() {
+        viewModel.getAllBorrowedItems().observe(MainActivity.this, new Observer<List<PaperDetails>>() {
             @Override
-            public void onChanged(@Nullable List<PaperDatabaseModel> PaperDatabaseModel) {
+            public void onChanged(@Nullable List<PaperDetails> PaperDatabaseModel) {
                 papersListAdapter.addItems(PaperDatabaseModel);
 
             }

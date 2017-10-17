@@ -13,7 +13,7 @@ import com.raizlabs.android.dbflow.annotation.Column;
 @Entity
 public class PaperDatabaseModel  {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
 
     public int id;
 

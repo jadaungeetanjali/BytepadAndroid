@@ -1,5 +1,6 @@
 package in.silive.bo;
 
+import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcelable;
 
@@ -9,10 +10,10 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by root on 12/8/17.
  */
-
+@Entity
 public class SubjectDatabaseModel {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     public Integer id;
 
     public String subjectCode;
