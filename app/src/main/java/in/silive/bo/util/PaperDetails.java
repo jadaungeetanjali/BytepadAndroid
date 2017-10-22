@@ -32,12 +32,30 @@ public class PaperDetails {
     @SerializedName("admin_id")
     @Expose
     public Integer adminId;
-
+    public String dwnldPath;
+    public boolean downloaded;
 
     @SerializedName("Id")
     @Expose
 
     public Integer id;
+
+    public PaperDetails(Integer id1, Integer subjectCodeId, Integer examTypeId, String fileUrl, Integer semester, Integer sessionId, Integer paperType, Integer adminId, String dwnldPath, boolean downloaded, Integer id, String subjectCode, String subjectName) {
+        this.id1 = id1;
+        this.subjectCodeId = subjectCodeId;
+        this.examTypeId = examTypeId;
+        this.fileUrl = fileUrl;
+        this.semester = semester;
+        this.sessionId = sessionId;
+        this.paperType = paperType;
+        this.adminId = adminId;
+        this.dwnldPath = dwnldPath;
+        this.downloaded = downloaded;
+        this.id = id;
+        this.subjectCode = subjectCode;
+        this.subjectName = subjectName;
+    }
+
     @SerializedName("SubjectCode")
     @Expose
     public String subjectCode;

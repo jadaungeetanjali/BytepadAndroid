@@ -24,6 +24,7 @@ import java.io.FileNotFoundException;
 import in.silive.bo.Activities.MainActivity;
 import in.silive.bo.Application.BytepadApplication;
 import in.silive.bo.Network.CheckConnectivity;
+import in.silive.bo.util.PaperDetails;
 
 /**
  * Created by AKG002 on 08-08-2016.
@@ -72,7 +73,7 @@ public class Util {
 
     }
 
-    public static void downloadPaper(final Activity context, final PaperDatabaseModel paper) {
+    public static void downloadPaper(final Activity context, final PaperDetails paper) {
         BytepadApplication application = (BytepadApplication)context.getApplication();
         final Tracker mTracker = application.getDefaultTracker();
         PrefManager prefManager = new PrefManager(context);

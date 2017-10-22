@@ -21,7 +21,7 @@ import in.silive.bo.util.PaperDetails;
  */
 public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.PaperViewHolder> {
     private Activity context;
-    private List<PaperDatabaseModel> papersList;
+    private List<PaperDetails> papersList;
 
     public PapersListAdapter(Activity context, List<PaperDetails> papersList) {
         this.papersList = papersList;
@@ -29,7 +29,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
 
     }
 
-    public List<PaperDatabaseModel> getPapersList() {
+    public List<PaperDetails> getPapersList() {
         return papersList;
     }
 
@@ -52,11 +52,11 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
     }
     @Override
     public void onBindViewHolder(PaperViewHolder holder, int position) {
-        final PaperDatabaseModel paper = this.getPapersList().get(position);
-        holder.tvPaperTitle.setText(paper.dwnldPath);
-        holder.tvPaperCategory.setText(paper.dwnldPath);
-        holder.tvPaperTitle.setText(paper.dwnldPath);
-        holder.tvPaperSize.setText(paper.dwnldPath);
+        final PaperDetails paper = this.getPapersList().get(position);
+        holder.tvPaperTitle.setText(paper.subjectName);
+        holder.tvPaperCategory.setText(paper.subjectName);
+        holder.tvPaperTitle.setText(paper.subjectName);
+        holder.tvPaperSize.setText(paper.subjectName);
         int paperImgId;
        /* if (paper.Title.contains("doc") || paper.Title.contains("DOC") || paper.Title.contains("Doc"))
             paperImgId = R.drawable.doc;
@@ -66,7 +66,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
             paperImgId = R.drawable.pdf;
     */
         holder.imageView.setImageResource(R.drawable.doc);
-        if (paper.downloaded) {
+       if (paper.downloaded) {
             holder.tvDownload.setText("View");
             holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
