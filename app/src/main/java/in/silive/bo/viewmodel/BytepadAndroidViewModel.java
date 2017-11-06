@@ -4,33 +4,33 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
-import android.os.AsyncTask;
+import android.arch.lifecycle.ViewModelProvider;
+import android.telecom.RemoteConnection;
 
 import java.util.List;
 
 import in.silive.bo.Application.BytepadApplication;
-import in.silive.bo.PaperDatabase;
-import in.silive.bo.PaperDatabaseModel;
+
 import in.silive.bo.PrefManager;
-import in.silive.bo.SubjectDatabaseModel;
-import in.silive.bo.database.AppDatabase;
+import in.silive.bo.database.RoomDb;
 import in.silive.bo.util.PaperDetails;
 
 /**
  * Created by root on 9/8/17.
  */
 
-public class BytepadAndroidViewModel extends AndroidViewModel{
+public class BytepadAndroidViewModel extends AndroidViewModel implements ViewModelProvider.Factory{
     private final LiveData<List<PaperDetails>> itemAndPersonList;
     //private final LiveData<List<SubjectDatabaseModel>> SubjectList;
-    private AppDatabase appDatabase;
+    private RoomDb appDatabase;
     PrefManager prefManager;
 
-    public BytepadAndroidViewModel(BytepadApplication application) {
+
+    public BytepadAndroidViewModel(Application application) {
         super(application);
         prefManager = new PrefManager(this.getApplication());
 
-        appDatabase = AppDatabase.getDatabase(this.getApplication());
+        appDatabase = RoomDb.getDatabase(this.getApplication());
 
         itemAndPersonList = appDatabase.itemAndPersonModel().getPapers();
         //SubjectList=appDatabase.itemAndPersonModel().getSubjects();
@@ -45,6 +45,10 @@ public class BytepadAndroidViewModel extends AndroidViewModel{
         //return SubjectList;
     }
 
+    @Override
+    public <T extends ViewModel> T create(Class<T> modelClass) {
+        return null;
     }
+}
 
 

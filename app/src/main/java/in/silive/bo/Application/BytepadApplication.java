@@ -22,6 +22,7 @@ public class BytepadApplication extends Application {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
         FlowManager.init(new FlowConfig.Builder(this).build());
+//        AppDatabase.getDatabase(this);
     }
 
     /**
@@ -33,7 +34,7 @@ public class BytepadApplication extends Application {
         if (mTracker == null) {
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
             // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
-            mTracker = analytics.newTracker(R.xml.global_tracker);
+           // mTracker = analytics.newTracker(R.xml.global_tracker);
         }
         return mTracker;
     }

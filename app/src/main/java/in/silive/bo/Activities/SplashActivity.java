@@ -1,12 +1,12 @@
 package in.silive.bo.Activities;
 
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -25,8 +25,6 @@ import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.PendingRequestListener;
 import com.octo.android.robospice.request.listener.RequestListener;
-import com.raizlabs.android.dbflow.sql.language.Delete;
-import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -44,15 +42,15 @@ import in.silive.bo.Network.CheckConnectivity;
 import in.silive.bo.Network.RoboRetroSpiceRequest;
 import in.silive.bo.Network.RoboRetroSpiceRequestSubject;
 import in.silive.bo.Network.RoboRetrofitService;
-import in.silive.bo.PaperDatabase;
+
 import in.silive.bo.PaperDatabaseModel;
 
 import in.silive.bo.PrefManager;
 import in.silive.bo.R;
-import in.silive.bo.Services.RegisterGCM;
+//import in.silive.bo.Services.RegisterGCM;
 import in.silive.bo.SubjectDatabaseModel;
 import in.silive.bo.Util;
-import in.silive.bo.database.AppDatabase;
+import in.silive.bo.database.RoomDb;
 import in.silive.bo.viewmodel.BytepadAndroidViewModel;
 
 public class SplashActivity extends AppCompatActivity implements RequestListener<PaperModel.PapersList> {
@@ -69,23 +67,25 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
     ArrayList<PaperModel> list;
     AnimateHorizontalProgressBar progressBar;
     private BytepadAndroidViewModel addAndroidViewModel;
-    private AppDatabase appDatabase;
+    private RoomDb appDatabase;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         bundle = new Bundle();
         prefManager = new PrefManager(this);
-        appDatabase = AppDatabase.getDatabase(this);
         BytepadApplication application = (BytepadApplication) getApplication();
-        mTracker = application.getDefaultTracker();
-        mTracker.setScreenName("SplashActivity");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-        if (!prefManager.isGCMTokenSentToServer()) {
-            Intent i = new Intent(this, RegisterGCM.class);
-            startService(i);
-        }
+        appDatabase = RoomDb.getDatabase(this.getApplication());
+
+  //      mTracker = application.getDefaultTracker();
+//        mTracker.setScreenName("SplashActivity");
+  //      mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    //    if (!prefManager.isGCMTokenSentToServer()) {
+      //      Intent i = new Intent(this, RegisterGCM.class);
+        //    startService(i);
+      //  }
         splash = (RelativeLayout) findViewById(R.id.splash);
         addAndroidViewModel = ViewModelProviders.of(this).get(BytepadAndroidViewModel.class);
         progressBar = (AnimateHorizontalProgressBar) findViewById(R.id.animate_progress_bar);
@@ -329,8 +329,8 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
 
                 for (int i = 0; i < result.size(); i++) {
                     PaperModel paper = result.get(i);
-                    PaperDatabaseModel paperDatabaseModel = new PaperDatabaseModel();
-                    paperDatabaseModel.id=paper.id;
+                    PaperDatabaseModel paperDatabaseModel = new PaperDatabaseModel(paper.id,paper.subjectCodeId,paper.examTypeId,paper.fileUrl,paper.semester,paper.sessionId,paper.paperType,paper.adminId,false);
+                   /* paperDatabaseModel.id=paper.id;
 
                     paperDatabaseModel.subjectCodeId = paper.subjectCodeId;
                     paperDatabaseModel.examTypeId = paper.examTypeId;
@@ -339,7 +339,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
                     paperDatabaseModel.sessionId = paper.sessionId;
                     paperDatabaseModel.paperType = paper.paperType;
 
-                    paperDatabaseModel.downloaded = false;
+                    paperDatabaseModel.downloaded = false;*/
                     appDatabase.itemAndPersonModel().addPaper(new PaperDatabaseModel(paper.id, paper.subjectCodeId, paper.examTypeId, paper.fileUrl
                             , paper.semester, paper.sessionId, paper.paperType, paper.adminId, false));
 

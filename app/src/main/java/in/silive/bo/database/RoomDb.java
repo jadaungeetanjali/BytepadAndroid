@@ -8,18 +8,21 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+import in.silive.bo.DownloadQueue;
 import in.silive.bo.PaperDatabaseModel;
+import in.silive.bo.SubjectDatabaseModel;
 import in.silive.bo.dao.PaperDatabaseDao;
 
-@Database(entities = {PaperDatabaseModel.class}, version = 1)
-public abstract class AppDatabase extends RoomDatabase {
+@Database(entities = {PaperDatabaseModel.class,SubjectDatabaseModel.class, DownloadQueue.class}, version = 1,exportSchema = false)
 
-    private static AppDatabase INSTANCE;
+public abstract class RoomDb extends RoomDatabase {
 
-    public static AppDatabase getDatabase(Context context) {
+    private static RoomDb INSTANCE;
+
+    public static RoomDb getDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE =
-                    Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "paper_db")
+                    Room.databaseBuilder(context.getApplicationContext(), RoomDb.class, "paper_db").allowMainThreadQueries()
                             .build();
         }
         return INSTANCE;

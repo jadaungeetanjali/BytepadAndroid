@@ -16,6 +16,6 @@ public class RoboRetroSpiceRequestSubject extends RetrofitSpiceRequest<SubjectMo
 
     @Override
     public SubjectModel.SubjectList loadDataFromNetwork() throws Exception {
-        return null;
+        return getService().subjectList();
     }
 }

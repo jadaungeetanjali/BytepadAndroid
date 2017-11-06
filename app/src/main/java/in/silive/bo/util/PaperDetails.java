@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 public class PaperDetails {
     @SerializedName("id")
     @Expose
-    public Integer id1;
+    public Integer id;
     @SerializedName("subject_code_id")
     @Expose
     public Integer subjectCodeId;
@@ -38,23 +38,8 @@ public class PaperDetails {
     @SerializedName("Id")
     @Expose
 
-    public Integer id;
+    public Integer id1;
 
-    public PaperDetails(Integer id1, Integer subjectCodeId, Integer examTypeId, String fileUrl, Integer semester, Integer sessionId, Integer paperType, Integer adminId, String dwnldPath, boolean downloaded, Integer id, String subjectCode, String subjectName) {
-        this.id1 = id1;
-        this.subjectCodeId = subjectCodeId;
-        this.examTypeId = examTypeId;
-        this.fileUrl = fileUrl;
-        this.semester = semester;
-        this.sessionId = sessionId;
-        this.paperType = paperType;
-        this.adminId = adminId;
-        this.dwnldPath = dwnldPath;
-        this.downloaded = downloaded;
-        this.id = id;
-        this.subjectCode = subjectCode;
-        this.subjectName = subjectName;
-    }
 
     @SerializedName("SubjectCode")
     @Expose
@@ -64,7 +49,7 @@ public class PaperDetails {
     public String subjectName;
 
     public PaperDetails(Integer id1, Integer subjectCodeId, Integer examTypeId, String fileUrl, Integer semester, Integer sessionId, Integer paperType, Integer adminId, Integer id, String subjectCode, String subjectName) {
-        this.id1 = id1;
+        this.id = id1;
         this.subjectCodeId = subjectCodeId;
         this.examTypeId = examTypeId;
         this.fileUrl = fileUrl;

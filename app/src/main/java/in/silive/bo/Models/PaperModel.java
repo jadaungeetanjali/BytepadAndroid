@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-import in.silive.bo.PaperDatabase;
+
 import in.silive.bo.PaperDatabaseModel;
 
 /**

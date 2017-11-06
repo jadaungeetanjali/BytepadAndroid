@@ -1,5 +1,6 @@
 package in.silive.bo;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcelable;
@@ -14,6 +15,7 @@ import com.google.gson.annotations.SerializedName;
 public class SubjectDatabaseModel {
 
     @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "id1")
     public Integer id;
 
     public String subjectCode;
@@ -23,8 +25,7 @@ public class SubjectDatabaseModel {
     /**
      * No args constructor for use in serialization
      */
-    public SubjectDatabaseModel() {
-    }
+
 
 
     public SubjectDatabaseModel(Integer id, String subjectCode, String subjectName) {

@@ -54,6 +54,7 @@
             </intent-filter>
         </activity>
 
+
         <service android:name="in.silive.bo.Network.RoboRetrofitService" />
 
         <receiver
@@ -66,21 +67,7 @@
             </intent-filter>
         </receiver>
 
-        <service
-            android:name="in.silive.bo.Services.GcmListener"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-            </intent-filter>
-        </service>
-        <service
-            android:name="in.silive.bo.Services.InstanceIdListener"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID" />
-            </intent-filter>
-        </service>
-        <service android:name="in.silive.bo.Services.RegisterGCM" />
+
 
         <meta-data
             android:name="io.fabric.ApiKey"

@@ -36,24 +36,6 @@ public class PaperDatabaseModel  {
     public boolean downloaded;
 
 
-    public PaperDatabaseModel(Integer id, Integer subjectCodeId, Integer examTypeId, String fileUrl, Integer semester, Integer sessionId, Integer paperType, Integer adminId,
-                              String dwnldPath,boolean downloaded) {
-        super();
-        this.id = id;
-        this.subjectCodeId = subjectCodeId;
-        this.examTypeId = examTypeId;
-        this.fileUrl = fileUrl;
-        this.semester = semester;
-        this.sessionId = sessionId;
-        this.paperType = paperType;
-        this.adminId = adminId;
-        this.downloaded=downloaded;
-        this.dwnldPath=dwnldPath;
-    }
-
-    public PaperDatabaseModel() {
-
-    }
 
     public PaperDatabaseModel(Integer id, Integer subjectCodeId, Integer examTypeId, String fileUrl,
                               Integer semester,Integer sessionId, Integer paperType, Integer adminId,boolean downloaded) {
