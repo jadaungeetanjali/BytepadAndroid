@@ -270,9 +270,11 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
         //if (paperType==5)
           //  paperList=appDatabase.itemAndPersonModel().setval(true);
         //else
+      paperType=new int[paper.size()];
         for(int i=0;i<paper.size();i++)
         {
             paperType[i]=paper.get(i);
+            Log.d("debugg",Integer.toString(paperType[i]));
         }
         paperList = appDatabase.itemAndPersonModel().setPaperType(paperType);
         papersListAdapter = new PapersListAdapter(this, paperList);

@@ -179,6 +179,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
                 @Override
                 public void onRequestNotFound() {
 
+
                 }
 
                 @Override
@@ -196,6 +197,16 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
 
                 @Override
                 public void onRequestSuccess(SubjectModel.SubjectList subjectModels) {
+                    Log.d("Bytepad", "Request success");
+                    updateSubject(subjectModels);
+                    progressBar.setMax(subjectModels.size());
+                    progressBar.setProgress(0);
+
+       /* mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Download")
+                .setAction("Paper list download")
+                .set("Result", "Success")
+                .build());*/
 
                 }
             });
@@ -251,11 +262,11 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
                         downloadPaperList();
                     }
                 }).show();
-        mTracker.send(new HitBuilders.EventBuilder()
+       /* mTracker.send(new HitBuilders.EventBuilder()
                 .setCategory("Download")
                 .setAction("Paper list download")
                 .set("Result", "Failed")
-                .build());
+                .build());*/
     }
 
     @Override
@@ -265,12 +276,12 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
         progressBar.setMax(result.size());
         progressBar.setProgress(0);
 
-        mTracker.send(new HitBuilders.EventBuilder()
+       /* mTracker.send(new HitBuilders.EventBuilder()
                 .setCategory("Download")
                 .setAction("Paper list download")
                 .set("Result", "Success")
-                .build());
-        downloadSubjectList();
+                .build());*/
+       // downloadSubjectList();
 
     }
 
@@ -352,7 +363,8 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                checkDownloadDir();
+                downloadSubjectList();
+                //checkDownloadDir();
             }
         }.execute();
 

@@ -1,6 +1,7 @@
 package in.silive.bo.Adapters;
 
 import android.app.Activity;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,16 +68,16 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
     */
         holder.imageView.setImageResource(R.drawable.doc);
        if (paper.downloaded) {
-            holder.tvDownload.setText("View");
-            holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            //holder.tvDownload.setText("View");
+            holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Util.openDocument(context, paper.dwnldPath);
                 }
             });
         } else {
-            holder.tvDownload.setText("Download");
-            holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+           // holder.tvDownload.setText("Download");
+            holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Util.downloadPaper(context, paper);
@@ -90,7 +91,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
     class PaperViewHolder extends RecyclerView.ViewHolder {
         TextView tvPaperTitle, tvPaperCategory, tvPaperSize, tvDownload;
         ImageView imageView;
-        RelativeLayout relativeLayout;
+        ConstraintLayout constraintLayout;
 
         PaperViewHolder(View view) {
             super(view);
@@ -99,7 +100,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
             tvPaperSize = (TextView) view.findViewById(R.id.paper_size);
            // tvDownload = (TextView) view.findViewById(R.id.tvDownload);
             imageView = (ImageView) view.findViewById(R.id.ivIcon);
-           // relativeLayout = (RelativeLayout) view.findViewById(R.id.rl);
+           constraintLayout = (ConstraintLayout) view.findViewById(R.id.rview);
         }
     }
 
