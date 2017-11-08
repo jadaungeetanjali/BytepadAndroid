@@ -7,14 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
-import in.silive.bo.PaperDatabaseModel;
+import in.silive.bo.util.Mapping;
 import in.silive.bo.R;
 import in.silive.bo.Util;
+import in.silive.bo.util.MappingPapeType;
 import in.silive.bo.util.PaperDetails;
 
 /**
@@ -23,7 +24,8 @@ import in.silive.bo.util.PaperDetails;
 public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.PaperViewHolder> {
     private Activity context;
     private List<PaperDetails> papersList;
-
+    Mapping mapping=new Mapping();
+    MappingPapeType mappingPapeType=new MappingPapeType();
     public PapersListAdapter(Activity context, List<PaperDetails> papersList) {
         this.papersList = papersList;
         this.context = context;
@@ -53,11 +55,13 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
     }
     @Override
     public void onBindViewHolder(PaperViewHolder holder, int position) {
+
         final PaperDetails paper = this.getPapersList().get(position);
+        holder.tvPaperType.setText(mappingPapeType.getvalues(paper.examTypeId));
+       // Toast.makeText(context,mapping.getvalues(paper.sessionId),Toast.LENGTH_LONG).show();
+        holder.tvPaperCategory.setText(mapping.getvalues(paper.sessionId));
         holder.tvPaperTitle.setText(paper.subjectName);
-        holder.tvPaperCategory.setText(paper.subjectName);
-        holder.tvPaperTitle.setText(paper.subjectName);
-        holder.tvPaperSize.setText(paper.subjectName);
+        holder.tvPaperSize.setText("10KB");
         int paperImgId;
        /* if (paper.Title.contains("doc") || paper.Title.contains("DOC") || paper.Title.contains("Doc"))
             paperImgId = R.drawable.doc;
@@ -89,12 +93,13 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
     }
 
     class PaperViewHolder extends RecyclerView.ViewHolder {
-        TextView tvPaperTitle, tvPaperCategory, tvPaperSize, tvDownload;
+        TextView tvPaperTitle, tvPaperCategory, tvPaperSize, tvDownload,tvPaperType;
         ImageView imageView;
         ConstraintLayout constraintLayout;
 
         PaperViewHolder(View view) {
             super(view);
+            tvPaperType=(TextView)view.findViewById(R.id.ivcode);
             tvPaperTitle = (TextView) view.findViewById(R.id.paper_title);
             tvPaperCategory = (TextView) view.findViewById(R.id.paper_category);
             tvPaperSize = (TextView) view.findViewById(R.id.paper_size);

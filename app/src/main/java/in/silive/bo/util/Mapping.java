@@ -1,4 +1,4 @@
-package in.silive.bo;
+package in.silive.bo.util;
 
 import android.content.Context;
 
@@ -11,10 +11,10 @@ import java.util.HashMap;
 public class Mapping {
 
     private Context context;
-    HashMap<String, Integer> myMap;
+    HashMap<Integer, String> myMap;
 
-    public Mapping(Context current) {
-        this.context = current;
+    public Mapping() {
+
     }
 
     public void map() {
@@ -24,14 +24,15 @@ public class Mapping {
         int[] session_codes = {1, 2, 3, 4, 5, 6, 7};
 
 
-    myMap = new HashMap<String, Integer>();
+    myMap = new HashMap<Integer, String>();
         for (int i = 0; i < exam_type.length; i++) {
-            myMap.put(exam_type[i], examtype_codes[i]);
-            myMap.put(session[i], session_codes[i]);
+            myMap.put(examtype_codes[i], exam_type[i]);
+            myMap.put(session_codes[i], session[i]);
         }
     }
-    public int getvalues(String query)
+    public String getvalues(int key)
     {
-        return  myMap.get("query");
+        map();
+        return  myMap.get(key);
     }
 }

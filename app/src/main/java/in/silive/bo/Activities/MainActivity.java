@@ -19,8 +19,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ToggleButton;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.raizlabs.android.dbflow.runtime.FlowContentObserver;
 import com.raizlabs.android.dbflow.sql.language.SQLCondition;
 
@@ -30,7 +28,7 @@ import java.util.List;
 
 import in.silive.bo.Adapters.PapersListAdapter;
 import in.silive.bo.Application.BytepadApplication;
-import in.silive.bo.Mapping;
+import in.silive.bo.util.Mapping;
 
 import in.silive.bo.PrefManager;
 import in.silive.bo.R;
@@ -68,7 +66,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
    //     Tracker mTracker = application.getDefaultTracker();
 //        mTracker.setScreenName("MainActivity");
  //       mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-        mapping=new Mapping(this);
+        mapping=new Mapping();
         prefManager = new PrefManager(this);
      //   this.observer = new FlowContentObserver();
       //  this.observer.registerForContentChanges(this, PaperDatabaseModel.class);
@@ -94,6 +92,12 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
         query = "";
         ivClearSearch = (ImageView) findViewById(R.id.ivClearSearch);
         recyclerEmptyView = (RelativeLayout) findViewById(R.id.recyclerEmptyView);
+        all.setTextColor(Color.WHITE);
+        paper.add(1);
+        paper.add(2);
+        paper.add(3);
+        paper.add(4);
+        setUpList();
         all.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

@@ -59,11 +59,11 @@ public class Util {
         String mimetype = android.webkit.MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
         if (extension.equalsIgnoreCase("") || mimetype == null) {
             showSnackBar(context,"No document viewer found.");
-            mTracker.send(new HitBuilders.EventBuilder()
+          /*  mTracker.send(new HitBuilders.EventBuilder()
                     .setCategory("View Paper")
                     .setAction("opening")
                     .setLabel("Viewer not found")
-                    .build());
+                    .build());*/
         } else {
             intent.setDataAndType(Uri.fromFile(file), mimetype);
             context.startActivity(Intent.createChooser(intent, "Choose an Application:"));

@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rview"
+    android:padding="10dp"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="150dp">
+    android:layout_height="140dp">
 
 
 
@@ -22,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline7"
-        app:layout_constraintGuide_percent="0.0"
+        app:layout_constraintGuide_percent="0.09"
         android:orientation="horizontal"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="0dp" />
@@ -40,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline9"
-        app:layout_constraintGuide_percent="1.0"
+        app:layout_constraintGuide_percent="1"
         android:orientation="horizontal"
         tools:layout_editor_absoluteY="150dp"
         tools:layout_editor_absoluteX="0dp" />
@@ -115,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/guideline20"
-            app:layout_constraintGuide_percent="0.5"
+            app:layout_constraintGuide_percent="0.4"
             android:orientation="horizontal"
             tools:layout_editor_absoluteY="135dp"
             tools:layout_editor_absoluteX="0dp" />
