@@ -45,8 +45,8 @@ public interface PaperDatabaseDao {
        void delete(long itemreference);
      //@Query("select * from PaperDatabaseModel,SubjectDatabaseModel  where downloaded = :val")
      //List<PaperDatabaseModel>  setval(boolean val);
-    @Query("select * from PaperDatabaseModel,SubjectDatabaseModel where PaperDatabaseModel.subjectCodeId=SubjectDatabaseModel.id1 and  examTypeId in (:val)")
-    List<PaperDetails> setPaperType(int val[]);
+    @Query("select * from PaperDatabaseModel,SubjectDatabaseModel where PaperDatabaseModel.subjectCodeId=SubjectDatabaseModel.id1 and  examTypeId in (:val) and subjectName LIKE '%' || :query || '%' and downloaded=:value")
+    List<PaperDetails> setPaperType(int val[],String query,boolean value);
 
         @Insert(onConflict = REPLACE)
         void addPaper(PaperDatabaseModel borrowModel);

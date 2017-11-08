@@ -11,6 +11,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -54,7 +56,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
     PrefManager prefManager;
     Mapping mapping;
     private RoomDb appDatabase;
-
+    int counter=0;
     ArrayList<Integer> paper;
     private BytepadAndroidViewModel viewModel;
 
@@ -73,8 +75,9 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
 
         //this.observer.addModelChangeListener(this);
         paper=new ArrayList<>();
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        all=(ToggleButton)findViewById(R.id.all);
+        //all=(ToggleButton)findViewById(R.id.all);
         st1=(ToggleButton)findViewById(R.id.St1);
         st2=(ToggleButton)findViewById(R.id.st2);
         put=(ToggleButton)findViewById(R.id.put);
@@ -92,29 +95,42 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
         query = "";
         ivClearSearch = (ImageView) findViewById(R.id.ivClearSearch);
         recyclerEmptyView = (RelativeLayout) findViewById(R.id.recyclerEmptyView);
-        all.setChecked(true);
-        if((all.isChecked())) {
-            all.setTextColor(Color.WHITE);
-            paper.add(1);
-            paper.add(2);
-            paper.add(3);
-            paper.add(4);
-            setUpList();
-        }
-        else {
-            all.setTextColor(Color.BLACK);
-            paper.clear();
-            setUpList();
-        }
+        search_paper.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                query = editable.toString();
+
+                initialise();
+            }
+        });
+
+        initialise();
+
+        ivClearSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                search_paper.setText("");
+            }
+        });
+
         st1.setChecked(false);
         st1.setTextColor(Color.BLACK);
         st2.setChecked(false);
         st2.setTextColor(Color.BLACK);
-        put.setChecked(false);
-        put.setTextColor(Color.BLACK);
+
         ut.setChecked(false);
         ut.setTextColor(Color.BLACK);
-        all.setOnClickListener(new View.OnClickListener() {
+        /*all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if((all.isChecked())) {
@@ -123,17 +139,24 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                     paper.add(2);
                     paper.add(3);
                     paper.add(4);
-                    setUpList();
+                    setUpList(query);
                 }
                 else {
                     all.setTextColor(Color.BLACK);
-                    paper.clear();
-                    setUpList();
+                    Iterator itr = paper.iterator();
+                    while(itr.hasNext()){
+                        Object e = itr.next();
+                        if(counter<4)
+                            itr.remove();
+                        counter++;
+                    }
+
+                    setUpList(query);
                 }
 
 
             }
-        });
+        });*/
 
         st1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,7 +165,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
 
                     st1.setTextColor(Color.WHITE);
                     paper.add(3);
-                    setUpList();
+                    setUpList(query);
                 }
                 else
                 {   st1.setTextColor(Color.BLACK);
@@ -154,7 +177,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                     //    paper.remove(3);
 
 
-                    setUpList();
+                    setUpList(query);
                 }
 
             }
@@ -166,7 +189,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                      if(st2.isChecked()) {
                          st2.setTextColor(Color.WHITE);
                          paper.add(4);
-                         setUpList();
+                         setUpList(query);
                      }
                      else
                      {   st2.setTextColor(Color.BLACK);
@@ -176,7 +199,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                                  itr.remove();
                          }
                          // paper.remove(4);
-                         setUpList();
+                         setUpList(query);
                      }
 
                  }
@@ -190,7 +213,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                 if(put.isChecked()) {
                     put.setTextColor(Color.WHITE);
                     paper.add(2);
-                    setUpList();
+                    setUpList(query);
                 }
                 else {
                     put.setTextColor(Color.BLACK);
@@ -200,7 +223,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                             itr.remove();
                     }
                     // paper.remove(2);
-                    setUpList();
+                    setUpList(query);
                 }
             }
         });
@@ -211,7 +234,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                 if(ut.isChecked()) {
                     ut.setTextColor(Color.WHITE);
                     paper.add(1);
-                    setUpList();
+                    setUpList(query);
                 }
                 else
                 { ut.setTextColor(Color.BLACK);
@@ -221,7 +244,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                             itr.remove();
                     }
                     //paper.remove(1);
-                    setUpList();
+                    setUpList(query);
                 }
             }
         });
@@ -320,7 +343,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
         super.onStop();
     }
 
-  public void setUpList() {
+  public void setUpList(String query) {
         SQLCondition secondCondition;
         //if (paperType==5)
 
@@ -332,7 +355,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
             paperType[i]=paper.get(i);
             Log.d("debugg",Integer.toString(paperType[i]));
         }
-        paperList = appDatabase.itemAndPersonModel().setPaperType(paperType);
+        paperList = appDatabase.itemAndPersonModel().setPaperType(paperType,query,false);
         papersListAdapter = new PapersListAdapter(this, paperList);
 
         viewModel = ViewModelProviders.of(this).get(BytepadAndroidViewModel.class);
@@ -355,6 +378,25 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
             recyclerEmptyView.setVisibility(View.VISIBLE);
         }
 
+    }
+    void initialise()
+    {
+        put.setChecked(true);
+        if(put.isChecked()) {
+            put.setTextColor(Color.WHITE);
+            paper.add(2);
+            setUpList(query);
+        }
+        else {
+            put.setTextColor(Color.BLACK);
+            Iterator itr = paper.iterator();
+            while(itr.hasNext()){
+                if(itr.next().equals(2))
+                    itr.remove();
+            }
+            // paper.remove(2);
+            setUpList(query);
+        }
     }
 
     @Override
