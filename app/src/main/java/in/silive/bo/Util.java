@@ -24,12 +24,15 @@ import java.io.FileNotFoundException;
 import in.silive.bo.Activities.MainActivity;
 import in.silive.bo.Application.BytepadApplication;
 import in.silive.bo.Network.CheckConnectivity;
+import in.silive.bo.database.RoomDb;
 import in.silive.bo.util.PaperDetails;
 
 /**
  * Created by AKG002 on 08-08-2016.
  */
 public class Util {
+    private static RoomDb appDatabase;
+
     public static boolean isDownloadComplete(Activity context, long downloadId) {
         DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         Cursor c= downloadManager.query(new DownloadManager.Query().setFilterById(downloadId));
@@ -89,7 +92,9 @@ public class Util {
         }else {
             final DownloadManager downloadManager;
             String file_url = paper.fileUrl;
-            file_url = file_url.replace(" ", "%20");
+            file_url = ("http://testapi.silive.in/PaperFileUpload/PUT/"+file_url).trim();
+            file_url =file_url.replace(" ","%20");
+            Log.d("debugg",file_url);
             final long downloadReference;
             BroadcastReceiver recieveDownloadComplete, notificationClicked;
             downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
@@ -97,7 +102,7 @@ public class Util {
             DownloadManager.Request request = new DownloadManager.Request(uri);
             request.setTitle("xyz");
             request.setDescription("Bytepad Paper Download");
-            final Uri uri1 = Uri.parse("file://" + prefManager.getDownloadPath() + "/" + "xya");
+            final Uri uri1 = Uri.parse("file://" + prefManager.getDownloadPath() + "/" + "xyz");
             request.setDestinationUri(uri1);
             request.setVisibleInDownloadsUi(true);
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
@@ -108,7 +113,8 @@ public class Util {
             queueItem.dwnldPath = uri1.getPath();
             queueItem.reference = downloadReference;
             queueItem.paperId = paper.id;
-           // queueItem.save();
+            appDatabase = RoomDb.getDatabase(context.getApplication());
+            appDatabase.itemAndPersonModel().addQueue(queueItem);
             showSnackBar(context,"Download Started : " + "xyz");
             IntentFilter intentFilter = new IntentFilter(DownloadManager.ACTION_NOTIFICATION_CLICKED);
             notificationClicked = new BroadcastReceiver() {
@@ -142,27 +148,27 @@ public class Util {
                         int colmIndx = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
                         int status = cursor.getInt(colmIndx);
                         int fileNameIndex = cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI);
-                       /* switch (status) {
+                        switch (status) {
                             case DownloadManager.STATUS_SUCCESSFUL:
-                                showSnackBar(context,paper.Title + " downloaded");
+                                showSnackBar(context,paper.subjectName + " downloaded");
                                 paper.downloaded = true;
                                 paper.dwnldPath = uri1.getPath();
-                                paper.update();
-                                mTracker.send(new HitBuilders.EventBuilder()
+                                //paper.update();
+                                /*mTracker.send(new HitBuilders.EventBuilder()
                                         .setCategory("Download")
                                         .setAction("Paper download")
                                         .set("Result","Success")
-                                        .build());
-                                FlowContentObserver.setShouldForceNotify(true);
+                                        .build());*/
+                                //FlowContentObserver.setShouldForceNotify(true);
                          //       new Delete().from(DownloadQueue.class).where(DownloadQueue_Table.paperId.eq(paper.id)).query();
                                 break;
                             case DownloadManager.STATUS_FAILED:
-                                mTracker.send(new HitBuilders.EventBuilder()
+                                /*mTracker.send(new HitBuilders.EventBuilder()
                                         .setCategory("Download")
                                         .setAction("Paper download")
                                         .set("Result","failed")
-                                        .build());
-                                showSnackBar(context,"Download Unuccessful");
+                                        .build());*/
+                                showSnackBar(context,"Download Unsuccessful");
                                 break;
                             case DownloadManager.STATUS_PAUSED:
                                 Toast.makeText(context, "Download Paused", Toast.LENGTH_SHORT).show();
@@ -173,7 +179,7 @@ public class Util {
                             case DownloadManager.STATUS_PENDING:
                                 Toast.makeText(context, "Download Pending", Toast.LENGTH_SHORT).show();
                                 break;
-                        }*/
+                        }
 
                     }
                 }

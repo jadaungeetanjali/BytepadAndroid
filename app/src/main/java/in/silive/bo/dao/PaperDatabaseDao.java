@@ -52,6 +52,8 @@ public interface PaperDatabaseDao {
         void addPaper(PaperDatabaseModel borrowModel);
         @Insert(onConflict = REPLACE)
         void addSubject(SubjectDatabaseModel subjectDatabaseModel);
+        @Insert(onConflict = REPLACE)
+        void addQueue(DownloadQueue downloadQueue);
        @Delete
         void deletePaper(PaperDatabaseModel borrowModel);
 

@@ -25,6 +25,7 @@ import com.raizlabs.android.dbflow.runtime.FlowContentObserver;
 import com.raizlabs.android.dbflow.sql.language.SQLCondition;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import in.silive.bo.Adapters.PapersListAdapter;
@@ -105,10 +106,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                     setUpList();
                 }
                 else {
-                    paper.remove(1);
-                    paper.remove(2);
-                    paper.remove(3);
-                    paper.remove(4);
+                   paper.removeAll(paper);
                     setUpList();
                 }
             }
@@ -122,8 +120,14 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                     setUpList();
                 }
                 else
-                {
-                    paper.remove(3);
+                {    Iterator itr = paper.iterator();
+                    while(itr.hasNext()){
+                        if(itr.next().equals(3))
+                            itr.remove();
+                    }
+                //    paper.remove(3);
+
+
                     setUpList();
                 }
             }
@@ -137,8 +141,12 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                     setUpList();
                 }
                 else
-                {
-                    paper.remove(4);
+                { Iterator itr = paper.iterator();
+                    while(itr.hasNext()){
+                        if(itr.next().equals(4))
+                            itr.remove();
+                    }
+                   // paper.remove(4);
                     setUpList();
                 }
             }
@@ -152,7 +160,12 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                     setUpList();
                 }
                 else {
-                    paper.remove(2);
+                    Iterator itr = paper.iterator();
+                    while(itr.hasNext()){
+                        if(itr.next().equals(2))
+                            itr.remove();
+                    }
+                   // paper.remove(2);
                     setUpList();
                 }
             }
@@ -167,7 +180,12 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                 }
                 else
                 {
-                    paper.remove(1);
+                    Iterator itr = paper.iterator();
+                    while(itr.hasNext()){
+                        if(itr.next().equals(1))
+                            itr.remove();
+                    }
+                    //paper.remove(1);
                     setUpList();
                 }
 
@@ -261,7 +279,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
 
     @Override
     protected void onStop() {
-        observer.unregisterForContentChanges(this);
+//        observer.unregisterForContentChanges(this);
         super.onStop();
     }
 
