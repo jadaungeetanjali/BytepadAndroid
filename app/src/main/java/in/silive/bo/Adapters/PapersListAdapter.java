@@ -32,6 +32,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
 
     }
 
+
     public List<PaperDetails> getPapersList() {
         return papersList;
     }
@@ -72,7 +73,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
     */
         holder.imageView.setImageResource(R.drawable.doc);
        if (paper.downloaded) {
-            //holder.tvDownload.setText("View");
+            holder.tvDownload.setImageResource(R.drawable.view);
             holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -93,7 +94,11 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
     }
 
     class PaperViewHolder extends RecyclerView.ViewHolder {
-        TextView tvPaperTitle, tvPaperCategory, tvPaperSize, tvDownload,tvPaperType;
+        TextView tvPaperTitle;
+        TextView tvPaperCategory;
+        TextView tvPaperSize;
+        ImageView tvDownload;
+        TextView tvPaperType;
         ImageView imageView;
         ConstraintLayout constraintLayout;
 
@@ -103,7 +108,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
             tvPaperTitle = (TextView) view.findViewById(R.id.paper_title);
             tvPaperCategory = (TextView) view.findViewById(R.id.paper_category);
             tvPaperSize = (TextView) view.findViewById(R.id.paper_size);
-           // tvDownload = (TextView) view.findViewById(R.id.tvDownload);
+            tvDownload = (ImageView) view.findViewById(R.id.download);
             imageView = (ImageView) view.findViewById(R.id.ivIcon);
            constraintLayout = (ConstraintLayout) view.findViewById(R.id.rview);
         }

@@ -92,16 +92,32 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
         query = "";
         ivClearSearch = (ImageView) findViewById(R.id.ivClearSearch);
         recyclerEmptyView = (RelativeLayout) findViewById(R.id.recyclerEmptyView);
-        all.setTextColor(Color.WHITE);
-        paper.add(1);
-        paper.add(2);
-        paper.add(3);
-        paper.add(4);
-        setUpList();
-        all.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        all.setChecked(true);
+        if((all.isChecked())) {
+            all.setTextColor(Color.WHITE);
+            paper.add(1);
+            paper.add(2);
+            paper.add(3);
+            paper.add(4);
+            setUpList();
+        }
+        else {
+            all.setTextColor(Color.BLACK);
+            paper.clear();
+            setUpList();
+        }
+        st1.setChecked(false);
+        st1.setTextColor(Color.BLACK);
+        st2.setChecked(false);
+        st2.setTextColor(Color.BLACK);
+        put.setChecked(false);
+        put.setTextColor(Color.BLACK);
+        ut.setChecked(false);
+        ut.setTextColor(Color.BLACK);
+        all.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+            public void onClick(View v) {
+                if((all.isChecked())) {
                     all.setTextColor(Color.WHITE);
                     paper.add(1);
                     paper.add(2);
@@ -110,80 +126,95 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                     setUpList();
                 }
                 else {
-                   paper.removeAll(paper);
+                    all.setTextColor(Color.BLACK);
+                    paper.clear();
                     setUpList();
                 }
+
+
             }
         });
-        st1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        st1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+            public void onClick(View v) {
+                if((st1.isChecked())) {
+
                     st1.setTextColor(Color.WHITE);
                     paper.add(3);
                     setUpList();
                 }
                 else
-                {    Iterator itr = paper.iterator();
+                {   st1.setTextColor(Color.BLACK);
+                    Iterator itr = paper.iterator();
                     while(itr.hasNext()){
                         if(itr.next().equals(3))
                             itr.remove();
                     }
-                //    paper.remove(3);
+                    //    paper.remove(3);
 
 
                     setUpList();
                 }
+
             }
         });
-        st2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+             st2.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     if(st2.isChecked()) {
+                         st2.setTextColor(Color.WHITE);
+                         paper.add(4);
+                         setUpList();
+                     }
+                     else
+                     {   st2.setTextColor(Color.BLACK);
+                         Iterator itr = paper.iterator();
+                         while(itr.hasNext()){
+                             if(itr.next().equals(4))
+                                 itr.remove();
+                         }
+                         // paper.remove(4);
+                         setUpList();
+                     }
+
+                 }
+             });
+
+
+        put.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    st2.setTextColor(Color.WHITE);
-                    paper.add(4);
-                    setUpList();
-                }
-                else
-                { Iterator itr = paper.iterator();
-                    while(itr.hasNext()){
-                        if(itr.next().equals(4))
-                            itr.remove();
-                    }
-                   // paper.remove(4);
-                    setUpList();
-                }
-            }
-        });
-        put.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+            public void onClick(View v) {
+
+                if(put.isChecked()) {
                     put.setTextColor(Color.WHITE);
                     paper.add(2);
                     setUpList();
                 }
                 else {
+                    put.setTextColor(Color.BLACK);
                     Iterator itr = paper.iterator();
                     while(itr.hasNext()){
                         if(itr.next().equals(2))
                             itr.remove();
                     }
-                   // paper.remove(2);
+                    // paper.remove(2);
                     setUpList();
                 }
             }
         });
-        ut.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        ut.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+            public void onClick(View v) {
+                if(ut.isChecked()) {
                     ut.setTextColor(Color.WHITE);
                     paper.add(1);
                     setUpList();
                 }
                 else
-                {
+                { ut.setTextColor(Color.BLACK);
                     Iterator itr = paper.iterator();
                     while(itr.hasNext()){
                         if(itr.next().equals(1))
@@ -192,9 +223,11 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                     //paper.remove(1);
                     setUpList();
                 }
-
             }
         });
+
+
+
 
 
 
@@ -290,6 +323,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
   public void setUpList() {
         SQLCondition secondCondition;
         //if (paperType==5)
+
           //  paperList=appDatabase.itemAndPersonModel().setval(true);
         //else
       paperType=new int[paper.size()];
@@ -302,11 +336,13 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
         papersListAdapter = new PapersListAdapter(this, paperList);
 
         viewModel = ViewModelProviders.of(this).get(BytepadAndroidViewModel.class);
+      recyclerView.setAdapter(papersListAdapter);
 
         viewModel.getAllBorrowedItems().observe(MainActivity.this, new Observer<List<PaperDetails>>() {
             @Override
             public void onChanged(@Nullable List<PaperDetails> PaperDatabaseModel) {
-                papersListAdapter.addItems(PaperDatabaseModel);
+                recyclerView.setAdapter(papersListAdapter);
+                //papersListAdapter.addItems(PaperDatabaseModel);
 
             }
 

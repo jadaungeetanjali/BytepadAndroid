@@ -52,13 +52,15 @@ public class Util {
 
     public static void openDocument(Activity context ,String name) {
         BytepadApplication application = (BytepadApplication)context.getApplication();
-        Tracker mTracker = application.getDefaultTracker();
+        //Tracker mTracker = application.getDefaultTracker();
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
         File file = new File(name);
         String extension = android.webkit.MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(file).toString());
         String mimetype = android.webkit.MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
         if (extension.equalsIgnoreCase("") || mimetype == null) {
-            showSnackBar(context,"No document viewer found.");
+            intent.setDataAndType(Uri.fromFile(file), "text/*");
+            context.startActivity(Intent.createChooser(intent, "Choose an Application:"));
+           // showSnackBar(context,"No document viewer found.");
           /*  mTracker.send(new HitBuilders.EventBuilder()
                     .setCategory("View Paper")
                     .setAction("opening")
@@ -67,11 +69,11 @@ public class Util {
         } else {
             intent.setDataAndType(Uri.fromFile(file), mimetype);
             context.startActivity(Intent.createChooser(intent, "Choose an Application:"));
-            mTracker.send(new HitBuilders.EventBuilder()
+            /*mTracker.send(new HitBuilders.EventBuilder()
                     .setCategory("View Paper")
                     .setAction("opening")
                     .setLabel("Viewer found")
-                    .build());
+                    .build());*/
         }
 
     }
