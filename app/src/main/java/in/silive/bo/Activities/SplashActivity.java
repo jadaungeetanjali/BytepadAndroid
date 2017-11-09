@@ -78,7 +78,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
         prefManager = new PrefManager(this);
         BytepadApplication application = (BytepadApplication) getApplication();
         appDatabase = RoomDb.getDatabase(this.getApplication());
-
+        sharedpreferences = BytepadApplication.getInstance().sharedPrefs;
   //      mTracker = application.getDefaultTracker();
 //        mTracker.setScreenName("SplashActivity");
   //      mTracker.send(new HitBuilders.ScreenViewBuilder().build());
