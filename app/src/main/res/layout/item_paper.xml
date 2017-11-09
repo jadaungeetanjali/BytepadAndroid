@@ -187,6 +187,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:id="@+id/rl"
         app:layout_constraintRight_toLeftOf="@+id/guideline8"
         android:background="@color/colorPrimaryDark"
         app:layout_constraintLeft_toLeftOf="@+id/guideline6"
@@ -196,7 +197,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/dicon"
-            android:id="@+id/download"
+            android:id="@+id/tvDownload"
             android:textColor="@color/textDark"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"

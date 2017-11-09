@@ -13,8 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
+
 import com.raizlabs.android.dbflow.runtime.FlowContentObserver;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 
@@ -83,7 +82,7 @@ public class Util {
 
     public static void downloadPaper(final Activity context, final PaperDetails paper) {
         BytepadApplication application = (BytepadApplication)context.getApplication();
-        final Tracker mTracker = application.getDefaultTracker();
+//        final Tracker mTracker = application.getDefaultTracker();
         PrefManager prefManager = new PrefManager(context);
         if (!CheckConnectivity.isNetConnected(context)){
             Snackbar

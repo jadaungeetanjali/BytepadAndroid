@@ -7,6 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,19 +74,23 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
             paperImgId = R.drawable.rtf;
         else
             paperImgId = R.drawable.pdf;
+<<<<<<< HEAD
     */
         holder.imageView.setImageResource(R.drawable.doc);
        if (paper.downloaded) {
             holder.tvDownload.setImageResource(R.drawable.view);
             holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View view) {
                     Util.openDocument(context, paper.dwnldPath);
                 }
             });
         } else {
+
            // holder.tvDownload.setText("Download");
             holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View view) {
                     Util.downloadPaper(context, paper);
@@ -94,6 +102,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
     }
 
     class PaperViewHolder extends RecyclerView.ViewHolder {
+
         TextView tvPaperTitle;
         TextView tvPaperCategory;
         TextView tvPaperSize;
@@ -102,15 +111,18 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
         ImageView imageView;
         ConstraintLayout constraintLayout;
 
+
         PaperViewHolder(View view) {
             super(view);
             tvPaperType=(TextView)view.findViewById(R.id.ivcode);
             tvPaperTitle = (TextView) view.findViewById(R.id.paper_title);
             tvPaperCategory = (TextView) view.findViewById(R.id.paper_category);
             tvPaperSize = (TextView) view.findViewById(R.id.paper_size);
-            tvDownload = (ImageView) view.findViewById(R.id.download);
+
+            tvDownload = (ImageView) view.findViewById(R.id.tvDownload);
             imageView = (ImageView) view.findViewById(R.id.ivIcon);
            constraintLayout = (ConstraintLayout) view.findViewById(R.id.rview);
+
         }
     }
 

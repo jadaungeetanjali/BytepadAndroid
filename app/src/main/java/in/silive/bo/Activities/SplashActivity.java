@@ -1,7 +1,13 @@
 package in.silive.bo.Activities;
 
+
 import android.arch.lifecycle.ViewModelProviders;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,8 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daasuu.ahp.AnimateHorizontalProgressBar;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
+
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.mobapphome.mahandroidupdater.tools.MAHUpdaterController;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.DurationInMillis;
@@ -27,10 +33,13 @@ import com.octo.android.robospice.request.listener.PendingRequestListener;
 import com.octo.android.robospice.request.listener.RequestListener;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import in.silive.bo.Application.BytepadApplication;
+import in.silive.bo.Config;
 import in.silive.bo.DownloadQueue;
 
 import in.silive.bo.Fragments.DialogFileDir;
@@ -39,6 +48,7 @@ import in.silive.bo.MarshMallowPermission;
 import in.silive.bo.Models.PaperModel;
 import in.silive.bo.Models.SubjectModel;
 import in.silive.bo.Network.CheckConnectivity;
+import in.silive.bo.Network.FetchData;
 import in.silive.bo.Network.RoboRetroSpiceRequest;
 import in.silive.bo.Network.RoboRetroSpiceRequestSubject;
 import in.silive.bo.Network.RoboRetrofitService;
@@ -47,11 +57,18 @@ import in.silive.bo.PaperDatabaseModel;
 
 import in.silive.bo.PrefManager;
 import in.silive.bo.R;
+
 //import in.silive.bo.Services.RegisterGCM;
 import in.silive.bo.SubjectDatabaseModel;
 import in.silive.bo.Util;
 import in.silive.bo.database.RoomDb;
 import in.silive.bo.viewmodel.BytepadAndroidViewModel;
+
+
+import in.silive.bo.Util;
+import in.silive.bo.dialog.AlertDialog;
+import in.silive.bo.listeners.FetchDataListener;
+
 
 public class SplashActivity extends AppCompatActivity implements RequestListener<PaperModel.PapersList> {
     public static PaperModel pm;
@@ -62,12 +79,17 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
     PrefManager prefManager;
     Bundle paperModelBundle;
     TextView tvProgressInfo;
-    Tracker mTracker;
+    BroadcastReceiver mRegistrationBroadcastReceiver;
+
     Bundle bundle;
     ArrayList<PaperModel> list;
     AnimateHorizontalProgressBar progressBar;
+
     private BytepadAndroidViewModel addAndroidViewModel;
     private RoomDb appDatabase;
+
+
+    private SharedPreferences sharedpreferences;
 
 
     @Override
@@ -77,6 +99,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
         bundle = new Bundle();
         prefManager = new PrefManager(this);
         BytepadApplication application = (BytepadApplication) getApplication();
+
         appDatabase = RoomDb.getDatabase(this.getApplication());
         sharedpreferences = BytepadApplication.getInstance().sharedPrefs;
   //      mTracker = application.getDefaultTracker();
@@ -85,7 +108,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
     //    if (!prefManager.isGCMTokenSentToServer()) {
       //      Intent i = new Intent(this, RegisterGCM.class);
         //    startService(i);
-      //  }
+
         splash = (RelativeLayout) findViewById(R.id.splash);
         addAndroidViewModel = ViewModelProviders.of(this).get(BytepadAndroidViewModel.class);
         progressBar = (AnimateHorizontalProgressBar) findViewById(R.id.animate_progress_bar);
@@ -98,7 +121,52 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
         roboRetroSpiceRequestSubject = new RoboRetroSpiceRequestSubject();
         checkPermissions();
 
+        if (CheckConnectivity.isNetConnected(getApplicationContext())) {
+            String firebase_id_send_to_server_or_not = sharedpreferences.getString(Config.FIREBASE_ID_SENT, "");
+            if (firebase_id_send_to_server_or_not.equals("0")) {
+                String Firebase_token = sharedpreferences.getString("regId", "");
+                FetchData fetchData = new FetchData(new FetchDataListener() {
+                    @Override
+                    public void processStart() {
+                    }
+
+                    @Override
+                    public void processFinish(String output) {
+                        SharedPreferences.Editor editor = sharedpreferences.edit();
+                        editor.putString(Config.FIREBASE_ID_SENT, "1");//1 means firebase id is registered
+                        editor.commit();
+                    }
+                }, this);
+                String post_data = "";
+                try {
+                    post_data = URLEncoder.encode(Config.fcm_token, "UTF-8") + "=" + URLEncoder.encode(Firebase_token, "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                fetchData.setArgs(Config.FIREBASE_TOKEN_UPDATE, post_data);
+                fetchData.execute();
+            }
+        } else {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.alertDialog(this);
+        }
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                // checking for type intent filter
+                if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
+                    // fcm successfully registered
+                    // now subscribe to `global` topic to receive app wide notifications
+                    FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
+                } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
+                    // new push notification is received
+                    String message = intent.getStringExtra("message");
+                    //ToasterUtils.toaster("Push notification: " + message);
+                }
+            }
+        };
     }
+
 
     private void checkPermissions() {
         MarshMallowPermission marshMallowPermission = new MarshMallowPermission(this);
@@ -124,6 +192,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
             }
         }
     }
+
 
     public void checkPapersList() {
         if (!prefManager.isPapersLoaded()) {

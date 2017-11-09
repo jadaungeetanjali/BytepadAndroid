@@ -35,10 +35,13 @@
             </intent-filter>
         </activity>
         <activity
+
             android:name="in.silive.bo.Activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
+
             android:windowSoftInputMode="adjustPan">
+
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -76,16 +79,19 @@
 
         <service android:name="in.silive.bo.Network.RoboRetrofitService" />
 
-        <receiver
-            android:name="com.google.android.gms.gcm.GcmReceiver"
-            android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="in.silive.bytepad" />
-            </intent-filter>
-        </receiver>
 
+
+
+        <service android:name=".services.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".services.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
 
 
         <meta-data
