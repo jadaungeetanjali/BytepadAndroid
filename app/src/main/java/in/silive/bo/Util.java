@@ -25,6 +25,8 @@ import in.silive.bo.Activities.MainActivity;
 import in.silive.bo.Application.BytepadApplication;
 import in.silive.bo.Network.CheckConnectivity;
 import in.silive.bo.database.RoomDb;
+import in.silive.bo.util.Mapping;
+import in.silive.bo.util.MappingPapeType;
 import in.silive.bo.util.PaperDetails;
 
 /**
@@ -53,6 +55,7 @@ public class Util {
     public static void openDocument(Activity context ,String name) {
         BytepadApplication application = (BytepadApplication)context.getApplication();
         //Tracker mTracker = application.getDefaultTracker();
+        appDatabase = RoomDb.getDatabase(context);
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
         File file = new File(name);
         String extension = android.webkit.MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(file).toString());
@@ -92,9 +95,10 @@ public class Util {
                         }
                     }).show();
         }else {
+            MappingPapeType mappingPapeType=new MappingPapeType();
             final DownloadManager downloadManager;
             String file_url = paper.fileUrl;
-            file_url = ("http://testapi.silive.in/PaperFileUpload/PUT/"+file_url).trim();
+            file_url = ("http://testapi.silive.in/PaperFileUpload/"+mappingPapeType.getvalues(paper.examTypeId)+"/"+file_url).trim();
             file_url =file_url.replace(" ","%20");
             Log.d("debugg",file_url);
             final long downloadReference;
@@ -102,7 +106,7 @@ public class Util {
             downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
             Uri uri = Uri.parse(file_url);
             DownloadManager.Request request = new DownloadManager.Request(uri);
-            request.setTitle("xyz");
+            request.setTitle(paper.subjectName);
             request.setDescription("Bytepad Paper Download");
             final Uri uri1 = Uri.parse("file://" + prefManager.getDownloadPath() + "/" + "xyz");
             request.setDestinationUri(uri1);
@@ -117,7 +121,7 @@ public class Util {
             queueItem.paperId = paper.id;
             appDatabase = RoomDb.getDatabase(context.getApplication());
             appDatabase.itemAndPersonModel().addQueue(queueItem);
-            showSnackBar(context,"Download Started : " + "xyz");
+            showSnackBar(context,"Download Started : " + paper.subjectName);
             IntentFilter intentFilter = new IntentFilter(DownloadManager.ACTION_NOTIFICATION_CLICKED);
             notificationClicked = new BroadcastReceiver() {
                 @Override
@@ -151,18 +155,21 @@ public class Util {
                         int status = cursor.getInt(colmIndx);
                         int fileNameIndex = cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI);
                         switch (status) {
+
+
                             case DownloadManager.STATUS_SUCCESSFUL:
                                 showSnackBar(context,paper.subjectName + " downloaded");
                                 paper.downloaded = true;
                                 paper.dwnldPath = uri1.getPath();
-                                //paper.update();
+                                appDatabase.itemAndPersonModel().updatepaperDownloaded(paper.downloaded,paper.dwnldPath,paper.id);
+                              //  paper.update();
                                 /*mTracker.send(new HitBuilders.EventBuilder()
                                         .setCategory("Download")
                                         .setAction("Paper download")
                                         .set("Result","Success")
                                         .build());*/
                                 //FlowContentObserver.setShouldForceNotify(true);
-                         //       new Delete().from(DownloadQueue.class).where(DownloadQueue_Table.paperId.eq(paper.id)).query();
+                         appDatabase.itemAndPersonModel().delete(reference);
                                 break;
                             case DownloadManager.STATUS_FAILED:
                                 /*mTracker.send(new HitBuilders.EventBuilder()

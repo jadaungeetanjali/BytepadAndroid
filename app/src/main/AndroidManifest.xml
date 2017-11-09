@@ -53,6 +53,25 @@
 
             </intent-filter>
         </activity>
+        <activity
+            android:name="in.silive.bo.Activities.DownloadActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="adjustPan">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
+                <data
+                    android:host="www.silive.in"
+                    android:pathPrefix="/"
+                    android:scheme="http" />
+
+            </intent-filter>
+        </activity>
 
 
         <service android:name="in.silive.bo.Network.RoboRetrofitService" />

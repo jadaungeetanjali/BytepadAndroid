@@ -41,6 +41,8 @@ public interface PaperDatabaseDao {
        void update(boolean val,String downloadpath,int itemid);
     @Query("update PaperDatabaseModel set downloaded = :val  where id = :itemid")
     void updatepaper(boolean val,int itemid);
+    @Query("update PaperDatabaseModel set downloaded = :val,dwnldPath=:path  where id = :itemid")
+    void updatepaperDownloaded(boolean val,String path,int itemid);
        @Query("delete from DownloadQueue where reference = :itemreference")
        void delete(long itemreference);
      //@Query("select * from PaperDatabaseModel,SubjectDatabaseModel  where downloaded = :val")

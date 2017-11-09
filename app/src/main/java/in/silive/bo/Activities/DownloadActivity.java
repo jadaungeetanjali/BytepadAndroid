@@ -17,7 +17,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ToggleButton;
@@ -31,16 +30,19 @@ import java.util.List;
 
 import in.silive.bo.Adapters.PapersListAdapter;
 import in.silive.bo.Application.BytepadApplication;
-import in.silive.bo.util.Mapping;
-
 import in.silive.bo.PrefManager;
 import in.silive.bo.R;
 import in.silive.bo.SnackBarListener;
 import in.silive.bo.database.RoomDb;
+import in.silive.bo.util.Mapping;
 import in.silive.bo.util.PaperDetails;
 import in.silive.bo.viewmodel.BytepadAndroidViewModel;
 
-public class MainActivity extends LifecycleActivity implements SnackBarListener {
+/**
+ * Created by root on 9/11/17.
+ */
+
+public class DownloadActivity extends LifecycleActivity implements SnackBarListener {
     public static List<PaperDetails> paperList = new ArrayList<>();
     public AutoCompleteTextView search_paper;
     public RecyclerView recyclerView;
@@ -65,21 +67,21 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.download);
         BytepadApplication application = (BytepadApplication)getApplication();
-   //     Tracker mTracker = application.getDefaultTracker();
+        //     Tracker mTracker = application.getDefaultTracker();
 //        mTracker.setScreenName("MainActivity");
- //       mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        //       mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         mapping=new Mapping();
         prefManager = new PrefManager(this);
-     //   this.observer = new FlowContentObserver();
-      //  this.observer.registerForContentChanges(this, PaperDatabaseModel.class);
+        //   this.observer = new FlowContentObserver();
+        //  this.observer.registerForContentChanges(this, PaperDatabaseModel.class);
 
         //this.observer.addModelChangeListener(this);
         paper=new ArrayList<>();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        downloadbutton=(ImageView)findViewById(R.id.downloadbutton);
+      //  downloadbutton=(ImageView)findViewById(R.id.donloadbutton);
         //all=(ToggleButton)findViewById(R.id.all);
         st1=(ToggleButton)findViewById(R.id.St1);
         st2=(ToggleButton)findViewById(R.id.st2);
@@ -186,27 +188,27 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
             }
         });
 
-             st2.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View v) {
-                     if(st2.isChecked()) {
-                         st2.setTextColor(Color.WHITE);
-                         paper.add(4);
-                         setUpList(query);
-                     }
-                     else
-                     {   st2.setTextColor(Color.BLACK);
-                         Iterator itr = paper.iterator();
-                         while(itr.hasNext()){
-                             if(itr.next().equals(4))
-                                 itr.remove();
-                         }
-                         // paper.remove(4);
-                         setUpList(query);
-                     }
+        st2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(st2.isChecked()) {
+                    st2.setTextColor(Color.WHITE);
+                    paper.add(4);
+                    setUpList(query);
+                }
+                else
+                {   st2.setTextColor(Color.BLACK);
+                    Iterator itr = paper.iterator();
+                    while(itr.hasNext()){
+                        if(itr.next().equals(4))
+                            itr.remove();
+                    }
+                    // paper.remove(4);
+                    setUpList(query);
+                }
 
-                 }
-             });
+            }
+        });
 
 
         put.setOnClickListener(new View.OnClickListener() {
@@ -251,13 +253,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                 }
             }
         });
-        downloadbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),DownloadActivity.class);
-                startActivity(i);
-            }
-        });
+
 
 
 
@@ -351,31 +347,25 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
         super.onStop();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initialise();
-    }
-
     public void setUpList(String query) {
         SQLCondition secondCondition;
         //if (paperType==5)
 
-          //  paperList=appDatabase.itemAndPersonModel().setval(true);
+        //  paperList=appDatabase.itemAndPersonModel().setval(true);
         //else
-      paperType=new int[paper.size()];
+        paperType=new int[paper.size()];
         for(int i=0;i<paper.size();i++)
         {
             paperType[i]=paper.get(i);
             Log.d("debugg",Integer.toString(paperType[i]));
         }
-        paperList = appDatabase.itemAndPersonModel().setPaperType(paperType,query,false);
+        paperList = appDatabase.itemAndPersonModel().setPaperType(paperType,query,true);
         papersListAdapter = new PapersListAdapter(this, paperList);
 
         viewModel = ViewModelProviders.of(this).get(BytepadAndroidViewModel.class);
-      recyclerView.setAdapter(papersListAdapter);
+        recyclerView.setAdapter(papersListAdapter);
 
-        viewModel.getAllBorrowedItems().observe(MainActivity.this, new Observer<List<PaperDetails>>() {
+        viewModel.getAllBorrowedItems().observe(DownloadActivity.this, new Observer<List<PaperDetails>>() {
             @Override
             public void onChanged(@Nullable List<PaperDetails> PaperDatabaseModel) {
                 recyclerView.setAdapter(papersListAdapter);
