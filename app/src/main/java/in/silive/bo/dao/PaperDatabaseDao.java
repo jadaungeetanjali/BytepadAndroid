@@ -58,6 +58,10 @@ public interface PaperDatabaseDao {
         void addQueue(DownloadQueue downloadQueue);
        @Delete
         void deletePaper(PaperDatabaseModel borrowModel);
+       @Query("delete from PaperDatabaseModel")
+      void deletePaperDb();
+    @Query("delete from SubjectDatabaseModel")
+    void deleteSubjectDb();
 
 
 }

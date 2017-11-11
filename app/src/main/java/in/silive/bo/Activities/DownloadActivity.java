@@ -1,5 +1,6 @@
 package in.silive.bo.Activities;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.LifecycleActivity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -128,13 +129,42 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
             }
         });
 
+
+        /*all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if((all.isChecked())) {
+                    all.setTextColor(Color.WHITE);
+                    paper.add(1);
+                    paper.add(2);
+                    paper.add(3);
+                    paper.add(4);
+                    setUpList(query);
+                }
+                else {
+                    all.setTextColor(Color.BLACK);
+                    Iterator itr = paper.iterator();
+                    while(itr.hasNext()){
+                        Object e = itr.next();
+                        if(counter<4)
+                            itr.remove();
+                        counter++;
+                    }
+
+                    setUpList(query);
+                }
+
+
+            }
+        });*/
+
         st1.setChecked(false);
-        st1.setTextColor(Color.BLACK);
+        st1.setTextColor(Color.WHITE);
         st2.setChecked(false);
-        st2.setTextColor(Color.BLACK);
+        st2.setTextColor(Color.WHITE);
 
         ut.setChecked(false);
-        ut.setTextColor(Color.BLACK);
+        ut.setTextColor(Color.WHITE);
         /*all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,16 +194,17 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
         });*/
 
         st1.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
                 if((st1.isChecked())) {
 
-                    st1.setTextColor(Color.WHITE);
+                    st1.setTextColor(Color.parseColor("#ff5d3b"));
                     paper.add(3);
                     setUpList(query);
                 }
                 else
-                {   st1.setTextColor(Color.BLACK);
+                {   st1.setTextColor(Color.WHITE);
                     Iterator itr = paper.iterator();
                     while(itr.hasNext()){
                         if(itr.next().equals(3))
@@ -189,15 +220,16 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
         });
 
         st2.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
                 if(st2.isChecked()) {
-                    st2.setTextColor(Color.WHITE);
+                    st2.setTextColor(Color.parseColor("#ff5d3b"));
                     paper.add(4);
                     setUpList(query);
                 }
                 else
-                {   st2.setTextColor(Color.BLACK);
+                {   st2.setTextColor(Color.WHITE);
                     Iterator itr = paper.iterator();
                     while(itr.hasNext()){
                         if(itr.next().equals(4))
@@ -212,16 +244,17 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
 
 
         put.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
 
                 if(put.isChecked()) {
-                    put.setTextColor(Color.WHITE);
+                    put.setTextColor(Color.parseColor("#ff5d3b"));
                     paper.add(2);
                     setUpList(query);
                 }
                 else {
-                    put.setTextColor(Color.BLACK);
+                    put.setTextColor(Color.WHITE);
                     Iterator itr = paper.iterator();
                     while(itr.hasNext()){
                         if(itr.next().equals(2))
@@ -234,15 +267,16 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
         });
 
         ut.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
                 if(ut.isChecked()) {
-                    ut.setTextColor(Color.WHITE);
+                    ut.setTextColor(Color.parseColor("#ff5d3b"));
                     paper.add(1);
                     setUpList(query);
                 }
                 else
-                { ut.setTextColor(Color.BLACK);
+                { ut.setTextColor(Color.WHITE);
                     Iterator itr = paper.iterator();
                     while(itr.hasNext()){
                         if(itr.next().equals(1))
@@ -253,7 +287,6 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
                 }
             }
         });
-
 
 
 
@@ -387,12 +420,12 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
     {
         put.setChecked(true);
         if(put.isChecked()) {
-            put.setTextColor(Color.WHITE);
+            put.setTextColor(Color.parseColor("#ff5d3b"));
             paper.add(2);
             setUpList(query);
         }
         else {
-            put.setTextColor(Color.BLACK);
+            put.setTextColor(Color.WHITE);
             Iterator itr = paper.iterator();
             while(itr.hasNext()){
                 if(itr.next().equals(2))
@@ -432,4 +465,16 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
             }
         }
     }*/
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i=new Intent(this, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+        finish();
+    }
 }

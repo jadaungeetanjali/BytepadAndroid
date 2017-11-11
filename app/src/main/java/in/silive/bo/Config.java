@@ -14,6 +14,7 @@ public class Config {
 
     static final String KEY_GCM_SENT_TO_SEVER = "sent_to_server";
     public static final String KEY_DOWNLOADED_LIST = "downloadedList";
+    public static final String TIMESTAMP ="time";
     public static String KEY_BYTEPAD = "bytepad";
     public static String KEY_DOWNLOAD_DIR = "bytepadDownload";
     public static final String TOPIC_GLOBAL = "global";
@@ -25,7 +26,7 @@ public class Config {
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
     public static final String PUSH_NOTIFICATION = "pushNotification";
     public static final String FIREBASE_ID_SENT = "FirebaseIdSendToServer";
-    public static final String FIREBASE_TOKEN_UPDATE = "user/fcm/";
+    public static final String FIREBASE_TOKEN_UPDATE = "/send_gcm_notifcation_";
     public static String fcm_token = "fcm_token";
 
 }

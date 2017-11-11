@@ -15,4 +15,7 @@ public interface BytePad {
     PaperModel.PapersList papersList();
     @GET("/subject_detail")
     SubjectModel.SubjectList subjectList();
+
+    @GET("/last_update_")
+    String timeStamp();
 }

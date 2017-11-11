@@ -54,7 +54,7 @@
         android:layout_width="0dp"
 
         android:layout_height="0dp"
-        android:background="@color/colorBg"
+        android:background="#FFFFFF"
         android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="@+id/guideline"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/guideline14"
-                app:layout_constraintGuide_percent="0.28"
+                app:layout_constraintGuide_percent="0.18"
                 android:orientation="horizontal"
                 tools:layout_editor_absoluteY="307dp"
                 tools:layout_editor_absoluteX="0dp" />
@@ -101,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/guideline114"
-                app:layout_constraintGuide_percent="0.3"
+                app:layout_constraintGuide_percent="0.18"
                 android:orientation="horizontal"
                 tools:layout_editor_absoluteY="307dp"
                 tools:layout_editor_absoluteX="0dp" />
@@ -116,8 +116,8 @@
                 tools:layout_editor_absoluteX="0dp" />
         <android.support.design.widget.AppBarLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
-
+            android:layout_height="wrap_content"
+            android:paddingTop="4sp"
             app:layout_constraintLeft_toLeftOf="@+id/guideline11"
             app:layout_constraintBottom_toTopOf="@+id/guideline14"
             app:layout_constraintTop_toTopOf="@+id/guideline13"
@@ -126,6 +126,8 @@
 
 
             <android.support.v7.widget.Toolbar
+                android:paddingTop="35sp"
+                android:paddingBottom="6sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
@@ -147,9 +149,11 @@
                 android:layout_marginLeft="13dp"
                 android:layout_marginRight="13dp"
                 android:layout_marginBottom="10dp"
-                app:cardCornerRadius="15dp"
+                android:layout_marginTop="5sp"
+
                 app:cardBackgroundColor="#ffffff"
                 android:layout_height="wrap_content">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:paddingLeft="10dp"
@@ -189,7 +193,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
 
-                android:layout_height="55dp"
+                android:layout_height="38sp"
+
                 android:background="#bdc3c7"
                 android:orientation="horizontal"
                 android:id="@+id/Lineartoggle">
@@ -197,6 +202,7 @@
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="#bdc3c7"
                     android:textOff="ST1"
                     android:textOn="ST1"
                     android:gravity="center"
@@ -208,7 +214,7 @@
                     android:textOff="ST2"
                     android:textOn="ST2"
                     android:gravity="center"
-
+                    android:background="#bdc3c7"
                     android:id="@+id/st2"
                     android:layout_weight="1"/>
                 <ToggleButton
@@ -217,7 +223,7 @@
                     android:textOff="PUT"
                     android:textOn="PUT"
                     android:gravity="center"
-
+                    android:background="#bdc3c7"
                     android:id="@+id/put"
                     android:layout_weight="1"/>
                 <ToggleButton
@@ -226,7 +232,7 @@
                     android:textOff="UT"
                     android:textOn="UT"
                     android:gravity="center"
-
+                    android:background="#bdc3c7"
                     android:id="@+id/ut"
                     android:layout_weight="1"/>
 
@@ -257,6 +263,7 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:paddingTop="35sp"
             android:id="@+id/rview"
             app:layout_constraintLeft_toLeftOf="@+id/guideline11"
             app:layout_constraintBottom_toTopOf="@+id/guideline15"
