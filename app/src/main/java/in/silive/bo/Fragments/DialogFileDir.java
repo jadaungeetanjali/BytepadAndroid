@@ -65,7 +65,7 @@ public class DialogFileDir extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        getDialog().setTitle("Select folder");
+        getDialog().setTitle("Select Folder to Store Papers");
         this.getDialog().getWindow().setBackgroundDrawableResource(R.color.colorPrimary);
         setCancelable(false);
         view = inflater.inflate(R.layout.fragment_dialog_file_dir, container, false);

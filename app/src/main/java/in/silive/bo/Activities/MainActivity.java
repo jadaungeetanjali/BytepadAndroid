@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ToggleButton;
 
@@ -55,6 +56,10 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
     ImageView downloadbutton;
     ImageView ivClearSearch;
     RelativeLayout recyclerEmptyView;
+    View st1line;
+    View st2line;
+    View putline;
+    View utline;
     FlowContentObserver observer;
     PrefManager prefManager;
     Mapping mapping;
@@ -86,6 +91,10 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
         st2=(ToggleButton)findViewById(R.id.st2);
         put=(ToggleButton)findViewById(R.id.put);
         ut=(ToggleButton)findViewById(R.id.ut);
+        st1line=(View)findViewById(R.id.st1line);
+        st2line=(View)findViewById(R.id.st2line);
+        putline=(View)findViewById(R.id.putline);
+        utline=(View)findViewById(R.id.utline);
         appDatabase = RoomDb.getDatabase(this);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         Log.d("Bytepad", "MainActivity created");
@@ -169,11 +178,13 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                 if((st1.isChecked())) {
 
                     st1.setTextColor(Color.parseColor("#ff5d3b"));
+                    st1line.setVisibility(View.VISIBLE);
                     paper.add(3);
                     setUpList(query);
                 }
                 else
                 {   st1.setTextColor(Color.WHITE);
+                st1line.setVisibility(View.GONE);
                     Iterator itr = paper.iterator();
                     while(itr.hasNext()){
                         if(itr.next().equals(3))
@@ -194,11 +205,13 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
                  public void onClick(View v) {
                      if(st2.isChecked()) {
                          st2.setTextColor(Color.parseColor("#ff5d3b"));
+                         st2line.setVisibility(View.VISIBLE);
                          paper.add(4);
                          setUpList(query);
                      }
                      else
                      {   st2.setTextColor(Color.WHITE);
+                     st2line.setVisibility(View.GONE);
                          Iterator itr = paper.iterator();
                          while(itr.hasNext()){
                              if(itr.next().equals(4))
@@ -219,11 +232,13 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
 
                 if(put.isChecked()) {
                     put.setTextColor(Color.parseColor("#ff5d3b"));
+                    putline.setVisibility(View.VISIBLE);
                     paper.add(2);
                     setUpList(query);
                 }
                 else {
                     put.setTextColor(Color.WHITE);
+                    putline.setVisibility(View.GONE);
                     Iterator itr = paper.iterator();
                     while(itr.hasNext()){
                         if(itr.next().equals(2))
@@ -235,17 +250,20 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
             }
         });
 
+
         ut.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
                 if(ut.isChecked()) {
                     ut.setTextColor(Color.parseColor("#ff5d3b"));
+                    utline.setVisibility(View.VISIBLE);
                     paper.add(1);
                     setUpList(query);
                 }
                 else
                 { ut.setTextColor(Color.WHITE);
+                utline.setVisibility(View.GONE);
                     Iterator itr = paper.iterator();
                     while(itr.hasNext()){
                         if(itr.next().equals(1))
@@ -404,11 +422,13 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
         put.setChecked(true);
         if(put.isChecked()) {
             put.setTextColor(Color.parseColor("#ff5d3b"));
+            putline.setVisibility(View.VISIBLE);
             paper.add(2);
             setUpList(query);
         }
         else {
             put.setTextColor(Color.WHITE);
+            put.setVisibility(View.GONE);
             Iterator itr = paper.iterator();
             while(itr.hasNext()){
                 if(itr.next().equals(2))

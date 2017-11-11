@@ -122,6 +122,14 @@
             android:orientation="vertical"
             tools:layout_editor_absoluteY="81dp"
             tools:layout_editor_absoluteX="144dp" />
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline1118"
+            app:layout_constraintGuide_percent="0.35"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="144dp" />
 
         <android.support.constraint.Guideline
             android:layout_width="wrap_content"
@@ -144,9 +152,9 @@
             android:id="@+id/ivIcon"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ficon"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/fileicon"
             app:layout_constraintBottom_toTopOf="@+id/guideline20"
             app:layout_constraintLeft_toLeftOf="@+id/guideline16"
 
@@ -158,11 +166,12 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
-            android:gravity="center"
+
+            android:gravity="center_vertical"
             android:text="ADVANCE ARCHITECTURE COMPONENTS NAS 401"
             android:textColor="#000000"
             app:layout_constraintBottom_toTopOf="@+id/guideline20"
-            app:layout_constraintLeft_toLeftOf="@+id/guideline118"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline1118"
             app:layout_constraintRight_toLeftOf="@+id/guideline18"
 
             app:layout_constraintTop_toTopOf="parent" />
@@ -180,7 +189,7 @@
             android:layout_height="wrap_content"
             android:text="Paper Category"
             android:id="@+id/paper_category"
-            android:textColor="#000000"
+            android:textColor="#FFFFFF"
 
             android:singleLine="true"
             android:layout_gravity="center_vertical"
@@ -190,12 +199,14 @@
 
 
             <RelativeLayout
-                android:layout_width="20dp"
-                android:layout_height="30dp"
+                android:layout_width="12sp"
+                android:layout_height="13sp"
                 android:padding="5dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginBottom="7dp"
-                android:background="@drawable/dicon"
+                android:gravity="center_vertical"
+                android:background="@drawable/iconlowerdownload"
                 android:id="@+id/tvDownload"
               android:layout_alignParentRight="true"
 

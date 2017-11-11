@@ -76,9 +76,9 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
             paperImgId = R.drawable.pdf;
 <<<<<<< HEAD
     */
-        holder.imageView.setImageResource(R.drawable.doc);
+        holder.imageView.setImageResource(R.drawable.fileicon);
        if (paper.downloaded) {
-            holder.tvDownload.setBackgroundResource(R.drawable.view);
+            holder.tvDownload.setBackgroundResource(R.drawable.viewic);
             holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
 
                 @Override

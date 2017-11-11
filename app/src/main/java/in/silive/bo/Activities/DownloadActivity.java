@@ -64,7 +64,10 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
     int counter=0;
     ArrayList<Integer> paper;
     private BytepadAndroidViewModel viewModel;
-
+    private View st1line;
+    View st2line;
+    View putline;
+    View utline;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,10 +87,15 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
         toolbar = (Toolbar) findViewById(R.id.toolbar);
       //  downloadbutton=(ImageView)findViewById(R.id.donloadbutton);
         //all=(ToggleButton)findViewById(R.id.all);
+
         st1=(ToggleButton)findViewById(R.id.St1);
         st2=(ToggleButton)findViewById(R.id.st2);
         put=(ToggleButton)findViewById(R.id.put);
         ut=(ToggleButton)findViewById(R.id.ut);
+        st1line=(View)findViewById(R.id.st1line);
+        st2line=(View)findViewById(R.id.st2line);
+        putline=(View)findViewById(R.id.putline);
+        utline=(View)findViewById(R.id.utline);
         appDatabase = RoomDb.getDatabase(this);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         Log.d("Bytepad", "MainActivity created");
@@ -200,11 +208,13 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
                 if((st1.isChecked())) {
 
                     st1.setTextColor(Color.parseColor("#ff5d3b"));
+                    st1line.setVisibility(View.VISIBLE);
                     paper.add(3);
                     setUpList(query);
                 }
                 else
                 {   st1.setTextColor(Color.WHITE);
+                    st1line.setVisibility(View.GONE);
                     Iterator itr = paper.iterator();
                     while(itr.hasNext()){
                         if(itr.next().equals(3))
@@ -225,11 +235,13 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
             public void onClick(View v) {
                 if(st2.isChecked()) {
                     st2.setTextColor(Color.parseColor("#ff5d3b"));
+                    st2line.setVisibility(View.VISIBLE);
                     paper.add(4);
                     setUpList(query);
                 }
                 else
                 {   st2.setTextColor(Color.WHITE);
+                    st2line.setVisibility(View.GONE);
                     Iterator itr = paper.iterator();
                     while(itr.hasNext()){
                         if(itr.next().equals(4))
@@ -250,11 +262,13 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
 
                 if(put.isChecked()) {
                     put.setTextColor(Color.parseColor("#ff5d3b"));
+                    putline.setVisibility(View.VISIBLE);
                     paper.add(2);
                     setUpList(query);
                 }
                 else {
                     put.setTextColor(Color.WHITE);
+                    putline.setVisibility(View.GONE);
                     Iterator itr = paper.iterator();
                     while(itr.hasNext()){
                         if(itr.next().equals(2))
@@ -266,17 +280,20 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
             }
         });
 
+
         ut.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
                 if(ut.isChecked()) {
                     ut.setTextColor(Color.parseColor("#ff5d3b"));
+                    utline.setVisibility(View.VISIBLE);
                     paper.add(1);
                     setUpList(query);
                 }
                 else
                 { ut.setTextColor(Color.WHITE);
+                    utline.setVisibility(View.GONE);
                     Iterator itr = paper.iterator();
                     while(itr.hasNext()){
                         if(itr.next().equals(1))
@@ -287,7 +304,6 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
                 }
             }
         });
-
 
 
 
@@ -421,11 +437,13 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
         put.setChecked(true);
         if(put.isChecked()) {
             put.setTextColor(Color.parseColor("#ff5d3b"));
+            putline.setVisibility(View.VISIBLE);
             paper.add(2);
             setUpList(query);
         }
         else {
             put.setTextColor(Color.WHITE);
+            put.setVisibility(View.GONE);
             Iterator itr = paper.iterator();
             while(itr.hasNext()){
                 if(itr.next().equals(2))
@@ -435,7 +453,6 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
             setUpList(query);
         }
     }
-
     @Override
     public CoordinatorLayout getCoordinatorLayout() {
         return this.coordinatorLayout;

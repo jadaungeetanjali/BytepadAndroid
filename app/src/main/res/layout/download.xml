@@ -129,7 +129,7 @@
                     android:layout_marginRight="13dp"
                     android:layout_marginBottom="10sp"
                     android:paddingTop="40sp"
-                    app:cardCornerRadius="0dp"
+                    app:cardCornerRadius="4dp"
                     app:cardBackgroundColor="#ffffff"
                     android:layout_height="wrap_content">
                     <LinearLayout
@@ -170,49 +170,112 @@
                 </android.support.v7.widget.CardView>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="38sp"
-                    android:background="#bdc3c7"
+
+                    android:layout_height="35sp"
+
+                    android:background="#cccccc"
                     android:orientation="horizontal"
                     android:id="@+id/Lineartoggle">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#cccccc"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
 
-                    <ToggleButton
+                        <ToggleButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="#cccccc"
+                            android:textOff="ST1"
+                            android:textOn="ST1"
+                            android:gravity="center"
+                            android:id="@+id/St1"
+                            android:layout_weight="1"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="5sp"
+                            android:visibility="gone"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:id="@+id/st1line"
+                            android:background="@color/colorPrimary"/>
+                    </LinearLayout>
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textOff="ST1"
-                        android:textOn="ST1"
-                        android:background="#bdc3c7"
-                        android:gravity="center"
-                        android:id="@+id/St1"
-                        android:layout_weight="1"/>
-                    <ToggleButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textOff="ST2"
-                        android:background="#bdc3c7"
-                        android:textOn="ST2"
-                        android:gravity="center"
+                        android:background="#cccccc"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
 
-                        android:id="@+id/st2"
-                        android:layout_weight="1"/>
-                    <ToggleButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textOff="PUT"
-                        android:textOn="PUT"
-                        android:gravity="center"
-                        android:background="#bdc3c7"
-                        android:id="@+id/put"
-                        android:layout_weight="1"/>
-                    <ToggleButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textOff="UT"
-                        android:textOn="UT"
-                        android:gravity="center"
-                        android:background="#bdc3c7"
-                        android:id="@+id/ut"
-                        android:layout_weight="1"/>
+                        <ToggleButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textOff="ST2"
+                            android:textOn="ST2"
+                            android:gravity="center"
+                            android:background="#cccccc"
+                            android:id="@+id/st2"
 
+                            android:layout_weight="1"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="5sp"
+                            android:visibility="gone"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:id="@+id/st2line"
+                            android:background="@color/colorPrimary"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#cccccc"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <ToggleButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textOff="PUT"
+                            android:textOn="PUT"
+                            android:gravity="center"
+                            android:background="#cccccc"
+                            android:id="@+id/put"
+                            android:layout_weight="1"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="5sp"
+                            android:visibility="visible"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:id="@+id/putline"
+                            android:background="@color/colorPrimary"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#cccccc"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <ToggleButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textOff="UT"
+                            android:textOn="UT"
+                            android:gravity="center"
+                            android:background="#cccccc"
+                            android:id="@+id/ut"
+                            android:layout_weight="1"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="5sp"
+                            android:visibility="gone"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:id="@+id/utline"
+                            android:background="@color/colorPrimary"/>
+
+                    </LinearLayout>
                 </LinearLayout>
             </android.support.design.widget.AppBarLayout>
 
