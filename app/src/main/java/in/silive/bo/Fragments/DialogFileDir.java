@@ -65,6 +65,7 @@ public class DialogFileDir extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         getDialog().setTitle("Select Folder to Store Papers");
         this.getDialog().getWindow().setBackgroundDrawableResource(R.color.colorPrimary);
         setCancelable(false);
@@ -199,6 +200,9 @@ public class DialogFileDir extends DialogFragment {
         }
         adapter = new DirListAdapter(getActivity(), dirList);
         lvDir.setAdapter(adapter);
+    }
+    public int getTheme() {
+        return R.style.DialogTheme;
     }
 
 

@@ -14,8 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 
-import com.raizlabs.android.dbflow.runtime.FlowContentObserver;
-import com.raizlabs.android.dbflow.sql.language.Delete;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -107,7 +106,7 @@ public class Util {
             DownloadManager.Request request = new DownloadManager.Request(uri);
             request.setTitle(paper.subjectName);
             request.setDescription("Bytepad Paper Download");
-            final Uri uri1 = Uri.parse("file://" + prefManager.getDownloadPath() + "/" + "xyz");
+            final Uri uri1 = Uri.parse("file://" + prefManager.getDownloadPath() + "/" + paper.subjectName+".doc");
             request.setDestinationUri(uri1);
             request.setVisibleInDownloadsUi(true);
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);

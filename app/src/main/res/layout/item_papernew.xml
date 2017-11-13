@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:padding="10dp"
+    android:layout_height="135sp"
+    android:padding="8sp"
     xmlns:card_view="http://schemas.android.com/tools"
     app:cardCornerRadius="8dp"
     card_view:cardElevation="6dp"
@@ -109,7 +109,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/guideline18"
-            app:layout_constraintGuide_percent="1.0"
+            app:layout_constraintGuide_percent="1"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="360dp" />
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline11118"
+            app:layout_constraintGuide_percent="0.98"
             android:orientation="vertical"
             tools:layout_editor_absoluteY="81dp"
             tools:layout_editor_absoluteX="360dp" />
@@ -126,7 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/guideline1118"
-            app:layout_constraintGuide_percent="0.35"
+            app:layout_constraintGuide_percent="0.34"
             android:orientation="vertical"
             tools:layout_editor_absoluteY="81dp"
             tools:layout_editor_absoluteX="144dp" />
@@ -152,9 +160,9 @@
             android:id="@+id/ivIcon"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="12dp"
-            android:layout_marginTop="12dp"
-            android:src="@drawable/fileicon"
+            android:layout_marginBottom="14dp"
+            android:layout_marginTop="14dp"
+            android:src="@drawable/ficon"
             app:layout_constraintBottom_toTopOf="@+id/guideline20"
             app:layout_constraintLeft_toLeftOf="@+id/guideline16"
 
@@ -172,7 +180,7 @@
             android:textColor="#000000"
             app:layout_constraintBottom_toTopOf="@+id/guideline20"
             app:layout_constraintLeft_toLeftOf="@+id/guideline1118"
-            app:layout_constraintRight_toLeftOf="@+id/guideline18"
+            app:layout_constraintRight_toLeftOf="@+id/guideline11118"
 
             app:layout_constraintTop_toTopOf="parent" />
         <RelativeLayout

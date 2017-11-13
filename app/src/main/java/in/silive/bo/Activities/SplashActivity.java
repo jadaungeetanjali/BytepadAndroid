@@ -16,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -104,6 +105,14 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        if (!isTaskRoot()
+                && getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
+                && getIntent().getAction() != null
+                && getIntent().getAction().equals(Intent.ACTION_MAIN)) {
+
+            finish();
+            return;
+        }
         bundle = new Bundle();
         prefManager = new PrefManager(this);
         BytepadApplication application = (BytepadApplication) getApplication();
@@ -407,6 +416,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
     public void checkDownloadDir() {
         if (TextUtils.isEmpty(prefManager.getDownloadPath())) {
             DialogFileDir dialogFileDir = new DialogFileDir();
+           // dialogFileDir.setStyle(DialogFragment.STYLE_NORMAL,R.style.DialogTheme);
             dialogFileDir.show(getSupportFragmentManager(), "File Dialog");
             dialogFileDir.setListener(new DialogFileDir.Listener() {
                 @Override
@@ -429,6 +439,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
     private void moveToNextActivity() {
         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
 
     }

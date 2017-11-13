@@ -6,8 +6,7 @@ import android.content.SharedPreferences;
 
 import com.crashlytics.android.Crashlytics;
 
-import com.raizlabs.android.dbflow.config.FlowConfig;
-import com.raizlabs.android.dbflow.config.FlowManager;
+
 
 import in.silive.bo.Config;
 import in.silive.bo.R;
@@ -30,7 +29,7 @@ public class BytepadApplication extends Application {
         sharedPrefs = getSharedPreferences(Config.SHARED_PREFS, Context.MODE_PRIVATE);
         super.onCreate();
         Fabric.with(this, new Crashlytics());
-        FlowManager.init(new FlowConfig.Builder(this).build());
+        //FlowManager.init(new FlowConfig.Builder(this).build());
 //        AppDatabase.getDatabase(this);
     }
 

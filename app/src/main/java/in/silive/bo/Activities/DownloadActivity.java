@@ -22,8 +22,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ToggleButton;
 
-import com.raizlabs.android.dbflow.runtime.FlowContentObserver;
-import com.raizlabs.android.dbflow.sql.language.SQLCondition;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -57,7 +56,7 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
     ImageView downloadbutton;
     ImageView ivClearSearch;
     RelativeLayout recyclerEmptyView;
-    FlowContentObserver observer;
+//    FlowContentObserver observer;
     PrefManager prefManager;
     Mapping mapping;
     private RoomDb appDatabase;
@@ -96,6 +95,7 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
         st2line=(View)findViewById(R.id.st2line);
         putline=(View)findViewById(R.id.putline);
         utline=(View)findViewById(R.id.utline);
+        downloadbutton=(ImageView)findViewById(R.id.downloadbutton);
         appDatabase = RoomDb.getDatabase(this);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         Log.d("Bytepad", "MainActivity created");
@@ -304,6 +304,12 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
                 }
             }
         });
+        downloadbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               backpress();
+            }
+        });
 
 
 
@@ -397,7 +403,7 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
     }
 
     public void setUpList(String query) {
-        SQLCondition secondCondition;
+  //      SQLCondition secondCondition;
         //if (paperType==5)
 
         //  paperList=appDatabase.itemAndPersonModel().setval(true);
@@ -486,9 +492,15 @@ public class DownloadActivity extends LifecycleActivity implements SnackBarListe
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        backpress();
+
+    }
+    void backpress()
+    {
         Intent i=new Intent(this, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(i);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 

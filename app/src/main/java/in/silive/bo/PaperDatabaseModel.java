@@ -3,7 +3,7 @@ package in.silive.bo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import com.raizlabs.android.dbflow.annotation.Column;
+
 
 
 

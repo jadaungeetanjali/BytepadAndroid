@@ -211,14 +211,14 @@
                 android:orientation="horizontal"
                 android:id="@+id/Lineartoggle">
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#cccccc"
                     android:orientation="vertical"
                     android:layout_weight="1">
 
                 <ToggleButton
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#cccccc"
                     android:textOff="ST1"
@@ -236,14 +236,14 @@
                         android:background="@color/colorPrimary"/>
                     </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#cccccc"
                 android:orientation="vertical"
                 android:layout_weight="1">
 
                 <ToggleButton
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textOff="ST2"
                     android:textOn="ST2"
@@ -262,13 +262,13 @@
                     android:background="@color/colorPrimary"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#cccccc"
                 android:orientation="vertical"
                 android:layout_weight="1">
                 <ToggleButton
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textOff="PUT"
                     android:textOn="PUT"
@@ -286,13 +286,13 @@
                     android:background="@color/colorPrimary"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#cccccc"
                 android:orientation="vertical"
                 android:layout_weight="1">
                 <ToggleButton
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textOff="UT"
                     android:textOn="UT"
@@ -336,7 +336,7 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:paddingTop="33sp"
+            android:paddingTop="35sp"
             android:id="@+id/rview"
             app:layout_constraintLeft_toLeftOf="@+id/guideline11"
             app:layout_constraintBottom_toTopOf="@+id/guideline15"

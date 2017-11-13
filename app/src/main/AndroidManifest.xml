@@ -39,7 +39,8 @@
             android:name="in.silive.bo.Activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
-
+            android:alwaysRetainTaskState="true"
+            android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustPan">
 
 
