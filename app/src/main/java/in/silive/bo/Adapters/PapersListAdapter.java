@@ -1,7 +1,9 @@
 package in.silive.bo.Adapters;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,8 +62,11 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
     }
     @Override
     public void onBindViewHolder(PaperViewHolder holder, int position) {
-
+        Typeface typeface= Typeface.createFromAsset(context.getAssets(),"font/middle.ttf");
+        //Typeface typefaces= Typeface.createFromAsset(context.getAssets(),"font/bottom.ttf");
         final PaperDetails paper = this.getPapersList().get(position);
+        holder.tvPaperTitle.setTypeface(typeface);
+        //holder.tvPaperCategory.setTypeface(typefaces);
         //holder.tvPaperType.setText(mappingPapeType.getvalues(paper.examTypeId));
        // Toast.makeText(context,mapping.getvalues(paper.sessionId),Toast.LENGTH_LONG).show();
         holder.tvPaperCategory.setText(mappingPapeType.getvalues(paper.examTypeId)+" "+"Semester "+mapping.getvalues(paper.sessionId));
@@ -112,7 +117,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
         ImageView tvDownload;
         TextView tvPaperType;
         ImageView imageView;
-        LinearLayout constraintLayout;
+        CardView constraintLayout;
 
 
         PaperViewHolder(View view) {
@@ -124,7 +129,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
 
             tvDownload = (ImageView) view.findViewById(R.id.tvDownload);
             //imageView = (ImageView) view.findViewById(R.id.ivIcon);
-           constraintLayout = (LinearLayout) view.findViewById(R.id.rview);
+           constraintLayout = (CardView) view.findViewById(R.id.rview);
 
         }
     }

@@ -101,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/guideline14111"
-                app:layout_constraintGuide_percent="0.24"
+                app:layout_constraintGuide_percent="0.235"
                 android:orientation="horizontal"
                 tools:layout_editor_absoluteY="307dp"
                 tools:layout_editor_absoluteX="0dp" />
@@ -109,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/guideline141"
-                app:layout_constraintGuide_percent="0.28"
+                app:layout_constraintGuide_percent="0.30"
                 android:orientation="horizontal"
                 tools:layout_editor_absoluteY="307dp"
                 tools:layout_editor_absoluteX="0dp" />
@@ -223,7 +223,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
 
-                    android:layout_height="40sp"
+                    android:layout_height="0dp"
                     app:layout_constraintLeft_toLeftOf="@+id/guideline11"
                     app:layout_constraintBottom_toTopOf="@+id/guideline141"
                     app:layout_constraintTop_toTopOf="@+id/guideline14111"
@@ -235,7 +235,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#FFFFFF"
-                        android:padding="5dp"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
                         android:orientation="vertical"
                         android:layout_weight="1">
 
@@ -261,7 +262,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="5dp"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
                         android:background="#FFFFFF"
                         android:orientation="vertical"
                         android:layout_weight="1">
@@ -289,7 +291,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#FFFFFF"
-                        android:padding="5dp"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
                         android:orientation="vertical"
                         android:layout_weight="1">
                         <ToggleButton
@@ -314,7 +317,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#FFFFFF"
-                        android:padding="5dp"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
                         android:orientation="vertical"
                         android:layout_weight="1">
                         <ToggleButton

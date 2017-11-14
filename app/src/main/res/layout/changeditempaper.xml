@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardElevation="2dp"
     android:id="@+id/rview"
-    android:background="#FFFFFF"
-    android:orientation="vertical">
+    android:background="#FFFFFF">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,15 +35,16 @@
                 android:id="@+id/paper_title"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                android:textSize="15sp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
+                android:paddingTop="2dp"
                 android:id="@+id/paper_category"
-                android:textColor="@color/colorPrimary"
+                android:textColor="#4C4C4C"
                 android:text="UT Semester 2010-2011"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="12sp"
                 />
         </LinearLayout>
 <ImageView
@@ -42,14 +55,10 @@
     android:id="@+id/tvDownload"
     android:layout_gravity="center_vertical"
     android:layout_weight="4.8"
-    android:src="@drawable/downloadicon"/>
+    android:src="@drawable/downloadf"/>
 
         </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="5dp"
-        android:background="#000000"/>
+    </LinearLayout>
 
 
-</LinearLayout>
+</android.support.v7.widget.CardView>
