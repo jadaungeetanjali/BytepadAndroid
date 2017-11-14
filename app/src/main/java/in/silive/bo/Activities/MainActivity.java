@@ -438,7 +438,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
         else {
             put.setTextColor(Color.BLACK);
             put.setBackgroundResource(R.drawable.backtoggle);
-            //put.setVisibility(View.GONE);
+            put.setVisibility(View.GONE);
             Iterator itr = paper.iterator();
             while(itr.hasNext()){
                 if(itr.next().equals(2))
