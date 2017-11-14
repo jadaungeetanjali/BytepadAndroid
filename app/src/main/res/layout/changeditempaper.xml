@@ -55,7 +55,7 @@
     android:id="@+id/tvDownload"
     android:layout_gravity="center_vertical"
     android:layout_weight="4.8"
-    android:src="@drawable/downloadf"/>
+    android:src="@drawable/downloadicon"/>
 
         </LinearLayout>
     </LinearLayout>
