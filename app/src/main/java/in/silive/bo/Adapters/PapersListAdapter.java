@@ -52,7 +52,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
     @Override
     public PaperViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context)
-                .inflate(R.layout.item_paperchanged, parent, false);
+                .inflate(R.layout.changeditempaper, parent, false);
 
         return new PaperViewHolder(itemView);
     }
@@ -117,7 +117,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
         ImageView tvDownload;
         TextView tvPaperType;
         ImageView imageView;
-        LinearLayout constraintLayout;
+        CardView constraintLayout;
 
 
         PaperViewHolder(View view) {
@@ -129,7 +129,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
 
             tvDownload = (ImageView) view.findViewById(R.id.tvDownload);
             //imageView = (ImageView) view.findViewById(R.id.ivIcon);
-           constraintLayout = (LinearLayout) view.findViewById(R.id.rview);
+           constraintLayout = (CardView) view.findViewById(R.id.rview);
 
         }
     }
