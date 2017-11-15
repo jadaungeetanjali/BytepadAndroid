@@ -65,7 +65,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
         Typeface typeface= Typeface.createFromAsset(context.getAssets(),"font/middle.ttf");
         //Typeface typefaces= Typeface.createFromAsset(context.getAssets(),"font/bottom.ttf");
         final PaperDetails paper = this.getPapersList().get(position);
-        holder.tvPaperTitle.setTypeface(typeface);
+        //holder.tvPaperTitle.setTypeface(typeface);
         //holder.tvPaperCategory.setTypeface(typefaces);
         //holder.tvPaperType.setText(mappingPapeType.getvalues(paper.examTypeId));
        // Toast.makeText(context,mapping.getvalues(paper.sessionId),Toast.LENGTH_LONG).show();

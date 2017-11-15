@@ -14,12 +14,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+
             android:layout_weight="1">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Advanced Architecture NAS401"
                 android:textColor="#000000"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
                 android:id="@+id/paper_title"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
@@ -36,13 +39,13 @@
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:paddingRight="10dp"
+            android:layout_height="32dp"
+            android:paddingRight="5dp"
             android:paddingTop="5dp"
             android:id="@+id/tvDownload"
             android:layout_gravity="center_vertical"
-            android:layout_weight="4.8"
-            android:src="@drawable/downloadb"/>
+            android:layout_weight="9"
+            android:src="@drawable/downloadbb"/>
 
     </LinearLayout>
     <View
