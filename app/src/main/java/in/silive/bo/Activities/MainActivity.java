@@ -70,7 +70,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activitymainchanged);
+        setContentView(R.layout.temp);
         BytepadApplication application = (BytepadApplication)getApplication();
    //     Tracker mTracker = application.getDefaultTracker();
 //        mTracker.setScreenName("MainActivity");

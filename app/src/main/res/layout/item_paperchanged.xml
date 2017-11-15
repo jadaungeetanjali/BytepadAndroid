@@ -23,7 +23,7 @@
                 android:id="@+id/paper_title"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                android:textSize="15sp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
                 android:id="@+id/paper_category"
                 android:textColor="#4C4C4C"
                 android:text="UT Semester 2010-2011"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="10sp"
                 />
         </LinearLayout>
         <ImageView
