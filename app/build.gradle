@@ -25,8 +25,9 @@ android {
         applicationId "in.silive.bo"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 8
-        versionName "4.2"
+        versionCode 9
+        versionName "4.3" +
+                ""
         multiDexEnabled true
         javaCompileOptions {
             annotationProcessorOptions {
@@ -41,8 +42,8 @@ android {
     }
     buildTypes {
         release {
-            debuggable true
-            minifyEnabled true
+            debuggable false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             zipAlignEnabled true
         }

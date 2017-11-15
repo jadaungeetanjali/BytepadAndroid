@@ -92,10 +92,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
         st2=(ToggleButton)findViewById(R.id.st2);
         put=(ToggleButton)findViewById(R.id.put);
         ut=(ToggleButton)findViewById(R.id.ut);
-        st1line=(View)findViewById(R.id.st1line);
-        st2line=(View)findViewById(R.id.st2line);
-        putline=(View)findViewById(R.id.putline);
-        utline=(View)findViewById(R.id.utline);
+
         appDatabase = RoomDb.getDatabase(this);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         Log.d("Bytepad", "MainActivity created");
@@ -442,7 +439,7 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
         else {
             put.setTextColor(Color.BLACK);
             put.setBackgroundResource(R.drawable.backtoggle);
-            put.setVisibility(View.GONE);
+//            put.setVisibility(View.GONE);
             Iterator itr = paper.iterator();
             while(itr.hasNext()){
                 if(itr.next().equals(2))

@@ -26,6 +26,7 @@
     <style name="DialogTheme">
         <item name="android:windowBackground">@drawable/gradient</item>
         <item name="android:windowNoTitle">false</item>
+        <item name="android:windowIsFloating">true</item>
     </style>
 
     <style name="NavigationTab" parent="Widget.Design.TabLayout">

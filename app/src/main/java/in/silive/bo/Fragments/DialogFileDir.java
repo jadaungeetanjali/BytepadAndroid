@@ -67,7 +67,7 @@ public class DialogFileDir extends DialogFragment {
         // Inflate the layout for this fragment
 
         getDialog().setTitle("Select Folder to Store Papers");
-        this.getDialog().getWindow().setBackgroundDrawableResource(R.color.colorPrimary);
+        this.getDialog().getWindow().setBackgroundDrawableResource(R.drawable.gradient);
         setCancelable(false);
         view = inflater.inflate(R.layout.fragment_dialog_file_dir, container, false);
         sharedPreferences = getActivity().getSharedPreferences(Config.KEY_BYTEPAD, Activity.MODE_PRIVATE);

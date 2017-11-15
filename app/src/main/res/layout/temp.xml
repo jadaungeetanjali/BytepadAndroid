@@ -177,11 +177,11 @@
                             android:textSize="16sp"/>
 
                         <ImageView
-                            android:layout_width="25sp"
-                            android:layout_height="30sp"
-                            android:src="@drawable/iconupperr"
+                            android:layout_width="18sp"
+                            android:layout_height="20sp"
+                            android:src="@drawable/downloadupperf"
                             android:layout_gravity="right"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="13dp"
                             android:id="@+id/downloadbutton"
 
                             />
@@ -216,8 +216,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:hint="Search"
-                                android:singleLine="true"
                                 android:layout_weight="1"
+                                android:singleLine="true"
+                                android:imeOptions="actionDone"
+                                android:maxLines="1"
                                 android:background="@android:color/transparent"
                                 android:textColor="#333"
                                 android:textColorHint="#666"

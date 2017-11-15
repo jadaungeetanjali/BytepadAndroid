@@ -62,7 +62,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
     }
     @Override
     public void onBindViewHolder(PaperViewHolder holder, int position) {
-        Typeface typeface= Typeface.createFromAsset(context.getAssets(),"font/middle.ttf");
+        //Typeface typeface= Typeface.createFromAsset(context.getAssets(),"font/middle.ttf");
         //Typeface typefaces= Typeface.createFromAsset(context.getAssets(),"font/bottom.ttf");
         final PaperDetails paper = this.getPapersList().get(position);
         //holder.tvPaperTitle.setTypeface(typeface);
@@ -86,7 +86,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
            //RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(20,25);
 
          //  holder.tvDownload.setLayoutParams(params);
-            holder.tvDownload.setImageResource(R.drawable.viewchangedicon);
+            holder.tvDownload.setImageResource(R.drawable.viewbutton);
             holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
 
                 @Override
