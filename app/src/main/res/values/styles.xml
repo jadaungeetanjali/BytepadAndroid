@@ -24,7 +24,7 @@
 
     </style>
     <style name="DialogTheme">
-        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:windowBackground">@drawable/gradient</item>
         <item name="android:windowNoTitle">false</item>
     </style>
 

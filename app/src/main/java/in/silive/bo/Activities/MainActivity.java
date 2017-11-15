@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -104,6 +106,8 @@ public class MainActivity extends LifecycleActivity implements SnackBarListener 
         recyclerView = (RecyclerView) findViewById(R.id.rview);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this,
+                DividerItemDecoration.HORIZONTAL));
         query = "";
         ivClearSearch = (ImageView) findViewById(R.id.ivClearSearch);
         recyclerEmptyView = (RelativeLayout) findViewById(R.id.recyclerEmptyView);
