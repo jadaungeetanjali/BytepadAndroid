@@ -1,35 +1,39 @@
 {
   "project_info": {
-    "project_number": "415097439524",
-    "project_id": "seventh-history-140406"
+    "project_number": "660880811676",
+    "firebase_url": "https://bytepad-13a0d.firebaseio.com",
+    "project_id": "bytepad-13a0d",
+    "storage_bucket": "bytepad-13a0d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:415097439524:android:65194881c04c6fe0",
+        "mobilesdk_app_id": "1:660880811676:android:7fe969555978b211",
         "android_client_info": {
           "package_name": "in.silive.bo"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "660880811676-stu63l872ravna392hb009to4jmlvsvv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCsBKgXiqCGIY53LvVXpAHySeqqvDIWZzE"
+          "current_key": "AIzaSyDz8644f3KUMohzzjM0x85wvCm5wJGpRbw"
         }
       ],
       "services": {
         "analytics_service": {
-          "status": 2,
-          "analytics_property": {
-            "tracking_id": "UA-62659989-1"
-          }
+          "status": 1
         },
         "appinvite_service": {
           "status": 1,
           "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

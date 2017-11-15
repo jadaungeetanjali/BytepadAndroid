@@ -35,10 +35,33 @@
             </intent-filter>
         </activity>
         <activity
+
             android:name="in.silive.bo.Activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
-            android:windowSoftInputMode="stateHidden">
+            android:alwaysRetainTaskState="true"
+            android:launchMode="singleInstance"
+            android:windowSoftInputMode="adjustPan">
+
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
+                <data
+                    android:host="www.silive.in"
+                    android:pathPrefix="/"
+                    android:scheme="http" />
+
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="in.silive.bo.Activities.DownloadActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="adjustPan">
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -54,33 +77,23 @@
             </intent-filter>
         </activity>
 
+
         <service android:name="in.silive.bo.Network.RoboRetrofitService" />
 
-        <receiver
-            android:name="com.google.android.gms.gcm.GcmReceiver"
-            android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="in.silive.bytepad" />
-            </intent-filter>
-        </receiver>
 
-        <service
-            android:name="in.silive.bo.Services.GcmListener"
-            android:exported="false">
+
+
+        <service android:name=".services.MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service
-            android:name="in.silive.bo.Services.InstanceIdListener"
-            android:exported="false">
+        <service android:name=".services.MyFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID" />
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service android:name="in.silive.bo.Services.RegisterGCM" />
+
 
         <meta-data
             android:name="io.fabric.ApiKey"

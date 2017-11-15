@@ -2,19 +2,21 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarItemBackground">@drawable/gradient</item>
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@drawable/initial_bg</item>
+
     </style>
     <style name="AppThemeNoActionBar" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
-
+        <item name="actionBarItemBackground">@drawable/gradient</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
     <style name="AppThemeNoActionBarWithBG" parent="AppThemeNoActionBar">
         <!-- Customize your theme here. -->
@@ -22,7 +24,9 @@
 
     </style>
     <style name="DialogTheme">
-        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:windowBackground">@drawable/gradient</item>
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowIsFloating">true</item>
     </style>
 
     <style name="NavigationTab" parent="Widget.Design.TabLayout">

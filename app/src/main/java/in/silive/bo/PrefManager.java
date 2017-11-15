@@ -19,9 +19,18 @@ public class PrefManager {
     public boolean isPapersLoaded(){
         return pref.getBoolean(Config.PAPERS_LOADED,false);
     }
+    public boolean isSubjectLoaded()
+    {
+        return pref.getBoolean(Config.Subject_Loaded,false);
+    }
 
     public void setPapersLoaded(boolean b){
         editor.putBoolean(Config.PAPERS_LOADED,b);
+        editor.apply();
+    }
+    public void setSubjectLoaded(boolean b)
+    {
+        editor.putBoolean(Config.Subject_Loaded,b);
         editor.apply();
     }
 

@@ -1,3 +1,39 @@
 <resources>
-    <string name="app_name">Bytepad</string>
+    <string name="app_name">BYTEPAD</string>
+
+
+
+        <string-array name="exam_type">
+            <item>UT</item>
+            <item>PUT</item>
+            <item>ST-1</item>
+            <item>ST-2</item>
+        </string-array>
+
+        <integer-array name="examtype_codes">
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+            <item>4</item>
+        </integer-array>
+    <string-array name="session">
+        <item>2010&#8211;2011</item>
+        <item>2011&#8211;2012</item>
+        <item>2012&#8211;2013</item>
+        <item>2013&#8211;2014</item>
+        <item>2014&#8211;2015</item>
+        <item>2015&#8211;2016</item>
+        <item>2016&#8211;2017</item>
+    </string-array>
+
+    <integer-array name="session_codes">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </integer-array>
 </resources>
+

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rview"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Advanced Architecture NAS401"
+                android:textColor="#000000"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:id="@+id/paper_title"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:textSize="15sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:id="@+id/paper_category"
+                android:textColor="#4C4C4C"
+                android:text="UT Semester 2010-2011"
+                android:textSize="10sp"
+                />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:id="@+id/tvDownload"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="9"
+            android:src="@drawable/downloadbuton"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorBg"/>
+
+
+</LinearLayout>
