@@ -46,7 +46,6 @@ import in.silive.bo.Config;
 import in.silive.bo.DownloadQueue;
 
 import in.silive.bo.Fragments.DialogFileDir;
-import in.silive.bo.Manifest;
 import in.silive.bo.MarshMallowPermission;
 
 import in.silive.bo.Models.PaperModel;
@@ -289,6 +288,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
     {
         //tvProgressInfo.setText("Searching for signals");
         if (!CheckConnectivity.isNetConnected(this)) {
+            //Log.i("connectivity", "No Connection");
             Snackbar
                     .make(splash, "No internet connection!", Snackbar.LENGTH_INDEFINITE)
                     .setAction("RETRY", new View.OnClickListener() {
@@ -303,13 +303,13 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
                 @Override
                 public void onRequestNotFound() {
 
-
                 }
 
                 @Override
                 public void onRequestFailure(SpiceException spiceException) {
                     Log.d("debugg",spiceException.getCause().toString());
                     //Toast.makeText(getApplicationContext(),"failed Timestamp",Toast.LENGTH_LONG).show();
+
                     Snackbar
                             .make(splash, "No internet connection!", Snackbar.LENGTH_INDEFINITE)
                             .setAction("RETRY", new View.OnClickListener() {
@@ -384,6 +384,8 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
 
                 @Override
                 public void onRequestFailure(SpiceException spiceException) {
+                    Log.d("Bytepad", "RoboRetroSpiceRequestSubject Failure ");
+                    Log.d("Bytepad", spiceException.getCause().toString());
                     Snackbar
                             .make(splash, "No internet connection!", Snackbar.LENGTH_INDEFINITE)
                             .setAction("RETRY", new View.OnClickListener() {
@@ -435,7 +437,6 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
         spiceManager.start(this);
     }
 
-
     private void moveToNextActivity() {
         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(intent);
@@ -447,15 +448,17 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
 
     @Override
     protected void onStop() {
-        spiceManager.shouldStop();
         super.onStop();
+        spiceManager.shouldStop();
+
         Log.d("Bytepad", "onStop called");
     }
 
     @Override
     public void onRequestFailure(SpiceException spiceException) {
         spiceException.printStackTrace();
-        Log.d("Bytepad", "Request failure");
+        Log.d("Bytepad", "RoboRetroSpiceRequest failure");
+        Log.d("Bytepad", spiceException.getCause().toString());
         Snackbar
                 .make(splash, "No internet connection!", Snackbar.LENGTH_INDEFINITE)
                 .setAction("RETRY", new View.OnClickListener() {
@@ -507,7 +510,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
                 for (int i = 0; i < result.size(); i++) {
                     SubjectModel subject = result.get(i);
                     //SubjectDatabaseModel subjectDatabaseModel =new SubjectDatabaseModel();
-                    appDatabase.itemAndPersonModel().addSubject(new SubjectDatabaseModel(subject.id,subject.subjectCode,subject.subjectName));
+                    appDatabase.itemAndPersonModel().addSubject(new SubjectDatabaseModel(subject.id, subject.subjectName));
 
 
                     publishProgress(i + 1);

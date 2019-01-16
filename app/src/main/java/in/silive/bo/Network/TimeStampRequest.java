@@ -1,5 +1,7 @@
 package in.silive.bo.Network;
 
+import android.util.Log;
+
 import com.octo.android.robospice.request.retrofit.RetrofitSpiceRequest;
 
 /**
@@ -14,6 +16,7 @@ public class TimeStampRequest extends RetrofitSpiceRequest<String,BytePad> {
     }
     @Override
     public String loadDataFromNetwork() throws Exception {
+        Log.d("time", getService().timeStamp());
         return getService().timeStamp();
     }
 }

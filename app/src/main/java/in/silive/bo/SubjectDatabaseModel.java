@@ -18,7 +18,7 @@ public class SubjectDatabaseModel {
     @ColumnInfo(name = "id1")
     public Integer id;
 
-    public String subjectCode;
+    //public String subjectCode;
 
     public String subjectName;
 
@@ -28,10 +28,10 @@ public class SubjectDatabaseModel {
 
 
 
-    public SubjectDatabaseModel(Integer id, String subjectCode, String subjectName) {
+    public SubjectDatabaseModel(Integer id, String subjectName) {
         super();
         this.id = id;
-        this.subjectCode = subjectCode;
+        //this.subjectCode = subjectCode;
         this.subjectName = subjectName;
     }
 }

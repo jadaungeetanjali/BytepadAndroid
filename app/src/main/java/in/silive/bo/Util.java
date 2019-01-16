@@ -95,7 +95,7 @@ public class Util {
         }else {
             MappingPapeType mappingPapeType=new MappingPapeType();
             final DownloadManager downloadManager;
-   String file_url = paper.fileUrl;
+            String file_url = paper.fileUrl;
             file_url = ("http://testapi.silive.in/PaperFileUpload/"+mappingPapeType.getvalues(paper.examTypeId)+"/"+file_url).trim();
             file_url =file_url.replace(" ","%20");
             Log.d("debugg",file_url);

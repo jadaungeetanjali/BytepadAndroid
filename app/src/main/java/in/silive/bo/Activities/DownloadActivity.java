@@ -1,7 +1,6 @@
 package in.silive.bo.Activities;
 
 import android.annotation.SuppressLint;
-import android.arch.lifecycle.LifecycleActivity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -10,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -42,7 +42,7 @@ import in.silive.bo.viewmodel.BytepadAndroidViewModel;
  * Created by root on 9/11/17.
  */
 
-public class DownloadActivity extends LifecycleActivity implements SnackBarListener {
+public class DownloadActivity extends AppCompatActivity implements SnackBarListener {
     public static List<PaperDetails> paperList = new ArrayList<>();
     public AutoCompleteTextView search_paper;
     public RecyclerView recyclerView;

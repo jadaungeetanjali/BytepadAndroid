@@ -28,7 +28,7 @@ public class PaperDetails {
     public Integer sessionId;
     @SerializedName("paper_type")
     @Expose
-    public Integer paperType;
+    public int paperType;
     @SerializedName("admin_id")
     @Expose
     public Integer adminId;
@@ -41,14 +41,14 @@ public class PaperDetails {
     public Integer id1;
 
 
-    @SerializedName("SubjectCode")
-    @Expose
-    public String subjectCode;
+    //@SerializedName("SubjectCode")
+    //@Expose
+    //public String subjectCode;
     @SerializedName("SubjectName")
     @Expose
     public String subjectName;
 
-    public PaperDetails(Integer id1, Integer subjectCodeId, Integer examTypeId, String fileUrl, Integer semester, Integer sessionId, Integer paperType, Integer adminId, Integer id, String subjectCode, String subjectName) {
+    public PaperDetails(Integer id1, Integer subjectCodeId, Integer examTypeId, String fileUrl, Integer semester, Integer sessionId, int paperType, Integer adminId, Integer id, String subjectName) {
         this.id = id1;
         this.subjectCodeId = subjectCodeId;
         this.examTypeId = examTypeId;
@@ -58,7 +58,7 @@ public class PaperDetails {
         this.paperType = paperType;
         this.adminId = adminId;
         this.id = id;
-        this.subjectCode = subjectCode;
+        //this.subjectCode = subjectCode;
         this.subjectName = subjectName;
     }
 }

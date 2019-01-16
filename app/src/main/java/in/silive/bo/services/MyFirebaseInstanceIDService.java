@@ -1,4 +1,4 @@
-package in.silive.bo.services;
+package in.silive.bo.Services;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

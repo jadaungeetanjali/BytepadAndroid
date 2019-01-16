@@ -19,9 +19,9 @@ public class SubjectModel implements Parcelable{
     @SerializedName("Id")
     @Expose
     public Integer id;
-    @SerializedName("SubjectCode")
-    @Expose
-    public String subjectCode;
+    //@SerializedName("SubjectCode")
+    //@Expose
+    //public String subjectCode;
     @SerializedName("SubjectName")
     @Expose
     public String subjectName;
@@ -34,23 +34,23 @@ public class SubjectModel implements Parcelable{
     }
 
 
-    public SubjectModel(Integer id, String subjectCode, String subjectName) {
+    public SubjectModel(Integer id, String subjectName) {
         super();
         this.id = id;
-        this.subjectCode = subjectCode;
+        //this.subjectCode = subjectCode;
         this.subjectName = subjectName;
     }
 
     protected SubjectModel(Parcel in) {
         id=in.readInt();
-        subjectCode = in.readString();
+        //subjectCode = in.readString();
         subjectName = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
-        dest.writeString(subjectCode);
+        //dest.writeString(subjectCode);
         dest.writeString(subjectName);
     }
 
@@ -81,13 +81,13 @@ public class SubjectModel implements Parcelable{
         this.id = id;
     }
 
-    public String getSubjectCode() {
-        return subjectCode;
-    }
+   // public String getSubjectCode() {
+       // return subjectCode;
+    //}
 
-    public void setSubjectCode(String subjectCode) {
-        this.subjectCode = subjectCode;
-    }
+   // public void setSubjectCode(String subjectCode) {
+        //this.subjectCode = subjectCode;
+    //}
 
     public String getSubjectName() {
         return subjectName;
