@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <permission android:name="in.silive.bo.pernission.C2D_Message" />
+    <permission android:name="in.silive.bo.permission.C2D_Message" />
 
     <uses-permission android:name="in.silive.bytepad.pernission.C2D_Message" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -20,9 +20,18 @@
     <application
         android:name="in.silive.bo.Application.BytepadApplication"
         android:allowBackup="true"
-        android:icon="@drawable/bytepad_icon"
+        android:icon="@drawable/bytepad_launcher_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="in.silive.bo.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
         <activity
             android:name="in.silive.bo.Activities.SplashActivity"
             android:screenOrientation="portrait"

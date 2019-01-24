@@ -11,31 +11,31 @@ public class PaperDetails {
     @SerializedName("id")
     @Expose
     public Integer id;
-    @SerializedName("subject_code_id")
+    @SerializedName("subjectId")
     @Expose
     public Integer subjectCodeId;
-    @SerializedName("exam_type_id")
+    @SerializedName("examTypeId")
     @Expose
     public Integer examTypeId;
-    @SerializedName("file_url")
+    @SerializedName("fileUrl")
     @Expose
     public String fileUrl;
-    @SerializedName("semester")
+    @SerializedName("semesterType")
     @Expose
     public Integer semester;
-    @SerializedName("session_id")
+    @SerializedName("sessionId")
     @Expose
     public Integer sessionId;
-    @SerializedName("paper_type")
+    @SerializedName("paperType")
     @Expose
-    public int paperType;
-    @SerializedName("admin_id")
+    public String paperType;
+    @SerializedName("adminId")
     @Expose
     public Integer adminId;
     public String dwnldPath;
     public boolean downloaded;
 
-    @SerializedName("Id")
+    @SerializedName("id")
     @Expose
 
     public Integer id1;
@@ -44,11 +44,11 @@ public class PaperDetails {
     //@SerializedName("SubjectCode")
     //@Expose
     //public String subjectCode;
-    @SerializedName("SubjectName")
+    @SerializedName("subjectName")
     @Expose
     public String subjectName;
 
-    public PaperDetails(Integer id1, Integer subjectCodeId, Integer examTypeId, String fileUrl, Integer semester, Integer sessionId, int paperType, Integer adminId, Integer id, String subjectName) {
+    public PaperDetails(Integer id1, Integer subjectCodeId, Integer examTypeId, String fileUrl, Integer semester, Integer sessionId, String paperType, Integer adminId, Integer id, String subjectName) {
         this.id = id1;
         this.subjectCodeId = subjectCodeId;
         this.examTypeId = examTypeId;

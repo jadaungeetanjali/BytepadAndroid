@@ -28,7 +28,7 @@ public class Model {
 
     private Integer sessionId;
 
-    private Integer paperType;
+    private String paperType;
 
     private Integer adminId;
 
@@ -40,7 +40,7 @@ public class Model {
      */
 
 
-    public Model(Integer id, Integer subjectCodeId, Integer examTypeId, String fileUrl, Integer semester, Integer sessionId, Integer paperType, Integer adminId) {
+    public Model(Integer id, Integer subjectCodeId, Integer examTypeId, String fileUrl, Integer semester, Integer sessionId, String paperType, Integer adminId) {
         super();
         this.id = id;
         this.subjectCodeId = subjectCodeId;
@@ -110,12 +110,12 @@ public class Model {
     }
 
 
-    public Integer getPaperType() {
+    public String getPaperType() {
         return paperType;
     }
 
 
-    public void setPaperType(Integer paperType) {
+    public void setPaperType(String paperType) {
         this.paperType = paperType;
     }
 

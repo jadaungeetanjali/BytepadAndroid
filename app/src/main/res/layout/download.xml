@@ -236,6 +236,81 @@
                         </LinearLayout>
 
                     </android.support.v7.widget.CardView>
+                    <LinearLayout
+                        android:id="@+id/Lineartoggle"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="40sp"
+                        android:padding="3dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal"
+                        >
+
+
+
+                        <ToggleButton
+                            android:id="@+id/St1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/backtoggle"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="2dp"
+                            android:textOff="ST1"
+                            android:textOn="ST1" />
+
+
+
+
+
+                        <ToggleButton
+                            android:id="@+id/st2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/backtoggle"
+                            android:gravity="center"
+                            android:textOff="ST2"
+                            android:paddingLeft="3dp"
+                            android:paddingRight="3dp"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="2dp"
+                            android:textOn="ST2" />
+
+
+                        <ToggleButton
+                            android:id="@+id/put"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/backtoggleselected"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="2dp"
+                            android:textOff="PUT"
+                            android:textOn="PUT" />
+
+
+
+
+
+                        <ToggleButton
+                            android:id="@+id/ut"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="2dp"
+                            android:background="@drawable/backtoggle"
+                            android:gravity="center"
+                            android:textOff="UT"
+                            android:textOn="UT" />
+
+
+                    </LinearLayout>
+
                 </LinearLayout>
             </android.support.design.widget.AppBarLayout>
             <RelativeLayout
@@ -246,80 +321,6 @@
                 app:layout_constraintLeft_toLeftOf="@+id/guideline11"
                 app:layout_constraintRight_toLeftOf="@+id/guideline12">
 
-                <LinearLayout
-                    android:id="@+id/Lineartoggle"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="40sp"
-                    android:background="#FFFFFF"
-                    android:padding="3dp"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    >
-
-
-
-                    <ToggleButton
-                        android:id="@+id/St1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/backtoggle"
-                        android:gravity="center"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:textOff="ST1"
-                        android:textOn="ST1" />
-
-
-
-
-
-                    <ToggleButton
-                        android:id="@+id/st2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/backtoggle"
-                        android:gravity="center"
-                        android:textOff="ST2"
-                        android:paddingLeft="3dp"
-                        android:paddingRight="3dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:textOn="ST2" />
-
-
-                    <ToggleButton
-                        android:id="@+id/put"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/backtoggleselected"
-                        android:gravity="center"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:textOff="PUT"
-                        android:textOn="PUT" />
-
-
-
-
-
-                    <ToggleButton
-                        android:id="@+id/ut"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:background="@drawable/backtoggle"
-                        android:gravity="center"
-                        android:textOff="UT"
-                        android:textOn="UT" />
-
-
-                </LinearLayout>
 
 
                 <RelativeLayout
@@ -327,7 +328,6 @@
                     android:id="@+id/recyclerEmptyView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/Lineartoggle"
                     >
                     <TextView
                         android:layout_width="wrap_content"
@@ -344,11 +344,7 @@
                     android:id="@+id/rview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingTop="4dp"
-                    android:layout_below="@+id/Lineartoggle"
-
-
-                    >
+                    android:paddingTop="4dp">
 
                 </android.support.v7.widget.RecyclerView>
             </RelativeLayout>

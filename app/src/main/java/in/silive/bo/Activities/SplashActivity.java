@@ -25,7 +25,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daasuu.ahp.AnimateHorizontalProgressBar;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.mobapphome.mahandroidupdater.tools.MAHUpdaterController;
@@ -34,6 +33,7 @@ import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.PendingRequestListener;
 import com.octo.android.robospice.request.listener.RequestListener;
+import com.sasank.roundedhorizontalprogress.RoundedHorizontalProgressBar;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -89,7 +89,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
     String timeStamp;
     Bundle bundle;
     ArrayList<PaperModel> list;
-    AnimateHorizontalProgressBar progressBar;
+    RoundedHorizontalProgressBar progressBar;
 
     private BytepadAndroidViewModel addAndroidViewModel;
     private RoomDb appDatabase;
@@ -127,7 +127,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
 
         splash = (RelativeLayout) findViewById(R.id.splash);
         addAndroidViewModel = ViewModelProviders.of(this).get(BytepadAndroidViewModel.class);
-        progressBar = (AnimateHorizontalProgressBar) findViewById(R.id.animate_progress_bar);
+        progressBar = (RoundedHorizontalProgressBar) findViewById(R.id.animate_progress_bar);
         tvProgressInfo = (TextView) findViewById(R.id.tvProgressInfo);
         Log.d("Bytepad", "SplashActivity created");
         spiceManager = new SpiceManager(RoboRetrofitService.class);
@@ -288,7 +288,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
     {
         //tvProgressInfo.setText("Searching for signals");
         if (!CheckConnectivity.isNetConnected(this)) {
-            //Log.i("connectivity", "No Connection");
+            Log.i("connectivity", "No Connection");
             Snackbar
                     .make(splash, "No internet connection!", Snackbar.LENGTH_INDEFINITE)
                     .setAction("RETRY", new View.OnClickListener() {

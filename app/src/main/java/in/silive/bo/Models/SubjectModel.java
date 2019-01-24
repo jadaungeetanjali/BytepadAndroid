@@ -16,13 +16,13 @@ import java.util.ArrayList;
 
 public class SubjectModel implements Parcelable{
 
-    @SerializedName("Id")
+    @SerializedName("id")
     @Expose
     public Integer id;
     //@SerializedName("SubjectCode")
     //@Expose
     //public String subjectCode;
-    @SerializedName("SubjectName")
+    @SerializedName("subjectName")
     @Expose
     public String subjectName;
 

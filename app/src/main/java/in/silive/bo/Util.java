@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -56,10 +57,14 @@ public class Util {
         appDatabase = RoomDb.getDatabase(context);
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
         File file = new File(name);
-        String extension = android.webkit.MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(file).toString());
+        String extension = android.webkit.MimeTypeMap.getFileExtensionFromUrl(FileProvider.getUriForFile(context,
+               BuildConfig.APPLICATION_ID + ".provider", file).toString());
         String mimetype = android.webkit.MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+
         if (extension.equalsIgnoreCase("") || mimetype == null) {
-            intent.setDataAndType(Uri.fromFile(file), "text/*");
+
+            intent.setDataAndType(FileProvider.getUriForFile(context,
+                    BuildConfig.APPLICATION_ID + ".provider", file), "text/*");
             context.startActivity(Intent.createChooser(intent, "Choose an Application:"));
            // showSnackBar(context,"No document viewer found.");
           /*  mTracker.send(new HitBuilders.EventBuilder()
@@ -68,7 +73,12 @@ public class Util {
                     .setLabel("Viewer not found")
                     .build());*/
         } else {
-            intent.setDataAndType(Uri.fromFile(file), mimetype);
+            Log.d("hii", FileProvider.getUriForFile(context,
+                    BuildConfig.APPLICATION_ID + ".provider", file).toString() );
+            intent.setDataAndType(FileProvider.getUriForFile(context,
+                    BuildConfig.APPLICATION_ID + ".provider", file), mimetype);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             context.startActivity(Intent.createChooser(intent, "Choose an Application:"));
             /*mTracker.send(new HitBuilders.EventBuilder()
                     .setCategory("View Paper")
@@ -96,7 +106,7 @@ public class Util {
             MappingPapeType mappingPapeType=new MappingPapeType();
             final DownloadManager downloadManager;
             String file_url = paper.fileUrl;
-            file_url = ("http://testapi.silive.in/PaperFileUpload/"+mappingPapeType.getvalues(paper.examTypeId)+"/"+file_url).trim();
+            file_url = ("http://f845900b.ngrok.io/Papers/"+file_url).trim();
             file_url =file_url.replace(" ","%20");
             Log.d("debugg",file_url);
 
@@ -104,10 +114,12 @@ public class Util {
             BroadcastReceiver recieveDownloadComplete, notificationClicked;
             downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
             Uri uri = Uri.parse(file_url);
+            Log.d("debugg", uri.toString());
             DownloadManager.Request request = new DownloadManager.Request(uri);
             request.setTitle(paper.subjectName);
             request.setDescription("Bytepad Paper Download");
-            final Uri uri1 = Uri.parse("file://" + prefManager.getDownloadPath() + "/" + paper.subjectName+".doc");
+            final Uri uri1 = Uri.parse("file://" + prefManager.getDownloadPath() + "/" + paper.subjectName+ ".doc");
+            Log.d("debugg", uri1.toString());
             request.setDestinationUri(uri1);
             request.setVisibleInDownloadsUi(true);
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
@@ -117,6 +129,7 @@ public class Util {
             DownloadQueue queueItem = new DownloadQueue();
             queueItem.dwnldPath = uri1.getPath();
             queueItem.reference = downloadReference;
+            Log.d("download", ""+downloadReference);
             queueItem.paperId = paper.id;
             appDatabase = RoomDb.getDatabase(context.getApplication());
             appDatabase.itemAndPersonModel().addQueue(queueItem);
@@ -154,8 +167,6 @@ public class Util {
                         int status = cursor.getInt(colmIndx);
                         int fileNameIndex = cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI);
                         switch (status) {
-
-
                             case DownloadManager.STATUS_SUCCESSFUL:
                                 showSnackBar(context,paper.subjectName + " downloaded");
                                 paper.downloaded = true;

@@ -29,7 +29,7 @@ public class PaperDatabaseModel  {
 
     public Integer sessionId;
 
-    public int paperType;
+    public String paperType;
 
     public Integer adminId;
 
@@ -39,7 +39,7 @@ public class PaperDatabaseModel  {
 
 
     public PaperDatabaseModel(Integer id, Integer subjectCodeId, Integer examTypeId, String fileUrl,
-                              Integer semester,Integer sessionId, int paperType, Integer adminId,boolean downloaded) {
+                              Integer semester,Integer sessionId, String paperType, Integer adminId,boolean downloaded) {
         super();
         this.id = id;
         this.subjectCodeId = subjectCodeId;
@@ -118,11 +118,11 @@ public class PaperDatabaseModel  {
         this.sessionId = sessionId;
     }
 
-    public int getPaperType() {
+    public String getPaperType() {
         return paperType;
     }
 
-    public void setPaperType(int paperType) {
+    public void setPaperType(String paperType) {
         this.paperType = paperType;
     }
 

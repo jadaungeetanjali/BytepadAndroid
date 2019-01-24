@@ -11,7 +11,7 @@ public class Config {
     static final String DB_NAME = "bytepad";
 
 
-    public static final String BASE_URL = "http://testapi.silive.in/api";
+    public static final String BASE_URL = "http://f845900b.ngrok.io/api";
 
 
     static final String KEY_GCM_SENT_TO_SEVER = "sent_to_server";

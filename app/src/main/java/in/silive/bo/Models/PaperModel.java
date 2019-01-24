@@ -24,25 +24,25 @@ public class PaperModel implements Parcelable {
     @SerializedName("id")
     @Expose
     public Integer id;
-    @SerializedName("subject_code_id")
+    @SerializedName("subjectId")
     @Expose
     public Integer subjectCodeId;
-    @SerializedName("exam_type_id")
+    @SerializedName("examTypeId")
     @Expose
     public Integer examTypeId;
-    @SerializedName("file_url")
+    @SerializedName("fileUrl")
     @Expose
     public String fileUrl;
-    @SerializedName("semester")
+    @SerializedName("semesterType")
     @Expose
     public Integer semester;
-    @SerializedName("session_id")
+    @SerializedName("sessionId")
     @Expose
     public Integer sessionId;
-    @SerializedName("paper_type")
+    @SerializedName("paperType")
     @Expose
-    public int paperType;
-    @SerializedName("admin_id")
+    public String paperType;
+    @SerializedName("adminId")
     @Expose
     public Integer adminId;
 
@@ -54,7 +54,7 @@ public class PaperModel implements Parcelable {
     }
 
 
-    public PaperModel(Integer id, Integer subjectCodeId, Integer examTypeId, String fileUrl, Integer semester, Integer sessionId, int paperType, Integer adminId) {
+    public PaperModel(Integer id, Integer subjectCodeId, Integer examTypeId, String fileUrl, Integer semester, Integer sessionId, String paperType, Integer adminId) {
         super();
         this.id = id;
         this.subjectCodeId = subjectCodeId;
@@ -72,7 +72,7 @@ public class PaperModel implements Parcelable {
         examTypeId=in.readInt();
         semester=in.readInt();
         sessionId=in.readInt();
-        paperType=in.readInt();
+        paperType=in.readString();
         adminId=in.readInt();
         fileUrl = in.readString();
     }
@@ -84,7 +84,7 @@ public class PaperModel implements Parcelable {
         dest.writeInt(examTypeId);
         dest.writeInt(semester);
         dest.writeInt(sessionId);
-        dest.writeInt(paperType);
+        dest.writeString(paperType);
         dest.writeInt(adminId);
     }
 
@@ -160,12 +160,12 @@ public class PaperModel implements Parcelable {
 
     }
 
-    public int getPaperType() {
+    public String getPaperType() {
         return paperType;
     }
 
 
-    public void setPaperType(int paperType) {
+    public void setPaperType(String paperType) {
         this.paperType = paperType;
     }
 
