@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements SnackBarListener 
     ToggleButton all,st1,st2,put,ut;
     int paperType[];
     Toolbar toolbar;
-    ImageView downloadbutton;
+    FloatingActionButton downloadbutton;
     ImageView ivClearSearch;
     RelativeLayout recyclerEmptyView;
     View st1line;
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements SnackBarListener 
         paper=new ArrayList<>();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        downloadbutton=(ImageView)findViewById(R.id.downloadbutton);
+        downloadbutton=(FloatingActionButton) findViewById(R.id.downloadbutton);
         //all=(ToggleButton)findViewById(R.id.all);
         st1=(ToggleButton)findViewById(R.id.St1);
         st2=(ToggleButton)findViewById(R.id.st2);
@@ -397,12 +398,13 @@ public class MainActivity extends AppCompatActivity implements SnackBarListener 
           //  paperList=appDatabase.itemAndPersonModel().setval(true);
         //else
       paperType=new int[paper.size()];
+      Log.d("MainpaperSize", "" + paper.size());
         for(int i=0;i<paper.size();i++)
         {
             paperType[i]=paper.get(i);
-            Log.d("debugg",Integer.toString(paperType[i]));
         }
         paperList = appDatabase.itemAndPersonModel().setPaperType(paperType,query,false);
+        Log.d("mainPaperList", paperList.toString());
         papersListAdapter = new PapersListAdapter(this, paperList);
 
         viewModel = ViewModelProviders.of(this).get(BytepadAndroidViewModel.class);

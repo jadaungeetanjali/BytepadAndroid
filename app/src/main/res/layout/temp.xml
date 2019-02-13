@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/transparent"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <android.support.constraint.Guideline
@@ -52,15 +53,22 @@
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
         android:layout_width="0dp"
-
         android:layout_height="0dp"
-
-        android:background="#FFFFFF"
         android:orientation="vertical"
+        android:background="@android:color/transparent"
         app:layout_constraintLeft_toLeftOf="@+id/guideline"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
         app:layout_constraintRight_toLeftOf="@+id/guideline2">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/downloadbutton"
+            android:layout_width= "wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:backgroundTint="@color/colorPrimary"
+            android:src="@drawable/downloadupperf"
+            app:borderWidth="0dp"
+            android:layout_margin="16dp"/>
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -142,9 +150,11 @@
                 tools:layout_editor_absoluteX="0dp" />
             <android.support.design.widget.AppBarLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="240dp"
                 android:paddingTop="4sp"
                 android:id="@+id/appbar"
+                android:background="@android:color/transparent"
+                app:elevation="0dp"
                 app:layout_constraintLeft_toLeftOf="@+id/guideline11"
                 app:layout_constraintBottom_toTopOf="@+id/guideline14"
                 app:layout_constraintTop_toTopOf="@+id/guideline13"
@@ -152,97 +162,79 @@
                 >
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="240dp"
                     android:orientation="vertical"
-                    android:background="@drawable/gradient">
+                    android:background="@drawable/appbarbackground">
 
                     <android.support.v7.widget.Toolbar
-                        android:paddingTop="35sp"
-                        android:paddingBottom="6sp"
+                        android:id="@+id/toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_collapseMode="pin"
+                        android:paddingTop="35dp"
+                        android:paddingBottom="6dp"
+                        app:elevation="0dp"
+                        app:layout_collapseMode="pin">
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="35dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="65dp"
+                            app:cardCornerRadius="20dp"
+                            app:cardBackgroundColor="#ffffff"
+                            android:layout_height="wrap_content">
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:paddingTop="3dp"
+                                android:paddingBottom="3dp"
+                                android:orientation="horizontal"
+                                android:layout_height="38dp">
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_weight="0"
+                                    android:tint="@color/textDark"
+                                    android:src="@android:drawable/ic_menu_search"
+                                    android:layout_height="25dp" />
+                                <AutoCompleteTextView
+                                    android:id="@+id/search_paper"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:hint="Search"
+                                    android:layout_weight="1"
+                                    android:singleLine="true"
+                                    android:imeOptions="actionDone"
+                                    android:maxLines="1"
+                                    android:background="@android:color/transparent"
+                                    android:textColor="#333"
+                                    android:textColorHint="#666"
+                                    android:textSize="15sp" />
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:padding="3dp"
+                                    android:tint="@color/textDark"
+                                    android:src="@android:drawable/ic_menu_close_clear_cancel"
+                                    android:layout_weight="0"
+                                    android:id="@+id/ivClearSearch"
+                                    android:layout_height="25dp" />
 
+                            </LinearLayout>
 
-                        android:id="@+id/toolbar">
-                        <TextView
-                            android:id="@+id/toolbar_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/app_name"
-                            android:textColor="#FFFFFF"
-                            android:textStyle="bold"
-                            android:fontFamily="sans-serif"
-                            android:textSize="16sp"/>
-
-                        <ImageView
-                            android:layout_width="18sp"
-                            android:layout_height="20sp"
-                            android:src="@drawable/downloadupperf"
-                            android:layout_gravity="right"
-                            android:layout_marginRight="13dp"
-                            android:id="@+id/downloadbutton"
-
-                            />
+                        </android.support.v7.widget.CardView>
                     </android.support.v7.widget.Toolbar>
 
-                    <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="5sp"
-                        app:cardCornerRadius="10dp"
-                        app:cardBackgroundColor="#ffffff"
-                        android:layout_height="wrap_content">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:paddingTop="3dp"
-                            android:paddingBottom="3dp"
-                            android:orientation="horizontal"
-                            android:layout_height="wrap_content">
-                            <ImageView
-                                android:layout_width="25dp"
-                                android:layout_weight="0"
-                                android:tint="@color/textDark"
-                                android:src="@android:drawable/ic_menu_search"
-                                android:layout_height="25dp" />
-                            <AutoCompleteTextView
-                                android:id="@+id/search_paper"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:hint="Search"
-                                android:layout_weight="1"
-                                android:singleLine="true"
-                                android:imeOptions="actionDone"
-                                android:maxLines="1"
-                                android:background="@android:color/transparent"
-                                android:textColor="#333"
-                                android:textColorHint="#666"
-                                android:textSize="15sp" />
-                            <ImageView
-                                android:layout_width="25dp"
-                                android:padding="3dp"
-                                android:tint="@color/textDark"
-                                android:src="@android:drawable/ic_menu_close_clear_cancel"
-                                android:layout_weight="0"
-                                android:id="@+id/ivClearSearch"
-                                android:layout_height="25dp" />
-
-                        </LinearLayout>
-
-                    </android.support.v7.widget.CardView>
                     <LinearLayout
                         android:id="@+id/Lineartoggle"
                         android:layout_width="match_parent"
                         android:layout_height="40sp"
-                        android:padding="3dp"
-                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:layout_marginTop="15dp"
                         android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:orientation="horizontal"
                         >
                         <ToggleButton
@@ -252,8 +244,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/backtoggle"
                             android:gravity="center"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
+                            android:layout_marginRight="10dp"
                             android:textOff="ST1"
                             android:textOn="ST1" />
 
@@ -269,10 +260,7 @@
                             android:background="@drawable/backtoggle"
                             android:gravity="center"
                             android:textOff="ST2"
-                            android:paddingLeft="3dp"
-                            android:paddingRight="3dp"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
+                            android:layout_marginRight="10dp"
                             android:textOn="ST2" />
 
 
@@ -283,8 +271,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/backtoggleselected"
                             android:gravity="center"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
+                            android:layout_marginRight="10dp"
                             android:textOff="PUT"
                             android:textOn="PUT" />
 
@@ -298,7 +285,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
+                            android:layout_marginRight="10dp"
                             android:background="@drawable/backtoggle"
                             android:gravity="center"
                             android:textOff="UT"

@@ -2,9 +2,7 @@ package in.silive.bo;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-
-
-
+import android.util.Log;
 
 
 /**

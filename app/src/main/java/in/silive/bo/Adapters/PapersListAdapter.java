@@ -72,6 +72,7 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
        // Toast.makeText(context,mapping.getvalues(paper.sessionId),Toast.LENGTH_LONG).show();
         holder.tvPaperCategory.setText(mappingPapeType.getvalues(paper.examTypeId)+" "+"Semester "+mapping.getvalues(paper.sessionId));
         holder.tvPaperTitle.setText(paper.subjectName);
+        Log.d("examType", paper.examTypeId.toString());
         //holder.tvPaperSize.setText("10KB");
         int paperImgId;
        /* if (paper.Title.contains("doc") || paper.Title.contains("DOC") || paper.Title.contains("Doc"))

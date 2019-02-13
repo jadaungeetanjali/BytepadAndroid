@@ -105,8 +105,9 @@ public class Util {
         }else {
             MappingPapeType mappingPapeType=new MappingPapeType();
             final DownloadManager downloadManager;
+            String extension;
             String file_url = paper.fileUrl;
-            file_url = ("http://f845900b.ngrok.io/Papers/"+file_url).trim();
+            file_url = ("http://bytepad.silive.in/Papers/"+file_url).trim();
             file_url =file_url.replace(" ","%20");
             Log.d("debugg",file_url);
 
@@ -118,7 +119,11 @@ public class Util {
             DownloadManager.Request request = new DownloadManager.Request(uri);
             request.setTitle(paper.subjectName);
             request.setDescription("Bytepad Paper Download");
-            final Uri uri1 = Uri.parse("file://" + prefManager.getDownloadPath() + "/" + paper.subjectName+ ".doc");
+            if(file_url.contains(".doc"))
+                extension = ".doc";
+            else
+                extension = ".pdf";
+            final Uri uri1 = Uri.parse("file://" + prefManager.getDownloadPath() + "/" + paper.subjectName+ extension);
             Log.d("debugg", uri1.toString());
             request.setDestinationUri(uri1);
             request.setVisibleInDownloadsUi(true);

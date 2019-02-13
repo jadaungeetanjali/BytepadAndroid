@@ -327,6 +327,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
                 public void onRequestSuccess(String time) {
                     Log.d("Bytepad", "Request success");
                   timeStamp=time;
+                  Log.d("BytepadTime", timeStamp);
                   //Toast.makeText(getApplicationContext(),timeStamp,Toast.LENGTH_LONG).show();
                   if(sharedpreferences.getString(Config.TIMESTAMP,"").equals("")) {
                       SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -477,6 +478,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
     @Override
     public void onRequestSuccess(final PaperModel.PapersList result) {
         Log.d("Bytepad", "Request success");
+        Log.d("paper", result.toString());
         updatePapers(result);
         progressBar.setMax(result.size());
         progressBar.setProgress(0);
@@ -511,7 +513,6 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
                     SubjectModel subject = result.get(i);
                     //SubjectDatabaseModel subjectDatabaseModel =new SubjectDatabaseModel();
                     appDatabase.itemAndPersonModel().addSubject(new SubjectDatabaseModel(subject.id, subject.subjectName));
-
 
                     publishProgress(i + 1);
                 }
@@ -583,7 +584,7 @@ public class SplashActivity extends AppCompatActivity implements RequestListener
 
     public void checkDownloadList() {
         List<DownloadQueue> list =appDatabase.itemAndPersonModel().getQueuelist();
-
+        Log.d("paperList", list.toString());
         for (DownloadQueue item : list) {
             if (Util.isDownloadComplete(this, item.reference)) {
                 PaperDatabaseModel paper =appDatabase.itemAndPersonModel().getdownloadedpaperlist(item.paperId);
