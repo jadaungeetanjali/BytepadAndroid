@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <android.support.constraint.Guideline
@@ -150,7 +149,7 @@
                 tools:layout_editor_absoluteX="0dp" />
             <android.support.design.widget.AppBarLayout
                 android:layout_width="0dp"
-                android:layout_height="240dp"
+                android:layout_height="242dp"
                 android:paddingTop="4sp"
                 android:id="@+id/appbar"
                 android:background="@android:color/transparent"
@@ -162,7 +161,7 @@
                 >
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="240dp"
+                    android:layout_height="242dp"
                     android:orientation="vertical"
                     android:background="@drawable/appbarbackground">
 
@@ -176,8 +175,8 @@
                         app:layout_collapseMode="pin">
                         <android.support.v7.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="35dp"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginRight="25dp"
                             android:layout_marginBottom="10dp"
                             android:layout_marginTop="65dp"
                             app:cardCornerRadius="20dp"
@@ -197,7 +196,9 @@
                                     android:layout_weight="0"
                                     android:tint="@color/textDark"
                                     android:src="@android:drawable/ic_menu_search"
-                                    android:layout_height="25dp" />
+                                    android:layout_height="25dp"
+                                    android:layout_marginTop="3dp"
+                                    />
                                 <AutoCompleteTextView
                                     android:id="@+id/search_paper"
                                     android:layout_width="match_parent"
@@ -212,13 +213,14 @@
                                     android:textColorHint="#666"
                                     android:textSize="15sp" />
                                 <ImageView
+                                    android:id="@+id/ivClearSearch"
                                     android:layout_width="25dp"
                                     android:padding="3dp"
                                     android:tint="@color/textDark"
                                     android:src="@android:drawable/ic_menu_close_clear_cancel"
                                     android:layout_weight="0"
-                                    android:id="@+id/ivClearSearch"
-                                    android:layout_height="25dp" />
+                                    android:layout_height="25dp"
+                                    android:layout_marginTop="3dp"/>
 
                             </LinearLayout>
 

@@ -144,6 +144,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingTop="4sp"
+                android:background="#FFFFFF"
+                app:elevation="0dp"
                 android:id="@+id/appbar"
                 app:layout_constraintLeft_toLeftOf="@+id/guideline11"
                 app:layout_constraintBottom_toTopOf="@+id/guideline14"
@@ -154,18 +156,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="@drawable/gradient">
+                    android:background="@drawable/appbarbackground">
 
                     <android.support.v7.widget.Toolbar
-                        android:paddingTop="35sp"
-                        android:paddingBottom="6sp"
+                        android:paddingTop="45dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="15dp"
                         app:layout_collapseMode="pin"
-
-
-
                         android:id="@+id/toolbar">
                         <TextView
                             android:id="@+id/toolbar_title"
@@ -191,11 +190,10 @@
                     </android.support.v7.widget.Toolbar>
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_marginLeft="13dp"
-                        android:layout_marginRight="13dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="5sp"
-                        app:cardCornerRadius="4dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="15dp"
+                        app:cardCornerRadius="20dp"
                         app:cardBackgroundColor="#ffffff"
                         android:layout_height="wrap_content">
 
@@ -206,11 +204,12 @@
                             android:paddingTop="3dp"
                             android:paddingBottom="3dp"
                             android:orientation="horizontal"
-                            android:layout_height="wrap_content">
+                            android:layout_height="38dp">
                             <ImageView
                                 android:layout_width="25dp"
                                 android:layout_weight="0"
                                 android:tint="@color/textDark"
+                                android:layout_marginTop="3dp"
                                 android:src="@android:drawable/ic_menu_search"
                                 android:layout_height="25dp" />
                             <AutoCompleteTextView
@@ -227,6 +226,7 @@
                             <ImageView
                                 android:layout_width="25dp"
                                 android:padding="3dp"
+                                android:layout_marginTop="3dp"
                                 android:tint="@color/textDark"
                                 android:src="@android:drawable/ic_menu_close_clear_cancel"
                                 android:layout_weight="0"
@@ -238,16 +238,15 @@
                     </android.support.v7.widget.CardView>
                     <LinearLayout
                         android:id="@+id/Lineartoggle"
-
                         android:layout_width="match_parent"
                         android:layout_height="40sp"
-                        android:padding="3dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
+                        android:padding="5dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:orientation="horizontal"
                         >
-
-
 
                         <ToggleButton
                             android:id="@+id/St1"
@@ -256,8 +255,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/backtoggle"
                             android:gravity="center"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
+                            android:layout_marginRight="10dp"
                             android:textOff="ST1"
                             android:textOn="ST1" />
 
@@ -273,10 +271,7 @@
                             android:background="@drawable/backtoggle"
                             android:gravity="center"
                             android:textOff="ST2"
-                            android:paddingLeft="3dp"
-                            android:paddingRight="3dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
+                            android:layout_marginRight="10dp"
                             android:textOn="ST2" />
 
 
@@ -287,8 +282,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/backtoggleselected"
                             android:gravity="center"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
+                            android:layout_marginRight="10dp"
                             android:textOff="PUT"
                             android:textOn="PUT" />
 
@@ -301,8 +295,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="10dp"
                             android:background="@drawable/backtoggle"
                             android:gravity="center"
                             android:textOff="UT"

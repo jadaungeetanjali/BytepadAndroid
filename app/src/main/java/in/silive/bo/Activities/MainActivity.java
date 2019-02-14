@@ -431,6 +431,12 @@ public class MainActivity extends AppCompatActivity implements SnackBarListener 
     void initialise()
     {
         put.setChecked(true);
+        st1.setChecked(true);
+        // st1.setTextColor(Color.WHITE);
+        st2.setChecked(true);
+        //st2.setTextColor(Color.WHITE);
+
+        ut.setChecked(true);
         if(put.isChecked()) {
             put.setTextColor(Color.parseColor("#FFFFFF"));
             put.setBackgroundResource(R.drawable.backtoggleselected);
@@ -448,6 +454,66 @@ public class MainActivity extends AppCompatActivity implements SnackBarListener 
                     itr.remove();
             }
             // paper.remove(2);
+            setUpList(query);
+        }
+        if((st1.isChecked())) {
+
+            st1.setTextColor(Color.parseColor("#FFFFFF"));
+            st1.setBackgroundResource(R.drawable.backtoggleselected);
+            //st1line.setVisibility(View.GONE);
+            paper.add(3);
+            setUpList(query);
+        }
+        else
+        {   st1.setTextColor(Color.BLACK);
+            st1.setBackgroundResource(R.drawable.backtoggle);
+            //st1line.setVisibility(View.GONE);
+            Iterator itr = paper.iterator();
+            while(itr.hasNext()){
+                if(itr.next().equals(3))
+                    itr.remove();
+            }
+            //    paper.remove(3);
+
+
+            setUpList(query);
+        }
+        if(st2.isChecked()) {
+            st2.setTextColor(Color.parseColor("#FFFFFF"));
+            st2.setBackgroundResource(R.drawable.backtoggleselected);
+            //st2line.setVisibility(View.VISIBLE);
+            paper.add(4);
+            setUpList(query);
+        }
+        else
+        {   st2.setTextColor(Color.BLACK);
+            st2.setBackgroundResource(R.drawable.backtoggle);
+            //            st2line.setVisibility(View.GONE);
+            Iterator itr = paper.iterator();
+            while(itr.hasNext()){
+                if(itr.next().equals(4))
+                    itr.remove();
+            }
+            // paper.remove(4);
+            setUpList(query);
+        }
+        if(ut.isChecked()) {
+            ut.setTextColor(Color.parseColor("#FFFFFF"));
+            ut.setBackgroundResource(R.drawable.backtoggleselected);
+            //utline.setVisibility(View.VISIBLE);
+            paper.add(1);
+            setUpList(query);
+        }
+        else
+        { ut.setTextColor(Color.BLACK);
+            ut.setBackgroundResource(R.drawable.backtoggle);
+            //   utline.setVisibility(View.GONE);
+            Iterator itr = paper.iterator();
+            while(itr.hasNext()){
+                if(itr.next().equals(1))
+                    itr.remove();
+            }
+            //paper.remove(1);
             setUpList(query);
         }
     }
