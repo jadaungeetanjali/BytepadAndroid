@@ -34,7 +34,7 @@ import in.silive.bo.PrefManager;
 import in.silive.bo.R;
 import in.silive.bo.SnackBarListener;
 import in.silive.bo.database.RoomDb;
-import in.silive.bo.util.Mapping;
+import in.silive.bo.util.MappingSession;
 import in.silive.bo.util.PaperDetails;
 import in.silive.bo.viewmodel.BytepadAndroidViewModel;
 
@@ -58,7 +58,7 @@ public class DownloadActivity extends AppCompatActivity implements SnackBarListe
     RelativeLayout recyclerEmptyView;
 //    FlowContentObserver observer;
     PrefManager prefManager;
-    Mapping mapping;
+    MappingSession mappingSession;
     private RoomDb appDatabase;
     int counter=0;
     ArrayList<Integer> paper;
@@ -75,7 +75,7 @@ public class DownloadActivity extends AppCompatActivity implements SnackBarListe
         //     Tracker mTracker = application.getDefaultTracker();
 //        mTracker.setScreenName("MainActivity");
         //       mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-        mapping=new Mapping();
+        mappingSession =new MappingSession();
         prefManager = new PrefManager(this);
         //   this.observer = new FlowContentObserver();
         //  this.observer.registerForContentChanges(this, PaperDatabaseModel.class);

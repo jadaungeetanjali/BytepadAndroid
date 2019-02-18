@@ -11,7 +11,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,9 +20,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ToggleButton;
 
@@ -35,7 +32,7 @@ import java.util.List;
 
 import in.silive.bo.Adapters.PapersListAdapter;
 import in.silive.bo.Application.BytepadApplication;
-import in.silive.bo.util.Mapping;
+import in.silive.bo.util.MappingSession;
 
 import in.silive.bo.PrefManager;
 import in.silive.bo.R;
@@ -64,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements SnackBarListener 
     View utline;
     //FlowContentObserver observer;
     PrefManager prefManager;
-    Mapping mapping;
+    MappingSession mappingSession;
     private RoomDb appDatabase;
     int counter=0;
     ArrayList<Integer> paper;
@@ -78,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements SnackBarListener 
    //     Tracker mTracker = application.getDefaultTracker();
 //        mTracker.setScreenName("MainActivity");
  //       mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-        mapping=new Mapping();
+        mappingSession =new MappingSession();
         prefManager = new PrefManager(this);
      //   this.observer = new FlowContentObserver();
       //  this.observer.registerForContentChanges(this, PaperDatabaseModel.class);

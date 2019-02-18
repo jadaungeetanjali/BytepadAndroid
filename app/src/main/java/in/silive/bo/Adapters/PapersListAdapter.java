@@ -1,9 +1,6 @@
 package in.silive.bo.Adapters;
 
 import android.app.Activity;
-import android.graphics.Typeface;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,14 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
-import in.silive.bo.util.Mapping;
+import in.silive.bo.util.MappingSession;
 import in.silive.bo.R;
 import in.silive.bo.Util;
 import in.silive.bo.util.MappingPapeType;
@@ -31,7 +26,7 @@ import in.silive.bo.util.PaperDetails;
 public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.PaperViewHolder> {
     private Activity context;
     private List<PaperDetails> papersList;
-    Mapping mapping=new Mapping();
+    MappingSession mappingSession =new MappingSession();
     MappingPapeType mappingPapeType=new MappingPapeType();
     public PapersListAdapter(Activity context, List<PaperDetails> papersList) {
         this.papersList = papersList;
@@ -69,10 +64,10 @@ public class PapersListAdapter extends RecyclerView.Adapter<PapersListAdapter.Pa
         //holder.tvPaperTitle.setTypeface(typeface);
         //holder.tvPaperCategory.setTypeface(typefaces);
         //holder.tvPaperType.setText(mappingPapeType.getvalues(paper.examTypeId));
-       // Toast.makeText(context,mapping.getvalues(paper.sessionId),Toast.LENGTH_LONG).show();
-        holder.tvPaperCategory.setText(mappingPapeType.getvalues(paper.examTypeId)+" "+"Semester "+mapping.getvalues(paper.sessionId));
+       // Toast.makeText(context,mappingSession.getvalues(paper.sessionId),Toast.LENGTH_LONG).show();
+        holder.tvPaperCategory.setText(mappingPapeType.getvalues(paper.examTypeId)+" "+"Semester "+
+                mappingSession.getvalues(paper.sessionId) + " " + paper.paperType);
         holder.tvPaperTitle.setText(paper.subjectName);
-        Log.d("examType", paper.examTypeId.toString());
         //holder.tvPaperSize.setText("10KB");
         int paperImgId;
        /* if (paper.Title.contains("doc") || paper.Title.contains("DOC") || paper.Title.contains("Doc"))

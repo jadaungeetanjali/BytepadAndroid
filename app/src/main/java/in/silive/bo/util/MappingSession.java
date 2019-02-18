@@ -8,12 +8,12 @@ import java.util.HashMap;
  * Created by root on 22/8/17.
  */
 
-public class Mapping {
+public class MappingSession {
 
     private Context context;
     HashMap<Integer, String> myMap;
 
-    public Mapping() {
+    public MappingSession() {
 
     }
 

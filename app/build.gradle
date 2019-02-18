@@ -27,8 +27,8 @@ android {
         applicationId "in.silive.bo"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 12
-        versionName "4.6" +
+        versionCode 13
+        versionName "4.6.1" +
                 ""
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true

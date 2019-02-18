@@ -24,7 +24,6 @@ import in.silive.bo.Activities.MainActivity;
 import in.silive.bo.Application.BytepadApplication;
 import in.silive.bo.Network.CheckConnectivity;
 import in.silive.bo.database.RoomDb;
-import in.silive.bo.util.Mapping;
 import in.silive.bo.util.MappingPapeType;
 import in.silive.bo.util.PaperDetails;
 
